@@ -1,0 +1,13 @@
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.csproj.AssemblyReference.cache
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.csproj.CoreCompileInputs.cache
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.dll
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.pdb
+C:\Documents\AottgAnarchy\AoTTG_Data\Managed\Antis.dll
+C:\Documents\AottgAnarchy\AoTTG_Data\Managed\Antis.pdb
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.csproj.AssemblyReference.cache
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.csproj.CoreCompileInputs.cache
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.csproj.CopyComplete
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.dll
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Antis\obj\Debug\Antis.pdb
+C:\Users\georg\Downloads\AEM\AEM\AoTTG_Data\Managed\Antis.dll
+C:\Users\georg\Downloads\AEM\AEM\AoTTG_Data\Managed\Antis.pdb

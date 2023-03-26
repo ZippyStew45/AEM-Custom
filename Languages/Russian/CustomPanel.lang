@@ -1,0 +1,14 @@
+﻿title:Пользовательские настройки уровня 
+selection:Карта,Логика
+gameTypes:Раунды,Волны,PvP,Гонка,Свой
+spawnCap:Количество титанов:
+gameMode:Режим:
+mapScript:Скрипт:
+logicScript:Скрипт:
+btnClear:Очистить
+btnClose:Закрыть
+random:Случайно
+update:Обновить список
+picker0:Выбор карты
+picker1:Выбор логики
+filter:Поиск:

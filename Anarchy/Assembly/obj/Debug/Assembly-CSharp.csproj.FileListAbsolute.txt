@@ -1,0 +1,11 @@
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.dll
+C:\Users\georg\OneDrive\Documents\.AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.pdb
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.dll
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.pdb
+C:\Users\georg\Downloads\AEM\AEM\AoTTG_Data\Managed\Assembly-CSharp.dll
+C:\Users\georg\Downloads\AEM\AEM\AoTTG_Data\Managed\Assembly-CSharp.pdb
+C:\Users\georg\Downloads\AEM\AEM-master\Anarchy\Assembly\obj\Debug\Assembly-CSharp.csproj.CopyComplete

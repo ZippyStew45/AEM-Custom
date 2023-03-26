@@ -1,0 +1,78 @@
+﻿#Errors
+cmdNotFound:<color=red>Comando <color=yellow>"{0}"</color> no encontrado</color>
+errMC:<color=red>Error: No cliente principal</color>
+errArg:<color=red>Error ({0}): Argumentos inválidos</color>
+errPM:<color=red>Error: No se puede enviar un mensaje a ID {0} (Jugador no encontrado)</color>
+pauseErr:<color=red>Error: El juego ya está en pausa</color>
+unpauseErr:<color=red>Error: El juego no está en pausa</color>
+
+#Kick
+kickIgnore:<color=red>Ignorar ID {0} (Jugador no encontrado)</color>
+kickSuccess:<color=#$maincolor$>Jugador [{0}] {1} expulsado!</color>
+
+#PM
+pmSetID:<color=#$maincolor$>Jugador[<color=#$subcolor$>{0}</color>] establecido como objetivo PM</color>
+pmSent:<color=#$maincolor$>PM enviado a ID<color=$subcolor$>{0}</color> (<color=#$subcolor$>{1}</color>)</color>
+
+#Room commands
+errRoom:<color=red>Error: comando de sala <color=yellow>"{0}"</color> no encontrado</color>
+roomTime:<color=#$subcolor$>{0}</color> <color=#$maincolor$>segundos agregados al tiempo</color>
+roomMax:<color=#$maincolor$>Max jugadores establecidos en <color=#$subcolor$>{0}</color></color>
+roomTimeSet:<color=#$maincolor$>Tiempo del servidor establecido en <color=#$subcolor$>{0}</color></color>
+
+#Restart
+restartMessage:<color=#$maincolor$>Masterclient reinicio el juego</color>
+
+#Pause
+pauseTrue:<color=#$maincolor$>Cliente principal ha pausado el juego</color>
+pauseFalse:<color=#$maincolor$>Cliente principal ha dejado de pausar el juego</color>
+
+#DaylightChange
+daylightChange:<color=#$maincolor$>La luz del día cambió a<color=#$subcolor$>{0}</color></color>
+
+#ResetKD
+resetkdLocal:<color=#$maincolor$>Tus estadísticas se han restablecido</color>
+resetkdAll:<color=#$maincolor$>Todas las estadísticas han sido restablecidas</color>
+resetkdPlayer:<color=#$maincolor$>Jugadores [{0}] {1} tenían sus propiedades restablecidas</color>
+
+#Revive
+revived:<color=#$maincolor$>Has sido revivido.</color>
+revivedAll:<color=#$subcolor$>Todos los</color><color=#$maincolor$> jugadores han sido revividos.</color>
+playerRevived:<color=#$maincolor$>Jugador [{0}] ha sido revivido</color>
+
+#Spectate
+specModeEnter:<color=#$maincolor$>Entras en modo espectador</color>
+specModeQuit:<color=#$maincolor$>Dejas el modo espectador</color>
+
+#Aso racing
+notRacingMode:<color=red>Error: Not racing mode</color>
+asoraceTrue:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>enabled</color> after restart</color>
+asoraceFalse:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>disabled</color> after restart</color>
+errPlayer:<color=red>Error: Jugador con ID {0} no existe</color>
+errExecute:<color=red>Error inesperado al ejecutar el comando <color=yellow>"{0}"</color></color>
+errTeamsLocked:Los equipos están bloqueados o deshabilitados.
+errTeamsInvalid:Código de equipo no es válido (0, 1, 2 son válidos)
+unbanFailed:<color=red>Error: no hay tal jugador en la lista de prohibición</color>
+unbanSucceed:<color=#$maincolor$>El jugador ha eliminado la prohibición con éxito</color>
+muteSucceed:<color=#$maincolor$>Jugador [{0}] {1} silenciado</color>
+unmuteSucceed:<color=#$maincolor$>Jugador [{0}] {1} no silenciado</color>
+muteFailed:<color=red>Incapaz de silenciar [{0}] {1} silenciado (Ya esta silenciado)</color>
+unmuteFailed:<color=red>No se puede eliminar el silencio [{0}] {1} silenciado (No esta silenciado)</color>
+activatedGameModes:Modos de juego actualmente activos:
+teamChanged:<color=#$maincolor$>Te uniste al equipo {0}</color>
+teamIndividuals:individual
+teamCyan:cyan
+teamMagenta:magenta
+noAbuseFound:The player is not using any abusive feature.
+infGasAbuse:Infinite gas
+infBladesAbuse:Infinite blades
+infBulletsAbuse:Infinite bullets
+bodyLeanAbuse:Disabled body lean
+newTpsAbuse:NewTPS Camera
+legacyBurstAbuse:Legacy gas burst
+abuseFeatures:Player uses next features:
+noAnarchyFeaturesFound:The player is not using any abusive feature.
+infGasInPvp:Infinite gas in PvP
+anarchyFeatures:Player uses next features:
+anarchyAbusiveFeatures:Player uses next abusive features:
+disableBurstCD:Disabled burst cooldown

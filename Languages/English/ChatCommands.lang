@@ -1,0 +1,78 @@
+﻿#Errors
+cmdNotFound:<color=red>Command <color=yellow>"{0}"</color> not found</color>
+errMC:<color=red>Error: Not masterclient</color>
+errArg:<color=red>Error ({0}): Invlaid arguments</color>
+errPM:<color=red>Error: cannot send message to ID {0} (Player not found)</color>
+pauseErr:<color=red>Error: Game is already paused</color>
+unpauseErr:<color=red>Error: Game is not paused</color>
+
+#Kick
+kickIgnore:<color=red>Ignore kicking ID {0} (Player not found)</color>
+kickSuccess:<color=#$maincolor$>Player [{0}] {1} kicked!</color>
+
+#PM
+pmSetID:<color=#$maincolor$>Player [<color=#$subcolor$>{0}</color>] set as PM target</color>
+pmSent:<color=#$maincolor$>Sent PM to ID <color=$subcolor$>{0}</color> (<color=#$subcolor$>{1}</color>)</color>
+
+#Restart
+restartMessage:<color=#$maincolor$>Masterclient has restarted the game</color>
+
+#Room commands
+errRoom:<color=red>Error: room command <color=yellow>"{0}"</color> not found</color>
+roomTime:<color=#$subcolor$>{0}</color> <color=#$maincolor$>seconds add to time</color>
+roomTimeSet:<color=#$maincolor$>Room time set to <color=#$subcolor$>{0}</color></color>
+roomMax:<color=#$maincolor$>Max players set to <color=#$subcolor$>{0}</color></color>
+
+#Pause
+pauseTrue:<color=#$maincolor$>Masterclient has paused the game</color>
+pauseFalse:<color=#$maincolor$>Masterclient has unpased the game</color>
+
+#DaylightChange
+daylightChange:<color=#$maincolor$>Daylight changed to <color=#$subcolor$>{0}</color></color>
+
+#ResetKD
+resetkdLocal:<color=#$maincolor$>Your stats have been reset.</color>
+resetkdAll:<color=#$maincolor$>All stats have been reset.</color>
+resetkdPlayer:<color=#$maincolor$>Player's [{0}] {1} properties have been reset.</color>
+
+#Revive
+revived:<color=#$maincolor$>You have been revived.</color>
+revivedAll:<color=#$subcolor$>All</color><color=#$maincolor$> player have been revived.</color>
+playerRevived:<color=#$maincolor$>Player [{0}] has been revived.</color>
+
+#Spectate
+specModeEnter:<color=#$maincolor$>You entered spectatore mode</color>
+specModeQuit:<color=#$maincolor$>You left spectator mode</color>
+
+#Aso racing
+notRacingMode:<color=red>Error: Not racing mode</color>
+asoraceTrue:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>enabled</color> after restart</color>
+asoraceFalse:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>disabled</color> after restart</color>
+errPlayer:<color=red>Error: Player with ID {0} not exists</color>
+errExecute:<color=red>Unexpected error while executing command <color=yellow>"{0}"</color></color>
+errTeamsLocked:Teams are locked or disabled
+errTeamsInvalid:Invalid team code (0, 1, 2 are valid)
+unbanFailed:<color=red>Error: no such player in banlist</color>
+unbanSucceed:<color=#$maincolor$>Player successfully unbanned</color>
+muteSucceed:<color=#$maincolor$>Player [{0}] {1} muted</color>
+unmuteSucceed:<color=#$maincolor$>Player [{0}] {1} unmuted</color>
+muteFailed:<color=red>Cannot mute [{0}] {1} muted (Already muted)</color>
+unmuteFailed:<color=red>Cannot unmute [{0}] {1} muted (Not muted)</color>
+activatedGameModes:Currently activated gamemodes:
+teamChanged:<color=#$maincolor$>You joined team {0}</color>
+teamIndividuals:individuals
+teamCyan:cyan
+teamMagenta:magenta
+noAbuseFound:The player is not using any abusive feature.
+infGasAbuse:Infinite gas
+infBladesAbuse:Infinite blades
+infBulletsAbuse:Infinite bullets
+bodyLeanAbuse:Disabled body lean
+newTpsAbuse:NewTPS Camera
+legacyBurstAbuse:Legacy gas burst
+abuseFeatures:Player uses next features:
+noAnarchyFeaturesFound:The player is not using any abusive feature.
+infGasInPvp:Infinite gas in PvP
+anarchyFeatures:Player uses next features:
+anarchyAbusiveFeatures:Player uses next abusive features:
+disableBurstCD:Disabled burst cooldown

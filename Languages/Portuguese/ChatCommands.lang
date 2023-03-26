@@ -1,0 +1,78 @@
+﻿#Errors
+cmdNotFound:<color=red>Commando <color=yellow>"{0}"</color> não encontrado</color>
+errMC:<color=red>Error: Não é masterclient(host da sala)</color>
+errArg:<color=red>Error ({0}): Argumentos Inválidos</color>
+errPM:<color=red>Error: Não foi possível enviar uma mensagem ao ID {0} (Jogador não encontrado)</color>
+pauseErr:<color=red>Error: O jogo já está pausado/color>
+unpauseErr:<color=red>Error: O jogo não está pausado</color>
+
+#Kick
+kickIgnore:<color=red>Ignorando kicking(chutando fora) ID {0} (Jogador não encontrado)</color>
+kickSuccess:<color=#$maincolor$>Jogador [{0}] {1} kicked(chutado fora)!</color>
+
+#PM
+pmSetID:<color=#$maincolor$>Jogador [<color=#$subcolor$>{0}</color>] definido como receptor das Mensagens Privadas(PM)</color>
+pmSent:<color=#$maincolor$>PM(Mensagem Privada) enviada ao ID <color=$subcolor$>{0}</color> (<color=#$subcolor$>{1}</color>)</color>
+
+#Room commands
+errRoom:<color=red>Error: comando de sala <color=yellow>"{0}"</color> não achado</color>
+roomTime:<color=#$subcolor$>{0}</color> <color=#$maincolor$>segundos adicionados ao tempo</color>
+roomMax:<color=#$maincolor$>Número máximo de jogadores definidos em <color=#$subcolor$>{0}</color></color>
+roomTimeSet:<color=#$maincolor$>Tempo da sala definido em <color=#$subcolor$>{0}</color></color>
+
+#Restart
+restartMessage:<color=#$maincolor$>Masterclient reiniciou o jogo</color>
+
+#Pause
+pauseTrue:<color=#$maincolor$>Masterclient pausou o jogo</color>
+pauseFalse:<color=#$maincolor$>Masterclient removeu a pausa do jogo</color>
+
+#DaylightChange
+daylightChange:<color=#$maincolor$>Iluminação do dia mudou para <color=#$subcolor$>{0}</color></color>
+
+#ResetKD
+resetkdLocal:<color=#$maincolor$>Seus status foram reiniciados.</color>
+resetkdAll:<color=#$maincolor$>Todos os status foram reiniciados.</color>
+resetkdPlayer:<color=#$maincolor$>Jogadores [{0}] {1} tiveram suas propriedades resetadas.</color>
+
+#Revive
+revived:<color=#$maincolor$>Você foi revivido.</color>
+revivedAll:<color=#$subcolor$>Todos</color><color=#$maincolor$> os jogadores foram revividos.</color>
+playerRevived:<color=#$maincolor$>Jogador [{0}] foi revivido.</color>
+
+#Spectate
+specModeEnter:<color=#$maincolor$>Você entrou no modo de espectador</color>
+specModeQuit:<color=#$maincolor$>Você saiu do modo de espectador</color>
+
+#Aso racing
+notRacingMode:<color=red>Error: Not racing mode</color>
+asoraceTrue:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>enabled</color> after restart</color>
+asoraceFalse:<color=#$maincolor$>ASO Racing will be <color=#$subcolor$>disabled</color> after restart</color>
+errPlayer:<color=red>Erro: Jogador com ID {0} não existe</color>
+errExecute:<color=red>Erro inesperado ao executar o comando <color=yellow>"{0}"</color></color>
+errTeamsLocked:Equipes estão travadas ou desabilitadas
+errTeamsInvalid:Código de equipe inválido (0, 1, 2 são válidos)
+unbanFailed:<color=red>Erro: não existe esse jogador na lista de banimento</color>
+unbanSucceed:<color=#$maincolor$>Jogador teve o banimento removido com sucesso</color>
+muteSucceed:<color=#$maincolor$>Jogador [{0}] {1} silenciado</color>
+unmuteSucceed:<color=#$maincolor$>Jogador [{0}] {1} não silenciado</color>
+muteFailed:<color=red>Não é possível silenciar [{0}] {1} silenciado (Já está silenciado)</color>
+unmuteFailed:<color=red>Não é possível remover o silenciamento [{0}] {1} silenciado (Não silenciado)</color>
+activatedGameModes:Modos de jogo ativos atualmente:
+teamChanged:<color=#$maincolor$>Você entrou na equipe {0}</color>
+teamIndividuals:individuais
+teamCyan:cyan
+teamMagenta:magenta
+noAbuseFound:The player is not using any abusive feature.
+infGasAbuse:Infinite gas
+infBladesAbuse:Infinite blades
+infBulletsAbuse:Infinite bullets
+bodyLeanAbuse:Disabled body lean
+newTpsAbuse:NewTPS Camera
+legacyBurstAbuse:Legacy gas burst
+abuseFeatures:Player uses next features:
+noAnarchyFeaturesFound:The player is not using any abusive feature.
+infGasInPvp:Infinite gas in PvP
+anarchyFeatures:Player uses next features:
+anarchyAbusiveFeatures:Player uses next abusive features:
+disableBurstCD:Disabled burst cooldown

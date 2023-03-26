@@ -1,0 +1,255 @@
+﻿#Main window
+title:Configuraciones
+buttons:Usual,Vídeo,Efectos,Teclas de acceso rápido,Mod,Habilidades
+abilityNames:Bombas
+btnBack:Atrás
+
+#General page
+game:<b>Juego</b>
+sensivity:Sensibilidad[{0}]
+distance:Distancia[{0}]
+moreDistance:Más distancia[{0}]
+snapshots:<b>Fotos Instantáneas</b>
+snapshotsEnabled:Fotos Instantáneas:
+snapshotsShow:Mostrar en el juego:
+snapshotsDmg:Daño minimo:
+minimap:Minimapa:
+gameFeed:Información del juego de RC:
+inverty:Invertir eje Y:
+staticFOV:FOV estático:
+fovValue:Valor FOV[{0}]
+
+others:<b>Otros</b>
+speedometer:Velocímetro:
+speedometerTypes:Velocidad, Daño
+bodylean:Cuerpo del héroe inclinado:
+
+audio:<b>Audio</b>
+overallAudio:Volume[{0}]
+
+#Video page
+
+graphics:<b>Gráficos</b>
+vsync:La sincronización vertical:
+mipmap:Mipmapping:
+texturesQuality:Calidad de las texturas
+texturesLevels:Alto, medio, bajo, ultra bajo
+quality:Calidad general[{0}]
+
+advancedVideo:<b>Ajustes avanzados</b>
+drawDistance:Distancia dibujada[{0}]
+occlusion:Utilice el culling de oclusión:
+aniso:Filtro anisotrópico
+anisoLevels:Deshabilitado, habilitado, forzado habilitado
+antiAliasing:Modo de suavizado:
+antiAliasings:Deshabilitado,2x,4x,8x
+bWeight:Mezcla de peso:
+blendWeights:Uno,Dos,Tres
+lodBias:LOD Bias[{0}]
+maxLOD:Max LOD[{0}]
+shadows:<b>Oscuridad</b>
+useShadows:Usa sombras:
+shadowCascade:Cascadas
+shadowCascades:1,2,4
+shadowDist:Distancia[{0}]
+shadowProjection:Proyección:
+shadowProjections:CloseFit,StableFit
+shadowNote:<color=yellow>Nota: Oscuridad funciona en calidad> = 0.17</color>
+
+#Effects page
+effects:<b>Efectos</b>
+windEffect:Efecto del viento:
+bladeTrails:Rastros de espada:
+blur:Blur:
+tilt:Inclinación de la cámara:
+
+#Rebinds page
+buttonsRebinds:Humano,Titán,Caballo,Cañón,Mod
+waiting:Esperando...
+mainRebinds:<b>Entradas principales</b>
+rebinds:<b>Teclas de acceso rápido</b>
+
+#Anarchy page
+modMenu:Main,Style,Name and Animation,Chat and Console
+
+#Anarchy/Style
+hudScale:HUD Scaling[{0}]:
+guiAutoScale:Usar escala automática de GUI:
+guiScaleWarning:<color=red><b>Cambiar estos valores puede <i>estropear</i> tu interfaz de usuario.</b></color>
+guiScaleWarning1:<color=yellow>Usted ha sido advertido.</color>
+windowOffset:<b>Ventana y Desplazamiento</b>
+windowHeight:Altura de la ventana:
+windowWidth:Largura de la ventana:
+windowBottomOffset:Desplazamiento de la ventana inferior:
+windowSideOffset:Desplazamiento de la ventana lateral:
+windowTopOffset:Desplazamiento de la ventana superior:
+labelOffset:Desplazamiento de etiqueta(Label):
+labelOffsetSlider:Deslizador del control deslizante de etiquetas(Label):
+bigLabelOffset:Desplazamiento de etiqueta(Label) grande:
+Others:<b>Otros</b>
+fontSize:Tamaño de fuente:
+height:Altura del elemento UI:
+horizontalMargin:Distancia horizontal entre elementos:
+verticalMargin:Distancia vertical entre elementos:
+labelSpace:Etiqueta(Label) de espaciamiento:
+
+styleColors:<b>Configuración de colores</b>
+fontName:Nombre de fuente:
+background:Color de fondo:
+backgroundTransparency:Transparencia de fondo:
+normal:Normal
+hover:Flotar
+active:Habilitado
+onNormal:En normal
+onHover:En flotar
+onActive:En Habilitado
+vector:Vector
+color:Color
+text:Texto
+useVectors:Usar desplazamiento de color de vectores:
+
+#Anarchy/Chat and Console
+chat:<b>Chat</b>
+chatBack:Fondo de chat:
+chatBackVal:Transparencia[{0}]
+chatCount:Número de mensajes de chat:
+chatSize:Tamaño del mensaje de chat:
+chatWidth:Largura de chat:
+chatUseCustomSpace:Usar espaciamiento personalizado
+chatSpaceUp:Arriba:
+chatSpaceDown:Abajo:
+chatSpaceLeft:Izquierda:
+chatSpaceRight:Derecha:
+
+console:<b>Consola</b>
+consoleBack:Fondo de la consola:
+consoleBackVal:Transparencia[{0}]
+consoleCount:Número de mensajes de la consola:
+consoleSize:Tamaño del mensaje de la consola:
+consoleWidth:Ancho de la consola:
+consoleUseCustomSpace:Usar espaciamiento personalizado
+consoleSpaceUp:Arriba:
+consoleSpaceDown:Abajo:
+consoleSpaceLeft:Izquierda:
+consoleSpaceRight:Derecha:
+
+#Abilities
+
+#Abilities/Bombs
+bombStats:<b>Estadísticas de bombas</b>
+bombRad:Tamaño {0}:
+bombCd:Tiempo de espera {0}:
+bombSpeed:Velocidad {0}:
+bombRange:Distancia {0}:
+bombName:Nombre de la bomba:
+bombColor:<b>Color de la bomba</b>
+bombColorR:Color rojo:
+bombColorG:Color verde:
+bombColorB:Color azul:
+bombColorA:Transparencia:
+feedConsoleMode:Feedback del juego en la consola:
+trailAppearance:Apariencia del rastro:
+trailType:Legado,Líquido,Combinado
+trailFps:Cuadros por segundo:
+infiniteTrails:Tiempo infinito de la vida:
+burstType:Burst mode:
+burstTypes:Both,Rebind
+shadowsUI:Shadow effect on UI:
+Forward:Forward
+Backward:Backward
+Left:Left
+Right:Right
+Gas:Jump/Gas
+Dodge:Dodge
+LeftHook:Left hook
+RightHook:Right hook
+BothHooks:Both hooks
+Lock:Lock titan
+Attack:Attack
+SpecialAttack:Special attack/ability
+Salute:Salute
+CameraType:Change camera
+Reset:Restart/Suicide
+Pause:Pause
+HideCursor:Hide cursor
+FullScreen:Fullscreen:
+Reload:Reload
+FlareGreen:Shoot green flare
+FlareRed:Shoot red flare
+FlareBlack:Shoot black flare
+ReelIn:Reel in
+ReelOut:Reel out
+GasBurst:Gas burst
+Minimap Max:Minimap maximize
+Minimap Toggle:Minimap toggle
+Minimap Reset:Minimap reset
+Open Chat:Open chat
+Live Spectate:Live spectate
+Cannon Up:Cannon up
+Cannon Down:Cannon down
+Cannon Right:Cannon right
+Cannon Fire:Cannon fire
+Cannon Mount:Cannon mount
+Cannon Slow:Cannon slow
+Titan Forward:Forward
+Titan Backward:Backward
+Titan Left:Left
+Titan Right:Right
+Titan Jump:Jump
+Titan Kill:Titan suicide
+Titan Walk:Walk
+Titan Punch:Punch
+Titan Slam:Slam
+Titan Grab (front):Front grab
+Titan Grab (back):Back grab
+Titan Grab (nape):Neck grab
+Titan Slap:Slap
+Titan Bite:Bite
+Titan Cover nape:Protect nape
+Titan Sit:Sit
+Horse Forward:Forward
+Horse Backward:Backward
+Horse Left:Left
+Horse Right:Right
+Horse Walk:Walk
+Horse Jump:Jump
+Horse Mount:Mount
+RestartHotkey:Restart key
+PauseHotkey:Pause key
+DebugPanel:Debug panel
+ChatHistory:Chat history
+legacyBurstRebind:Legacy Gas Rebind
+lblAbuse:Abusive features
+bodyLean:Hero body leaning
+infiniteGas:Infinite gas
+infiniteBullets:Infinite bullets
+infiniteBlades:Infinite blades
+disableMouseReel:Disable mouse wheel reel-in
+anarchyMainDesc:Anarchy-Specific features.
+hideOwnName:Hide your hero name/guild:
+noColorNames:Disable colored names:
+hideCrosshairArrows:Hide crosshair arrows:
+infGasPvp:Infinite gas in PvP:
+SingleStats:Single stats panel:
+disableFog:Disable fog:
+labelScale:Labels scale[{0}]:
+racingStartCrosshair:Race start timer on crosshair:
+bombCdCrosshair:Bomb CD on crosshair:
+disableBurstCD:Disable burst cooldown:
+Titan Stomp:Stomp
+Titan Kick:Kick
+Titan FaceSlap:Slap face
+Titan NeckSlap:Slap neck
+Titan LeftSlap:Slap left
+Titan RightSlap:Slap right
+Titan SlapLow:Lower slap
+Titan LeftSlapLow:Lower slap left
+Titan RightSlapLow:Lower slap right
+Titan LeftBite:Bite left side
+Titan RightBite:Bite right side
+titanRebindOptions:Advanced options
+invertSlap:Invert slap direction:
+invertBite:Invert bite direction:
+disableDirectionalSlap:Disable directional slaps:
+disableDirectionalBite:Disable directional bites:
+Rejoin:Rejoin to room:

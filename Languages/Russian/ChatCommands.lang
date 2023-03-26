@@ -1,0 +1,74 @@
+﻿#Errors
+cmdNotFound:<color=red>Команда <color=yellow>"{0}"</color> не существует</color>
+errMC:<color=red>Ошибка:</color> Вы не хост.
+errArg:<color=red>Ошибка (<color=#$maincolor$>{0}</color>):</color> Неправильные аргументы.
+errPM:<color=red>Ошибка:</color> Невозможно написать игроку {0} (Игрок не найден).
+pauseErr:<color=red>Ошибка:</color> Игра уже на паузе.
+unpauseErr:<color=red>Ошибка:</color> Игра не на паузе.
+errRoom:<color=red>Ошибка:</color> Команда комнаты <color=yellow>"{0}"</color> не найдена.
+
+#Kick
+kickIgnore:<color=#$maincolor$>Игнорирование игрока <color=#$subcolor$>[{0}]</color> (Игрок не найден).</color>
+kickSuccess:<color=#$maincolor$>Игрок <color=#$subcolor$>[{0}]</color> {1} выгнан!</color>
+
+#PM
+pmSetID:<color=#$maincolor$>Игрок <color=#$subcolor$>[{0}]</color> теперь цель PM.</color>
+pmSent:<color=#$maincolor$>Сообщение отправлено игроку <color=#$subcolor$>[{0}]</color>: <color=#$maincolor$>{1}</color></color>
+
+#Room commands
+roomTime:<color=#$maincolor$>Ко времени добавлено <color=#$subcolor$>{0}</color> секунд.</color>
+roomMax:<color=#$maincolor$>Количество игроков изменено на <color=#$subcolor$>{0}</color>.</color>
+roomTimeSet:<color=#$maincolor$>Время комнаты установлено на <color=#$subcolor$>{0}</color>.</color>
+
+#Restart
+restartMessage:<color=#$maincolor$>Игра была перезапущена хостом!</color>
+
+#Pause
+pauseTrue:<color=#$maincolor$>Хост поставил игру на паузу.</color>
+pauseFalse:<color=#$maincolor$>Хост снял игру с паузы!</color>
+
+#ResetKD
+resetkdLocal:<color=#$maincolor$>Ваша стататистика сброшена.</color>
+resetkdAll:<color=#$maincolor$>Статистика <color=#$subcolor$>всех</color> игроков очищена.</color>
+resetkdPlayer:<color=#$maincolor$>Статистика игрока <color=#$subcolor$>[{0}]</color> {1} сброшена.</color>
+
+#Revive
+revived:<color=#$maincolor$>Вы были возрождены.</color>
+revivedAll:<color=#$maincolor$>Возрождены <color=#$subcolor$>все</color> игроки.</color>
+playerRevived:<color=#$maincolor$>Игрок <color=#$subcolor$>[{0}]</color> был возрождён.</color>
+
+#Spectate
+specModeEnter:<color=#$maincolor$>Вы вошли в режим наблюдения.</color>
+specModeQuit:<color=#$maincolor$>Вы вышли из режима наблюдения.</color>
+
+#Aso racing
+notRacingMode:<color=red>Ошибка:</color> Вы не в гоночном режиме.
+asoraceTrue:<color=#$maincolor$>Бесконечная гонка будет <color=green>включена</color> после рестарта</color>.
+asoraceFalse:<color=#$maincolor$>Бесконечная гонка будет <color=red>выключена</color> после рестарта</color>.
+errPlayer:<color=red>Ошибка:</color> Игрок с ID <color=#$subcolor$>[{0}]</color> не найден.
+errExecute:<color=red>Ошибка при выполнении команды <color=yellow>"{0}"</color>.</color>
+errTeamsLocked:<color=#$maincolor$>Команды <color=red>закрыты</color> или <color=red>выключены</color> в комнате.</color>
+errTeamsInvalid:<color=#$maincolor$>Неверный номер команды (<color=#$subcolor$>0, 1, 2</color> верные).</color>
+unbanFailed:<color=red>Ошибка:</color> Игрока нет в бан-листе.
+unbanSucceed:<color=#$maincolor$>Игрок успешно разбанен.</color>
+muteSucceed:<color=#$maincolor$>Игрок <color=#$subcolor$>[{0}]</color> {1} отправлен в мут.</color>
+unmuteSucceed:<color=#$maincolor$>Игрок <color=#$subcolor$>[{0}]</color> {1} удалён из мута.</color>
+muteFailed:Нельзя отправить в мут <color=#$subcolor$>[{0}]</color> {1} (уже в муте).
+unmuteFailed:Нельзя удалить из мута <color=#$subcolor$>[{0}]</color> {1} (не в муте).
+activatedGameModes:Активированные игровые режимы:
+teamChanged:<color=#$maincolor$>Вы присоеденились к команде {0}.</color>
+teamIndividuals:Individuals
+teamCyan:Сyan
+teamMagenta:Magenta
+noAbuseFound:Игрок не использует никаких нелегальных функций
+infGasAbuse:Бесконечный газ
+infBladesAbuse:Бесконечные клинки
+infBulletsAbuse:Бесконечные пули
+bodyLeanAbuse:Выключенный наклон героя
+newTpsAbuse:NewTPS Камера
+legacyBurstAbuse:Багованный бурст-ребинд
+abuseFeatures:Игрок использует следующие функции:
+noAnarchyFeaturesFound:Игрок не использует никаких нелегальных функций
+infGasInPvp:Бесконечный газ в пвп
+anarchyFeatures:Игрок использует следующие функции:
+anarchyAbusiveFeatures:Игрок использует следующие абузные функции:

@@ -1,0 +1,5 @@
+﻿killed:<color=#$subcolor>{0}</color> убивает <color=#$subcolor$>{1}</color>
+forDamage:<color=#$maincolor$>на <color=#$subcolor$>{0}</color> урона</color>
+gameLoose:Раунд <color=#$subcolor$>{0}</color> закончен (поражение)
+gameWin:Раунд <color=#$subcolor$>{0}</color> закончен (победа)
+roundStart:Раунд <color=#$subcolor$>{0}</color> начался
