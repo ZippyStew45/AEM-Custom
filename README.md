@@ -1,3 +1,2 @@
 # AEM-Custom
-This is a continuation of Sonicv6's AEM 
-a
+This is a continuation/modification of Sonicv6's AEM (Anarchy Expedition Mod)
