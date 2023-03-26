@@ -11,6 +11,7 @@ using Antis;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Anarchy.UI;
 
 internal partial class FengGameManagerMKII
 {
@@ -40,6 +41,26 @@ internal partial class FengGameManagerMKII
         Anarchy.UI.Chat.Add("Called");
         PhotonNetwork.player.SetCustomProperties(new Hashtable(){{PhotonPlayerProperty.medic, medic}});
     }
+
+    [RPC]
+    private void AemGunner(bool gunner, PhotonMessageInfo info)
+    {
+        Anarchy.UI.Chat.Add("Gunner Role Set to: " + gunner);
+        PhotonNetwork.player.SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Gunner, gunner } });
+    }
+    [RPC]
+    private void AemSupply(bool Supply, PhotonMessageInfo info)
+    {
+        Anarchy.UI.Chat.Add("Gunner Role Set to: " + Supply);
+        PhotonNetwork.player.SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Supply, Supply } });
+    }
+    [RPC]
+    private void AemBulder(bool Builder, PhotonMessageInfo info)
+    {
+        Anarchy.UI.Chat.Add("Gunner Role Set to: " + Builder);
+        PhotonNetwork.player.SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Builder, Builder } });
+    }
+
     [RPC]
     private void ForceStatsRPC(bool force, int gas, int bla, int spd, int acl, PhotonMessageInfo info)
     {

@@ -550,6 +550,30 @@ public class PhotonPlayer
             SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.medic, value ? 2 : 1 } });
         }
     }
+    public bool Gunner
+    {
+        get => Properties != null && Properties[PhotonPlayerProperty.Gunner] is int med && med == 2;
+        set
+        {
+            SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Gunner, value ? 2 : 1 } });
+        }
+    }
+    public bool Builder
+    {
+        get => Properties != null && Properties[PhotonPlayerProperty.Builder] is int med && med == 2;
+        set
+        {
+            SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Builder, value ? 2 : 1 } });
+        }
+    }
+    public bool Supply
+    {
+        get => Properties != null && Properties[PhotonPlayerProperty.Supply] is int med && med == 2;
+        set
+        {
+            SetCustomProperties(new Hashtable() { { PhotonPlayerProperty.Supply, value ? 2 : 1 } });
+        }
+    }
 
     public string Character
     {

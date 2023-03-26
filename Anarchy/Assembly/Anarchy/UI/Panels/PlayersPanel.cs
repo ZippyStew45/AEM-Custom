@@ -56,12 +56,45 @@ namespace Anarchy.UI
             ToggleButton(right, selectedPlayer.RCIgnored, val => { selectedPlayer.RCIgnored = val; }, "Ignored", true);
             ToggleButton(right, selectedPlayer.Wagoneer, val => { selectedPlayer.Wagoneer = val; }, "Wagoneer", true);
             ToggleButton(right, selectedPlayer.Medic, val => { selectedPlayer.Medic = val; }, "Medic", true);
+            ToggleButton(right, selectedPlayer.Gunner, val => { selectedPlayer.Gunner = val; }, "Gunner", true);
+            ToggleButton(right, selectedPlayer.Supply, val => { selectedPlayer.Supply = val; }, "Supplier", true);
+            ToggleButton(right, selectedPlayer.Builder, val => { selectedPlayer.Builder = val; }, "Builder", true);
             if (Button(right, "Kick", true) && !selectedPlayer.IsLocal) Network.Antis.Kick(selectedPlayer, false, string.Empty);
             if (Button(right, "Ban", true) && !selectedPlayer.IsLocal) Network.Antis.Kick(selectedPlayer, true, string.Empty);
 
             right.MoveY();
-            tpCoords = TextField(right, tpCoords, "Coords", Style.LabelOffset, true);
-            if (Button(right, "TP", true))
+
+            if (Button(right, "TP To Me", true))
+            {
+                Vector3 Mypos = PhotonPlayer.MyHero().transform.position;
+                string[] tpCoordsSplit = tpCoords.Split(' ');
+                selectedPlayer.GameObject.GetComponent<HERO>().BasePV.RPC("moveToRPC", selectedPlayer, new object[]
+                {
+                    Mypos.x, Mypos.y, Mypos.z
+                });
+            }
+            if (Button(right, "TP To Player", true))
+            {
+                GameObject gameObject1 = new GameObject();
+                GameObject gameObject2 = new GameObject();
+                foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    if (go.GetPhotonView().owner == PhotonPlayer.Find(selectedPlayer.ID))
+                        gameObject1 = go;
+                    if (go.GetPhotonView().owner == PhotonNetwork.player)
+                        gameObject2 = go;
+                }
+                gameObject2.transform.position = gameObject1.transform.position;
+            }
+            if (Button(right, "TP All To Me", true))
+            {
+                Vector3 Mypos = PhotonPlayer.MyHero().transform.position;
+                selectedPlayer.GameObject.GetComponent<HERO>().BasePV.RPC("moveToRPC", PhotonTargets.All, new object[]
+                {
+                    Mypos.x, Mypos.y, Mypos.z
+                });
+            }
+            if (Button(right, "TP To Coords", true))
             {
                 string[] tpCoordsSplit = tpCoords.Split(' ');
                 selectedPlayer.GameObject.GetComponent<HERO>().BasePV.RPC("moveToRPC", selectedPlayer, new object[]
@@ -71,6 +104,7 @@ namespace Anarchy.UI
                     float.Parse(tpCoordsSplit[2])
                 });
             }
+            tpCoords = TextField(right, tpCoords, "Coords", Style.LabelOffset, true);
         }
 
         protected override void DrawMainPart()
@@ -87,7 +121,7 @@ namespace Anarchy.UI
             {
                 for (int i = 0; i < PhotonNetwork.playerList.Length; i++)
                 {
-                    if (Button(playersRect, PhotonNetwork.playerList[i].UIName.ToHTMLFormat(), true))
+                    if (Button(playersRect, PhotonNetwork.playerList[i].UIName.ToHTMLFormat() + " [" + PhotonNetwork.playerList[i].ID + "]", true))
                     {
                         selectedPlayer = PhotonNetwork.playerList[i];
                         UpdateStats();

@@ -34,6 +34,26 @@ namespace Optimization
             //{
             //    bld.Append("[CB0000][BUL][-] ");
             //}
+            if (player.Gunner)
+            {
+                bld.Append("[00ff00][GUN][-] ");
+            }
+            if (player.Supply)
+            {
+                bld.Append("[ff0000][SUP][-] ");
+            }
+            if (player.Builder)
+            {
+                bld.Append("[2150d1][BLD][-] ");
+            }
+            if (player.Wagoneer)
+            {
+                bld.Append("[ff0000][WAG][-] ");
+            }
+            if (player.Medic)
+            {
+                bld.Append("[ffffff][MED][-] ");
+            }
             if (player.AbuseInformation.CharacterUnusualStats)
             {
                 bld.Append("[CB0000][STATS][-] ");
