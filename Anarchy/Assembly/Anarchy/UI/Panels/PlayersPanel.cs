@@ -89,10 +89,11 @@ namespace Anarchy.UI
             if (Button(right, "TP All To Me", true))
             {
                 Vector3 Mypos = PhotonPlayer.MyHero().transform.position;
-                selectedPlayer.GameObject.GetComponent<HERO>().BasePV.RPC("moveToRPC", PhotonTargets.All, new object[]
+
+                foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
                 {
-                    Mypos.x, Mypos.y, Mypos.z
-                });
+                    go.GetComponent<HERO>().BasePV.RPC("moveToRPC", PhotonTargets.Others, new object[] { Mypos.x, Mypos.y, Mypos.z });
+                }
             }
             if (Button(right, "TP To Coords", true))
             {
@@ -130,7 +131,7 @@ namespace Anarchy.UI
             }
             EndScrollView();
             right.Reset();
-            LabelCenter(right, selectedPlayer.UIName.ToHTMLFormat(), true);
+            LabelCenter(right, selectedPlayer.UIName.ToHTMLFormat() + " [" + selectedPlayer.ID + "]", true);
             pageSelection = SelectionGrid(right, pageSelection, selections, selections.Length, true);
             right.MoveY();
             SmartRect rect = new SmartRect(0, 0, 144, Style.Height);

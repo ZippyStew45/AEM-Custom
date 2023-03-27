@@ -51,6 +51,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("test", new TestCommand());
             allCommands.Add("sptit", new SPTitCommand());
             allCommands.Add("emcustommap", new EMCustomMapCommand());
+            allCommands.Add("cannon", new SpawnCannonCommand());
             allCommands.Add("bundle_load", new BundleLoadCommand());
             allCommands.Add("object_load", new ObjectLoadCommand());
             allCommands.Add("object_spawn", new ObjectSpawnCommand());

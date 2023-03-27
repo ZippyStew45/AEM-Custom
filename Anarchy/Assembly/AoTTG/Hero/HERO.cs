@@ -154,7 +154,7 @@ public partial class HERO : HeroBase
     public float maxVelocityChange = 10f;
     public AudioSource meatDie;
     internal Bomb myBomb;
-    public GameObject myCannon;
+    public static GameObject myCannon;
     public Transform myCannonBase;
     public Transform myCannonPlayer;
     public CannonPropRegion myCannonRegion;
@@ -307,6 +307,18 @@ public partial class HERO : HeroBase
             }
         }
 
+        if (PhotonNetwork.player.Supply)
+        {
+            FengGameManagerMKII.FGM.HeroGrav = FengGameManagerMKII.FGM.HeroGrav*2;
+
+            ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable()
+            {
+                {PhotonPlayerProperty.statGAS, 300}
+            };
+            var stats = IN_GAME_MAIN_CAMERA.MainHERO.Setup.myCostume.stat;
+            stats.Gas = 300;
+            PhotonNetwork.player.SetCustomProperties(hash);
+        }
         this.gravity = FengGameManagerMKII.FGM.HeroGrav;
         SetSounds();
     }
@@ -1131,7 +1143,6 @@ public partial class HERO : HeroBase
         {
             return;
         }
-
         currentSpeed = baseR.velocity.magnitude;
         if (!IsLocal)
         {

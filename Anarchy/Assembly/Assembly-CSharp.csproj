@@ -164,6 +164,7 @@
     <Compile Include="Anarchy\Commands\Chat\RulesCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ScatterCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SetHSCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\SpawnCannonCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SpawnFX.cs" />
     <Compile Include="Anarchy\Commands\Chat\SPTitCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\TestCommand.cs" />

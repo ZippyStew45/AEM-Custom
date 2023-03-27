@@ -56,12 +56,12 @@ public class PhotonPlayer
     {
         var bld = new System.Text.StringBuilder();
 
-        foreach(var pair in PropertiesHistory)
+        foreach (var pair in PropertiesHistory)
         {
             bld.Append($"({pair.Key.GetType()}) {pair.Key.ToString()}: {{\n");
             var dict = pair.Value as Dictionary<object, int>;
 
-            foreach(var meow in dict)
+            foreach (var meow in dict)
             {
                 bld.Append($"    ({meow.Key.GetType()}){meow.Key.ToString()} x {meow.Value}\n");
             }
@@ -142,7 +142,7 @@ public class PhotonPlayer
     {
         get
         {
-            if(_lastVersionRequest == null)
+            if (_lastVersionRequest == null)
             {
                 _lastVersionRequest = DateTime.Now;
                 return true;

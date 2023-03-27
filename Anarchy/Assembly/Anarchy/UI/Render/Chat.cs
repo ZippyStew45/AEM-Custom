@@ -1,5 +1,6 @@
 ﻿using Anarchy.Commands.Chat;
 using Anarchy.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -211,7 +212,9 @@ namespace Anarchy.UI
                     }
                     if (inputLine.StartsWith("/"))
                     {
-                        CMDHandler.TryHandle(inputLine);
+                        Vector3 ppos = PhotonPlayer.MyHero().transform.position;
+                        Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
+                        CMDHandler.TryHandle(inputLine.Replace("ppos", ppos.x + " " + ppos.y + " " + ppos.z).Replace("prot", prot.x + " " + prot.y + " " + prot.z + " " + prot.w));
                     }
                     else
                     {
