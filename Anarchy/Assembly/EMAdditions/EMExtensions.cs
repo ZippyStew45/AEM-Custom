@@ -98,6 +98,49 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
+    private void SpawnPrimitiveRPC(string Object, float Size, bool Gravity, Vector3 position, Quaternion rotation, PhotonMessageInfo info)
+    {
+        PrimitiveType Primitive;
+        switch (Object)
+        {
+            case "cube":
+                Primitive = PrimitiveType.Cube;
+                break;
+            case "sphere":
+                Primitive = PrimitiveType.Sphere;
+                break;
+            case "capsule":
+                Primitive = PrimitiveType.Capsule;
+                break;
+            case "cylinder":
+                Primitive = PrimitiveType.Cylinder;
+                break;
+            case "quad":
+                Primitive = PrimitiveType.Quad;
+                break;
+            case "plane":
+                Primitive = PrimitiveType.Plane;
+                break;
+            default:
+                Primitive = PrimitiveType.Cube;
+                break;
+        }
+        GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
+        SpawnObj.transform.position = position;
+        SpawnObj.transform.rotation = rotation;
+        SpawnObj.transform.localScale = new Vector3(Size, Size, Size);
+        SpawnObj.renderer.material.color = Color.gray;
+        SpawnObj.layer = LayerMask.NameToLayer("Ground");
+
+        if (Gravity == true)
+        {
+            SpawnObj.AddComponent<Rigidbody>();
+            SpawnObj.GetComponent<Rigidbody>().useGravity = true;
+            SpawnObj.GetComponent<Rigidbody>().mass = 10;
+        }
+    }
+
+    [RPC]
     private void LightRPC(string option, string value, PhotonMessageInfo info)
     {
         switch (option)

@@ -334,8 +334,9 @@ namespace Anarchy.UI
         { "/light Intensity Amount ", "Set Light Levels" },
         { "/gravity Amount ", "Set The Gravity Level" },
         { "/impact True|False Speed ", "Enable/Disable Player Collision Damage" },
-        { "/fx Object X Y Z X Y Z W", "Enable/Disable Player Collision Damage" },
+        { "/fx Object X Y Z X Y Z W ", "Spawn Effect" },
         { "/rd Amount ", "Set Your Local Render Distance" },
+        { "/obj Object Size Gravity(true|false) ", "Spawn Primitive object (You Need Builder Role To Use This)" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()
