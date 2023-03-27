@@ -106,6 +106,7 @@ public partial class TITAN : TitanBase
     private float random_run_time;
     private float rockInterval;
     private string runAnimation;
+    public static string runAnimation2;
     private float sbtime;
     internal TitanSkin Skin;
     private bool spawned;

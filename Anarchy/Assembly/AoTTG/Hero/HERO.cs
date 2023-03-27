@@ -313,10 +313,10 @@ public partial class HERO : HeroBase
 
             ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable()
             {
-                {PhotonPlayerProperty.statGAS, 300}
+                {PhotonPlayerProperty.statGAS, 1000}
             };
             var stats = IN_GAME_MAIN_CAMERA.MainHERO.Setup.myCostume.stat;
-            stats.Gas = 300;
+            stats.Gas = 1000;
             PhotonNetwork.player.SetCustomProperties(hash);
         }
         this.gravity = FengGameManagerMKII.FGM.HeroGrav;

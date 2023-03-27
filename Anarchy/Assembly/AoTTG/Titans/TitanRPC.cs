@@ -283,7 +283,6 @@ public partial class TITAN
             runAnimation = "run_abnormal_1";
             GetComponent<TITAN_SETUP>().setPunkHair();
         }
-
         name = titanNames[(int)abnormalType];
         ShowName = User.TitanNames[(int)abnormalType].PickRandomString();
         if (abnormalType == AbnormalType.Aberrant || abnormalType == AbnormalType.Jumper ||
@@ -359,8 +358,13 @@ public partial class TITAN
         baseA["attack_anti_AE_low_l"].speed = 1.1f * aniSpeed;
         baseA["attack_anti_AE_r"].speed = 1.1f * aniSpeed;
         baseA["attack_anti_AE_low_r"].speed = 1.1f * aniSpeed;
+        if (runAnimation2 != null)
+        {
+            runAnimation = runAnimation2;
+        }
         Idle();
     }
+
 
     [RPC]
     private void netSetLevel(float level, int AI, int skinColor)
