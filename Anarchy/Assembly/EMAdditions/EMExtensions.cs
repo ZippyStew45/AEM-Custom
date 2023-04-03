@@ -98,10 +98,10 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
-    private void SpawnPrimitiveRPC(string Object, float Size, bool Gravity, Vector3 position, Quaternion rotation, PhotonMessageInfo info)
+    private void SpawnPrimitiveRPC(string Object, Vector3 position, Quaternion rotation, PhotonMessageInfo info)
     {
         PrimitiveType Primitive;
-        switch (Object)
+        switch (Object.ToLower())
         {
             case "cube":
                 Primitive = PrimitiveType.Cube;
@@ -128,16 +128,19 @@ internal partial class FengGameManagerMKII
         GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
         SpawnObj.transform.position = position;
         SpawnObj.transform.rotation = rotation;
-        SpawnObj.transform.localScale = new Vector3(Size, Size, Size);
+        SpawnObj.transform.localScale = new Vector3(3, 3, 3);
         SpawnObj.renderer.material.color = Color.gray;
         SpawnObj.layer = LayerMask.NameToLayer("Ground");
+        SpawnObj.AddComponent<Rigidbody>();
+        SpawnObj.GetComponent<Rigidbody>().useGravity = true;
+        SpawnObj.GetComponent<Rigidbody>().mass = 10;
+        SpawnObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
 
-        if (Gravity == true)
-        {
-            SpawnObj.AddComponent<Rigidbody>();
-            SpawnObj.GetComponent<Rigidbody>().useGravity = true;
-            SpawnObj.GetComponent<Rigidbody>().mass = 10;
-        }
+    [RPC]
+    private void DeletePrimitiveRPC(GameObject obj, PhotonMessageInfo info)
+    {
+        Destroy(obj);
     }
 
     [RPC]

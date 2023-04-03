@@ -154,6 +154,7 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
         CameraMode = (CameraType)Settings.CameraMode.Value;
         CreateMinimap();
         VideoSettings.Apply();
+        base.gameObject.AddComponent<ObjControll>();
     }
 
     private void CameraMovement()
