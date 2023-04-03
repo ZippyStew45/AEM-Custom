@@ -179,7 +179,6 @@ namespace Anarchy.UI
             this.rectCommands = new Rect(350f, (float)Screen.height - 270f, 384f, 200f);
         }
 
-        public HERO myHero;
         protected internal override void Draw()
         {
             Event ev = Event.current;
@@ -337,6 +336,7 @@ namespace Anarchy.UI
         { "/fx Object X Y Z X Y Z W ", "Spawn Effect" },
         { "/rd Amount ", "Set Your Local Render Distance" },
         { "/obj Object Size Gravity(true|false) ", "Spawn Primitive object (You Need Builder Role To Use This)" },
+        { "/cannon ", "Spawn a Cannon (You Need Gunner Role To Use This)" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()
