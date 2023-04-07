@@ -57,7 +57,7 @@ public class ObjControll : MonoBehaviour
         if (HeldOBJ != null)
         {
             MoveOBJ();
-            Chat.Add(HeldOBJ.name);
+            //Chat.Add(HeldOBJ.name);
         }
     }
 
@@ -99,7 +99,7 @@ public class ObjControll : MonoBehaviour
 
     void DeleteOBJ(RaycastHit hit)
     {
-        Destroy(hit.transform.gameObject);
-        //FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.AllBuffered, hit.transform.gameObject);
+        //Destroy(hit.transform.gameObject);
+        FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.AllBuffered, hit.transform.gameObject.name);
     }
 }

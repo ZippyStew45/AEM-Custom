@@ -76,6 +76,7 @@ namespace AoTTG.Anarchy.Commands.Chat
             }
 
             GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
+            SpawnObj.name += " [" + FengGameManagerMKII.RandomString(25) + "]";
             SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
             SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
             SpawnObj.transform.localScale = new Vector3(3, 3, 3);

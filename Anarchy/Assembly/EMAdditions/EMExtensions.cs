@@ -103,29 +103,31 @@ internal partial class FengGameManagerMKII
         PrimitiveType Primitive;
         switch (Object.ToLower())
         {
-            case "cube":
+            case string s when s.StartsWith("cube"):
                 Primitive = PrimitiveType.Cube;
                 break;
-            case "sphere":
+            case string s when s.StartsWith("sphere"):
                 Primitive = PrimitiveType.Sphere;
                 break;
-            case "capsule":
+            case string s when s.StartsWith("capsule"):
                 Primitive = PrimitiveType.Capsule;
                 break;
-            case "cylinder":
+            case string s when s.StartsWith("cylinder"):
                 Primitive = PrimitiveType.Cylinder;
                 break;
-            case "quad":
+            case string s when s.StartsWith("quad"):
                 Primitive = PrimitiveType.Quad;
                 break;
-            case "plane":
+            case string s when s.StartsWith("plane"):
                 Primitive = PrimitiveType.Plane;
                 break;
             default:
                 Primitive = PrimitiveType.Cube;
                 break;
         }
+
         GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
+        SpawnObj.name = Object;
         SpawnObj.transform.position = position;
         SpawnObj.transform.rotation = rotation;
         SpawnObj.transform.localScale = new Vector3(3, 3, 3);
@@ -138,9 +140,10 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
-    private void DeletePrimitiveRPC(GameObject obj, PhotonMessageInfo info)
+    private void DeletePrimitiveRPC(string obj, PhotonMessageInfo info)
     {
-        Destroy(obj);
+        //Destroy(obj);
+        Destroy(GameObject.Find(obj));
     }
 
     [RPC]
@@ -440,6 +443,14 @@ internal partial class FengGameManagerMKII
         {
             Destroy(obj);
         }
+    }
+
+    private static System.Random randomm = new System.Random();
+    public static string RandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[randomm.Next(s.Length)]).ToArray());
     }
 
     /*

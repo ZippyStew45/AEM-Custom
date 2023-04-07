@@ -1,5 +1,6 @@
 ﻿using Anarchy;
 using System.Text;
+using UnityEngine;
 
 namespace Optimization
 {
@@ -9,6 +10,7 @@ namespace Optimization
 
         private float updateTimer = UpdateInterval;
         private readonly Anarchy.Localization.Locale lang;
+        private Vector3 HeroPos;
 
         public RoomInformation()
         {
@@ -21,6 +23,8 @@ namespace Optimization
             updateTimer -= UnityEngine.Time.unscaledDeltaTime;
             if (updateTimer <= 0f)
             {
+                if (PhotonPlayer.MyHero() != null)
+                    HeroPos = PhotonPlayer.MyHero().transform.position;
                 UpdateLabels();
                 updateTimer = UpdateInterval;
             }
@@ -47,6 +51,8 @@ namespace Optimization
                 bld.AppendLine(lang.Format("slots", PhotonNetwork.room.PlayerCount.ToString(), PhotonNetwork.room.MaxPlayers.ToString().ToString()));
             }
             bld.Append(lang.Format("fps", FengGameManagerMKII.FPS.FPS.ToString()));
+            if (PhotonPlayer.MyHero() != null)
+                bld.Append("\n" + HeroPos.x.ToString("0") + "," + HeroPos.y.ToString("0") + "," + HeroPos.z.ToString("0"));
             if (PhotonNetwork.player.Properties.ContainsKey(PhotonPlayerProperty.anarchyFlags))
             {
                 int anarchyInt = (int)PhotonNetwork.player.Properties[PhotonPlayerProperty.anarchyFlags];
