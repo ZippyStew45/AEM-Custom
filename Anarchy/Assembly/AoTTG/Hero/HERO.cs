@@ -3978,7 +3978,7 @@ public partial class HERO : HeroBase
                 if (flare4CD == 0f)
                 {
                     c = User.FlareColour4.Value.HexToColor();
-                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b);
+                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b, false);
                     flare4CD = flareTotalCD;
                 }
                 break;
@@ -3986,7 +3986,7 @@ public partial class HERO : HeroBase
                 if (flare5CD == 0f)
                 {
                     c = User.FlareColour5.Value.HexToColor();
-                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b);
+                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b, false);
                     flare5CD = flareTotalCD;
                 }
                 break;
@@ -3994,7 +3994,7 @@ public partial class HERO : HeroBase
                 if (flare6CD == 0f)
                 {
                     c = User.FlareColour6.Value.HexToColor();
-                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b);
+                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b, false);
                     flare6CD = flareTotalCD;
                 }
                 break;
@@ -4002,7 +4002,7 @@ public partial class HERO : HeroBase
                 if (flare7CD == 0f)
                 {
                     c = User.FlareColour7.Value.HexToColor();
-                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b);
+                    FengGameManagerMKII.FGM.BasePV.RPC("FlareColour", PhotonTargets.All, baseT.position, Quaternion.Euler(rot.eulerAngles.x + 60, rot.eulerAngles.y, rot.eulerAngles.z), c.r, c.g, c.b, true);
                     flare7CD = flareTotalCD;
                 }
                 break;

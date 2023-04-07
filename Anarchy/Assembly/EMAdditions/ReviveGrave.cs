@@ -10,7 +10,7 @@ public class ReviveGrave : Interactable
     {
         gameObject.AddComponent<SelfDestroy>().CountDown = 60f;
         transform.FindChild("Text").GetComponent<TextMesh>().text = Player.UIName.ToHTMLFormat();
-        FengGameManagerMKII.FGM.FlareColour(transform.position, Quaternion.Euler(-10, 0, 0), Color.gray.r, Color.gray.g, Color.gray.b, null);
+        FengGameManagerMKII.FGM.FlareColour(transform.position, Quaternion.Euler(-10, 0, 0), Color.gray.r, Color.gray.g, Color.gray.b, false, null);
     }
 
     public override void Interact()

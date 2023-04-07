@@ -12,6 +12,7 @@ using ExitGames.Client.Photon;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Anarchy.UI;
+using System.Runtime.InteropServices;
 
 internal partial class FengGameManagerMKII
 {
@@ -199,10 +200,17 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
-    public void FlareColour(Vector3 pos, Quaternion rot, float r, float g, float b, PhotonMessageInfo info)
+    public void FlareColour(Vector3 pos, Quaternion rot, float r, float g, float b, bool flash, PhotonMessageInfo info)
     {
         Color col = new Color(r, g, b);
         var obj = (GameObject)Instantiate(CacheResources.Load("FX/flareBullet1"), pos, rot);
+        if (flash == true)
+        {
+            Light bulbComp = obj.AddComponent<Light>();
+            bulbComp.renderMode = LightRenderMode.ForcePixel;
+            bulbComp.range = 70f;
+            bulbComp.color = col;
+        }
         obj.GetComponent<ParticleSystem>().startColor = col;
         obj.GetComponent<FlareMovement>().dontShowHint();
     }
