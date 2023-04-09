@@ -16,7 +16,7 @@ public class ObjControll : MonoBehaviour
 
 
     [Header("Physics Paramater")]
-    [SerializeField] private float PickUpRange = 20f;
+    [SerializeField] private float PickUpRange = 25f;
     [SerializeField] private float PickUpForce = 150f;
     [SerializeField] private float HeldRange = 18f;
 
