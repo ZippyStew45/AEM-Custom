@@ -132,7 +132,7 @@ internal partial class FengGameManagerMKII
         SpawnObj.transform.position = position;
         SpawnObj.transform.rotation = rotation;
         SpawnObj.transform.localScale = new Vector3(3, 3, 3);
-        SpawnObj.renderer.material.color = Color.gray;
+        SpawnObj.renderer.material.color = ObjControll.PlacedObjColor;
         SpawnObj.layer = LayerMask.NameToLayer("Ground");
         SpawnObj.AddComponent<Rigidbody>();
         SpawnObj.GetComponent<Rigidbody>().useGravity = true;

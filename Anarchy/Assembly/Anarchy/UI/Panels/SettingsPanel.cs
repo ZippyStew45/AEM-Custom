@@ -465,9 +465,16 @@ namespace Anarchy.UI
                     rects[0].MoveY();
                     Label(rects[0], "[00FF00]Expedition Binds".ToHTMLFormat());
                     rects[0].MoveY();
-                    for (int i = 0; i < (int) EMInputManager.EMInputs.Count; i++)
+                    for (int i = 0; i < 9/*(int) EMInputManager.EMInputs.Count*/; i++)
                     {
                         RebindButton(rects[0], EMInputManager.Keys[i]);
+                    }
+                    rects[1].MoveY();
+                    Label(rects[1], "[00FF00]Builder Binds".ToHTMLFormat());
+                    rects[1].MoveY();
+                    for (int i = 9; i < 13; i++)
+                    {
+                        RebindButton(rects[1], EMInputManager.Keys[i]);
                     }
                     break;
 

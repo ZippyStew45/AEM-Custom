@@ -19,6 +19,10 @@ public static class EMInputManager
         HorseFollow,
         Interact,
         CommandList,
+        Builder_Place,
+        Builder_delete,
+        Builder_OBJ_away,
+        Builder_OBJ_close,
         Count
     }
 
@@ -31,8 +35,12 @@ public static class EMInputManager
         KeyCode.Keypad5,
         KeyCode.Keypad6,
         KeyCode.Keypad7,
+        KeyCode.F,
         KeyCode.F12,
-        KeyCode.F
+        KeyCode.Mouse0,
+        KeyCode.Mouse1,
+        KeyCode.UpArrow,
+        KeyCode.DownArrow
     };
 
     public static KeySetting[] Keys = new KeySetting[(int)EMInputs.Count];

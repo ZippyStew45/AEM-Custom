@@ -4,6 +4,8 @@ using UnityEngine;
 using Anarchy;
 using Anarchy.Commands.Chat;
 using Anarchy.UI;
+using System;
+using System.Diagnostics;
 
 public class ObjControll : MonoBehaviour
 {
@@ -14,8 +16,13 @@ public class ObjControll : MonoBehaviour
 
 
     [Header("Physics Paramater")]
-    [SerializeField] private float PickUpRange = 250f;
+    [SerializeField] private float PickUpRange = 20f;
     [SerializeField] private float PickUpForce = 150f;
+    [SerializeField] private float HeldRange = 18f;
+
+    [Header("Object Colors")]
+    public static Color PlacedObjColor = Color.grey;
+    public static Color UnPlacedObjColor = Color.red;
 
     private void Awake()
     {
@@ -26,8 +33,10 @@ public class ObjControll : MonoBehaviour
     {
         if (!PhotonNetwork.player.Builder) //builder check
             return;
+        if (HeldRange <= 12) HeldRange = 12;
+        if (HeldRange >= 25) HeldRange = 25;
 
-        if (Input.GetMouseButtonDown(0))
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_Place))
         {
             if (HeldOBJ == null)
             {
@@ -35,7 +44,7 @@ public class ObjControll : MonoBehaviour
 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, PickUpRange))
                 {
-                    if (hit.transform.gameObject.renderer.material.color != Color.red)
+                    if (hit.transform.gameObject.renderer.material.color != UnPlacedObjColor)
                         return;
                     PickUpOBJ(hit.transform.gameObject);
                 }
@@ -45,14 +54,23 @@ public class ObjControll : MonoBehaviour
                 DropOBJ();
             }
         }
-        if (Input.GetMouseButtonDown(1))
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_delete))
         {
             RaycastHit hit;
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, PickUpRange))
             {
-                DeleteOBJ(hit);
+                if (hit.transform.gameObject.renderer.material.color == UnPlacedObjColor || hit.transform.gameObject.renderer.material.color == PlacedObjColor)
+                  DeleteOBJ(hit);
             }
+        }
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_OBJ_away))
+        {
+            HeldRange += 1f;
+        }
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_OBJ_close))
+        {
+            HeldRange -= 1f;
         }
         if (HeldOBJ != null)
         {
@@ -63,9 +81,9 @@ public class ObjControll : MonoBehaviour
 
     void MoveOBJ()
     {
-        if (Vector3.Distance(HeldOBJ.transform.position, (HoldArea.position + HoldArea.transform.forward * 18f)) > 0.1f)
+        if (Vector3.Distance(HeldOBJ.transform.position, (HoldArea.position + HoldArea.transform.forward * HeldRange)) > 0.1f)
         {
-            Vector3 moveDirection = ((HoldArea.position + HoldArea.transform.forward * 18f) - HeldOBJ.transform.position);
+            Vector3 moveDirection = ((HoldArea.position + HoldArea.transform.forward * HeldRange) - HeldOBJ.transform.position);
             HeldOBJRB.AddForce(moveDirection * PickUpForce);
         }
     }

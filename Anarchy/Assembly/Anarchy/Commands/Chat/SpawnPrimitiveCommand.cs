@@ -80,7 +80,7 @@ namespace AoTTG.Anarchy.Commands.Chat
             SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
             SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
             SpawnObj.transform.localScale = new Vector3(3, 3, 3);
-            SpawnObj.renderer.material.color = Color.red;
+            SpawnObj.renderer.material.color = ObjControll.UnPlacedObjColor;
             SpawnObj.AddComponent<Rigidbody>();
             SpawnObj.GetComponent<Rigidbody>().useGravity = true;
             SpawnObj.GetComponent<Rigidbody>().mass = 10;
