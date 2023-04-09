@@ -268,10 +268,10 @@ public class CustomCharacterManager : MonoBehaviour
                 this.setup.myCostume.stat.Acl += pt;
                 break;
         }
-        this.setup.myCostume.stat.Spd = Mathf.Clamp(this.setup.myCostume.stat.Spd, 75, 125);
-        this.setup.myCostume.stat.Gas = Mathf.Clamp(this.setup.myCostume.stat.Gas, 75, 125);
-        this.setup.myCostume.stat.Bla = Mathf.Clamp(this.setup.myCostume.stat.Bla, 75, 125);
-        this.setup.myCostume.stat.Acl = Mathf.Clamp(this.setup.myCostume.stat.Acl, 75, 125);
+        this.setup.myCostume.stat.Spd = Mathf.Clamp(this.setup.myCostume.stat.Spd, 25, 140);
+        this.setup.myCostume.stat.Gas = Mathf.Clamp(this.setup.myCostume.stat.Gas, 25, 150);
+        this.setup.myCostume.stat.Bla = Mathf.Clamp(this.setup.myCostume.stat.Bla, 25, 125);
+        this.setup.myCostume.stat.Acl = Mathf.Clamp(this.setup.myCostume.stat.Acl, 25, 140);
         this.freshLabel();
     }
 

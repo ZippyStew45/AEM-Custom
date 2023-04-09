@@ -2,7 +2,7 @@
 
 public class HeroCostume
 {
-    public const int MaxStats = 400;
+    public const int MaxStats = 455;
 
     private static bool inited;
     public static string[] body_casual_fa_texture;
@@ -740,7 +740,7 @@ public class HeroCostume
         allStats += stat.Acl;
         if (allStats > MaxStats)
         {
-            stat.Spd = (stat.Gas = (stat.Bla = (stat.Acl = 110)));
+            stat.Spd = (stat.Gas = (stat.Bla = (stat.Acl = 100)));
         }
     }
 
