@@ -71,7 +71,7 @@ namespace Anarchy.UI
             {
                 UnityEngine.GUI.DrawTexture(screenRect, texture);
             }
-            UnityEngine.GUI.Label(screenRect, string.Format(UIMainReferences.VersionShow, AnarchyManager.AnarchyVersion.ToString()), style);
+            UnityEngine.GUI.Label(screenRect, string.Format(UIMainReferences.VersionShow, AnarchyManager.AnarchyVersion.ToString(), AnarchyManager.CustomVersion), style);
         }
     }
 }

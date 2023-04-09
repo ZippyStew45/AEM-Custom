@@ -81,7 +81,7 @@ namespace Anarchy.UI
             Optimization.Labels.Font = Style.Font;
             yield return new WaitForSeconds(0.5f);
             Info.text = "Enjoy!";
-            Optimization.Labels.VERSION = string.Format(UIMainReferences.VersionShow, AnarchyManager.AnarchyVersion.ToString());
+            Optimization.Labels.VERSION = string.Format(UIMainReferences.VersionShow, AnarchyManager.AnarchyVersion.ToString(), AnarchyManager.CustomVersion);
             textUpdate = false;
             Loading.text = "Loading complete";
             yield return new WaitForSeconds(2f);

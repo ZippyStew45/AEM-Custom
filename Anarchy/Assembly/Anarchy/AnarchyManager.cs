@@ -34,6 +34,10 @@ namespace Anarchy
         /// </summary>
         public static readonly string CustomName = "[00FF00]AEM[-]";
         /// <summary>
+        /// Your AEM version
+        /// </summary>
+        public static readonly string CustomVersion = "0.1";
+        /// <summary>
         /// If you want to use full Anarchy synchronization feautures
         /// </summary>
         public static readonly bool FullAnarchySync = true;

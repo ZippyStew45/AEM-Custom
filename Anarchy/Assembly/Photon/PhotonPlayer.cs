@@ -99,7 +99,7 @@ public class PhotonPlayer
                     vanillaUsersArray = vanillaUsersList.ToArray();
                 }
                 ModName = ModNames.Anarchy;
-                if (IsLocal) ModName = AnarchyManager.CustomName;
+                if (IsLocal) ModName = AnarchyManager.CustomName + AnarchyManager.CustomVersion;
             }
             else if (anarchySync && !value && !IsLocal)
             {

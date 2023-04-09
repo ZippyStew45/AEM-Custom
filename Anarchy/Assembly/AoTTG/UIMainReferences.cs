@@ -3,7 +3,7 @@
 public sealed class UIMainReferences : MonoBehaviour
 {
     private static bool isGAMEFirstLaunch = true;
-    public const string VersionShow = "AEM Version 1.2 \nAnarchy({0})";
+    public const string VersionShow = "AEM Version {1} \nAnarchy({0})";
     public static string ConnectField = "01042015";
     public static UIMainReferences Main;
     public GameObject panelCredits;

@@ -6,6 +6,7 @@ using UnityEngine;
 using Anarchy.Network;
 using Anarchy.Configuration;
 using RC;
+using Anarchy;
 
 public static class PhotonNetwork
 {
@@ -1433,7 +1434,7 @@ public static class PhotonNetwork
     {
         if (target != null)
         {
-            FengGameManagerMKII.FGM.BasePV.RPC("SetAnarchyMod", target, new object[] { true, Anarchy.AnarchyManager.FullAnarchySync, Anarchy.AnarchyManager.CustomName, Anarchy.AnarchyManager.AnarchyVersion.ToString() });
+            FengGameManagerMKII.FGM.BasePV.RPC("SetAnarchyMod", target, new object[] { true, Anarchy.AnarchyManager.FullAnarchySync, Anarchy.AnarchyManager.CustomName + AnarchyManager.CustomVersion, Anarchy.AnarchyManager.AnarchyVersion.ToString() });
         }
     }
 

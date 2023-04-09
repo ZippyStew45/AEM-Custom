@@ -461,7 +461,7 @@ internal partial class FengGameManagerMKII
                 var customNameShow = customName == string.Empty ? "Custom" : customName;
                 info.Sender.AnarchySync =
  version == AnarchyManager.AnarchyVersion.ToString() && (customName != string.Empty && customName == AnarchyManager.CustomName);
-                if (customNameShow.RemoveAll() == "AEM")
+                if (customNameShow.RemoveAll() == ("AEM" + AnarchyManager.CustomVersion))
                 {
                     info.Sender.ModName = customNameShow;
                 }
