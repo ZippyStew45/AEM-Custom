@@ -233,6 +233,13 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
+    public void SetDayLevel(int r, int g, int b, PhotonMessageInfo info)
+    {
+        FengColor.Custom = new Color(r, g, b);
+        IN_GAME_MAIN_CAMERA.DayLight = DayLight.Custom;
+    }
+
+    [RPC]
     private void SpawnWagon(int horseId, bool refill, string fileName, int id, PhotonMessageInfo info)
     {
         var h = PhotonView.Find(horseId);

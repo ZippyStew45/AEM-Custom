@@ -415,6 +415,12 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
             CacheGameObject.Find("mainLight").GetComponent<Light>().color = FengColor.NightBlack;
             BaseG.GetComponent<Skybox>().material = this.skyBoxNIGHT;
         }
+        if (DayLight == DayLight.Custom)
+        {
+            RenderSettings.ambientLight = FengColor.Custom;
+            CacheGameObject.Find("mainLight").GetComponent<Light>().color = FengColor.Custom;
+            BaseG.GetComponent<Skybox>().material = this.skyBoxDAY;
+        }
         this.snapShotCamera.gameObject.GetComponent<Skybox>().material = BaseG.GetComponent<Skybox>().material;
     }
 

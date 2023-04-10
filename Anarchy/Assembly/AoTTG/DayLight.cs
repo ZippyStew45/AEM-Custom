@@ -3,5 +3,6 @@
     Day,
     Dawn,
     Night,
-    NightBlack
+    NightBlack,
+    Custom
 }

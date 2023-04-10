@@ -6,6 +6,7 @@ public class FengColor
     public static Color dawnLight = new Color(0.729f, 0.643f, 0.458f);
     public static Color dayAmbientLight = new Color(0.494f, 0.478f, 0.447f);
     public static Color NightBlack = new Color(0, 0, 0);
+    public static Color Custom;
 
     public static Color dayLight = new Color(1f, 1f, 1f);
 
