@@ -60,6 +60,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("fog", new FogCommand());
             allCommands.Add("light", new LightCommand());
             allCommands.Add("givelight", new SetFlashLightCommand());
+            allCommands.Add("setsky", new SetSkyCommand());
             allCommands.Add("setdaylightcolor", new SetDayLevelCommand());
             allCommands.Add("gravity", new GravityCommand());
             allCommands.Add("obj", new SpawnPrimitiveCommand());

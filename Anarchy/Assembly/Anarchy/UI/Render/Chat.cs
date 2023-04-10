@@ -328,7 +328,7 @@ namespace Anarchy.UI
         { "/fog enabled Vaule ", "Turn On Fog" },
         { "/fog mode ExponentialSquared|Exponential|Linear ", "Set Fog Mode" },
         { "/commonvd Amount ", "Set The Titans Detection Radius" },
-        { "/seths Amount ID ", "Set A Players Speed" },
+        { "/seths ID Amount ", "Set A Player's Horse Speed" },
         { "/light Color Hex ", "Set Light Color" },
         { "/light Intensity Amount ", "Set Light Levels" },
         { "/gravity Amount ", "Set The Gravity Level" },
@@ -338,7 +338,8 @@ namespace Anarchy.UI
         { "/obj Object ", "Spawn Primitive object (You Need Builder Role To Use This)" },
         { "/cannon ", "Spawn a Cannon (You Need Gunner Role To Use This)" },
         { "/givelight ID Toggle(0|1) ", "Set Light On A Player Or Turn It Off" },
-        { "/setdaylightcolor R G B ", "Set Day Light Level (ex: black is MidNight)" },
+        { "/setdaylightcolor R G B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
+        { "/setsky north south east west top bottom ", "Set SkyBox For Everyone" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()
