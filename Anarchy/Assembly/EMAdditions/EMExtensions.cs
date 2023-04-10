@@ -216,6 +216,23 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
+    public void SetFlashLight(int ID, int Toggle, PhotonMessageInfo info)
+    {
+        GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(CacheResources.Load("flashlight"));
+        if (Toggle == 0)
+        {
+            Transform Player = PhotonPlayer.Find(ID).GameObject.transform;
+            gameObject.transform.parent = Player;
+            gameObject.transform.position = Player.position + Vector3.up * 3f;
+            gameObject.transform.rotation = Quaternion.Euler(353f, 0f, 0f);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    [RPC]
     private void SpawnWagon(int horseId, bool refill, string fileName, int id, PhotonMessageInfo info)
     {
         var h = PhotonView.Find(horseId);

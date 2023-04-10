@@ -337,6 +337,7 @@ namespace Anarchy.UI
         { "/rd Amount ", "Set Your Local Render Distance" },
         { "/obj Object ", "Spawn Primitive object (You Need Builder Role To Use This)" },
         { "/cannon ", "Spawn a Cannon (You Need Gunner Role To Use This)" },
+        { "/givelight ID Toggle(0|1) ", "Set Light On A Player Or Turn It Off" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()

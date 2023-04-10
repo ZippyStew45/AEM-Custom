@@ -59,6 +59,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("seths", new SetHSCommand());
             allCommands.Add("fog", new FogCommand());
             allCommands.Add("light", new LightCommand());
+            allCommands.Add("givelight", new SetFlashLightCommand());
             allCommands.Add("gravity", new GravityCommand());
             allCommands.Add("obj", new SpawnPrimitiveCommand());
             allCommands.Add("impact", new ImpactDeathCommand());

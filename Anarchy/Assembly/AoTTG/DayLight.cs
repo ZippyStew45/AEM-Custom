@@ -2,5 +2,6 @@
 {
     Day,
     Dawn,
-    Night
+    Night,
+    NightBlack
 }
