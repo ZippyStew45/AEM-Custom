@@ -218,25 +218,26 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetFlashLight(int ID, int Toggle, PhotonMessageInfo info)
     {
-        GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(CacheResources.Load("flashlight"));
-        if (Toggle == 0)
+        if (Toggle == 1)
         {
+            GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(CacheResources.Load("flashlight"));
             Transform Player = PhotonPlayer.Find(ID).GameObject.transform;
+            gameObject.name = "Fashlightcmd[" + ID + "]";
             gameObject.transform.parent = Player;
             gameObject.transform.position = Player.position + Vector3.up * 3f;
             gameObject.transform.rotation = Quaternion.Euler(353f, 0f, 0f);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(GameObject.Find("Fashlightcmd[" + ID + "]"));
         }
     }
 
     [RPC]
-    public void SetDayLevel(int r, int g, int b, PhotonMessageInfo info)
+    public void SetDayLevel(float r, float g, float b, PhotonMessageInfo info)
     {
         FengColor.Custom = new Color(r, g, b);
-        IN_GAME_MAIN_CAMERA.DayLight = DayLight.Custom;
+        IN_GAME_MAIN_CAMERA.MainCamera.setDayLight(DayLight.Custom);
     }
 
     [RPC]

@@ -19,7 +19,7 @@ namespace AoTTG.Anarchy.Commands.Chat
         {
             float r = Convert.ToSingle(args[0]);
             float g = Convert.ToSingle(args[1]);
-            float b = Convert.ToSingle(args[3]);
+            float b = Convert.ToSingle(args[2]);
             FengGameManagerMKII.FGM.BasePV.RPC("SetDayLevel", PhotonTargets.AllBuffered, r, g, b);
             return true;
         }
