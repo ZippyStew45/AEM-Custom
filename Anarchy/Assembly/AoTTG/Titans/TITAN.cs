@@ -126,6 +126,7 @@ public partial class TITAN : TitanBase
     private string turnAnimation;
     private float turnDeg;
     private GameObject whoHasTauntMe;
+    public static bool HideHP = false;
 
     public string ShowName { get; private set; }
     private bool continueAiCombo = false;
@@ -2027,7 +2028,7 @@ public partial class TITAN : TitanBase
 
     private void UpdateLabel()
     {
-        if (healthLabel != null)
+        if (healthLabel != null && HideHP != true)
         {
             healthLabel.transform.LookAt(2f * healthLabel.transform.position - IN_GAME_MAIN_CAMERA.BaseT.position);
         }

@@ -69,10 +69,12 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("destroyobjects", new DestroyObjectsCommand());
             allCommands.Add("rd", new RenderDistanceCommand());
             allCommands.Add("comehereall", new ComeHereAllCommand());
+            allCommands.Add("hidehp", new HideTitanHealthCommand());
         }
 
         private void NotFound(string name)
         {
+
         }
 
         public void TryHandleCommand(ICommand cmd, string inputLine)

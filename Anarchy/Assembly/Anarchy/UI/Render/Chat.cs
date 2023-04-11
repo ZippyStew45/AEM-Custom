@@ -306,7 +306,7 @@ namespace Anarchy.UI
         { "/rules ", "Shows The Current Room's Play Rules" },
         { "/clear ", "Clears Chat" },
         { "/kill ID ", "Kill A Player" },
-        { "/team 0|1|2 ", "Set Your Player Team" },
+        { "/team [0|1|2] ", "Set Your Player Team" },
         { "/unban ID ", "Unban A Player" },
         { "/mute ID ", "Mute A Player" },
         { "/unmute ID ", "Unmute A Player" },
@@ -341,6 +341,7 @@ namespace Anarchy.UI
         { "/setdaylightcolor R [Optional]G [Optional]B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
         { "/setsky north south east west top bottom ", "Set SkyBox For Everyone" },
         { "/comehereall ", "TP all PLayers To You" },
+        { "/hidehp [0|1] ", "Hide All Titan's Health(0 = false 1 = true)" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()
