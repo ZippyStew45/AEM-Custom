@@ -86,16 +86,25 @@ internal partial class FengGameManagerMKII
         };
         PhotonNetwork.player.SetCustomProperties(hash);
     }
+
     [RPC]
     private void SetImpactDeathRPC(bool enabled, float speed, PhotonMessageInfo info)
     {
         ImpactDeathEnabled = enabled;
         ImpactDeathSpeed = speed;
     }
+
     [RPC]
     private void SetGravityRPC(float g, PhotonMessageInfo info)
     {
         HeroGrav = g;
+    }
+
+    [RPC]
+    private void SetDifficultyRPC(int Dif, PhotonMessageInfo info)
+    {
+        TITAN.instance.myDifficulty = Dif;
+        IN_GAME_MAIN_CAMERA.Difficulty = Dif;
     }
 
     [RPC]
@@ -292,6 +301,7 @@ internal partial class FengGameManagerMKII
         h.wag.transform.parent = null;
         h.Wagon = false;
     }
+
     [RPC]
     private void ReconnectWagon(int horseID, PhotonMessageInfo info)
     {
@@ -306,6 +316,7 @@ internal partial class FengGameManagerMKII
         wag.transform.parent = h.transform;
         h.GetComponent<Horse>().Wagon = true;
     }
+
     public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker, bool RockThrow, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
     {
         var position = new Vector3(posX, posY, posZ);

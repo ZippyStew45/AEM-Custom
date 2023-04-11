@@ -127,6 +127,7 @@ public partial class TITAN : TitanBase
     private float turnDeg;
     private GameObject whoHasTauntMe;
     public static bool HideHP = false;
+    public static TITAN instance;
 
     public string ShowName { get; private set; }
     private bool continueAiCombo = false;
