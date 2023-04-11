@@ -1730,6 +1730,12 @@ public partial class TITAN : TitanBase
             {
                 var a = myHeroT.position + vector;
                 var sqrMagnitude = (a - baseT.position).sqrMagnitude;
+                if (sqrMagnitude > 8000f && sqrMagnitude < 90000f && baseT.gameObject.name.Contains("Rock_Enabled"))
+                {
+                    Attack("throw");
+                    rockInterval = 2f;
+                    return true;
+                }
                 if (sqrMagnitude > 8000f && sqrMagnitude < 90000f && !GameModes.NoRocks.Enabled)
                 {
                     Attack("throw");

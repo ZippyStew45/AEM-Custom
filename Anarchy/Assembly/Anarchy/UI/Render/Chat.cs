@@ -314,7 +314,7 @@ namespace Anarchy.UI
         { "/checkuser ID ", "Check Anarchy Abuse Features Of Player" },
         { "/scatter ", "Spread The Titans Around The Map" },
         { "/givegas ID Amount ", "Give A Player A Selected Amount Of Gas" },
-        { "/sptit type size health speed count chaseDistance attackWait, X, Y, Z, Faker[0|1] [Optional ->] bodySkinLink eyeSkinLink animationSpeed ", "Spawn Custom Titan" },
+        { "/sptit type size health speed count chaseDistance attackWait, X, Y, Z, Faker[0|1] RockThrow[0|1] [Optional ->] bodySkinLink eyeSkinLink animationSpeed ", "Spawn Custom Titan (1 = Enable)" },
         { "/emcustommap localPath prefabName X Y Z X Y Z W ", "Spawn Custom Unity Map" },
         { "/bundle_load bundleName ", "Load Unity Bundle To Cache" },
         { "/object_load bundleName objectName ", "Load Unity Object To Cache" },
@@ -338,7 +338,7 @@ namespace Anarchy.UI
         { "/obj Object ", "Spawn Primitive object (You Need Builder Role To Use This)" },
         { "/cannon ", "Spawn a Cannon (You Need Gunner Role To Use This)" },
         { "/givelight ID Toggle(0|1) ", "Set Light On A Player Or Turn It Off" },
-        { "/setdaylightcolor R G B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
+        { "/setdaylightcolor R [Optional]G [Optional]B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
         { "/setsky north south east west top bottom ", "Set SkyBox For Everyone" },
         { "/restart ", "Restart The Current Lobby" } };
 

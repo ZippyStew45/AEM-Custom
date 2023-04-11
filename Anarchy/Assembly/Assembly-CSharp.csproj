@@ -163,8 +163,10 @@
     <Compile Include="Anarchy\Commands\Chat\RenderDistanceCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\RulesCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ScatterCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\SetDayLevelCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SetFlashLightCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SetHSCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\SetSkyCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SpawnCannonCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SpawnFX.cs" />
     <Compile Include="Anarchy\Commands\Chat\SpawnPrimitiveCommand.cs" />

@@ -306,7 +306,7 @@ internal partial class FengGameManagerMKII
         wag.transform.parent = h.transform;
         h.GetComponent<Horse>().Wagon = true;
     }
-    public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
+    public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker, bool RockThrow, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
     {
         var position = new Vector3(posX, posY, posZ);
         var rotation = new Quaternion(0f, 0f, 0f, 0f);
@@ -321,6 +321,7 @@ internal partial class FengGameManagerMKII
             t.CustomSpeed = speed;
             t.rigidbody.freezeRotation = lockAxis;
             t.chaseDistance = chaseDistance;
+            if (RockThrow) t.name += "Rock_Enabled";
             t.BasePV.RPC("AniSpeed", PhotonTargets.AllBuffered, animationSpeed);
             t.BasePV.RPC("loadskinRPC", PhotonTargets.AllBuffered, bodySkinLink, eyeSkinLink);
             t.SetAbnormalType((AbnormalType)type);

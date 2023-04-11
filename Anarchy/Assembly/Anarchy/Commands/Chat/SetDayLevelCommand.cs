@@ -18,9 +18,16 @@ namespace AoTTG.Anarchy.Commands.Chat
         public override bool Execute(string[] args)
         {
             float r = Convert.ToSingle(args[0]);
-            float g = Convert.ToSingle(args[1]);
-            float b = Convert.ToSingle(args[2]);
-            FengGameManagerMKII.FGM.BasePV.RPC("SetDayLevel", PhotonTargets.AllBuffered, r, g, b);
+            if (args[1] != null && args[2] != null)
+            {
+                float g = Convert.ToSingle(args[1]);
+                float b = Convert.ToSingle(args[2]);
+                FengGameManagerMKII.FGM.BasePV.RPC("SetDayLevel", PhotonTargets.AllBuffered, r, g, b);
+            }
+            else
+            {
+                FengGameManagerMKII.FGM.BasePV.RPC("SetDayLevel", PhotonTargets.AllBuffered, r, r, r);
+            }
             return true;
         }
     }

@@ -20,6 +20,7 @@ namespace AoTTG.Anarchy.Commands.Chat
 
         public override bool Execute(string[] args)
         {
+            bool RockThrow = false;
             bool fake = false;
             if (args[10] == "1")
             {
@@ -43,13 +44,19 @@ namespace AoTTG.Anarchy.Commands.Chat
                 }
             }
             else TITAN.runAnimation2 = null;
+
+            if (args[11] == "1")
+            {
+                RockThrow = true;
+            }
+
             try
             {
                 int length = args.Length;
                 FengGameManagerMKII.FGM.SPTitan(int.Parse(args[0]), float.Parse(args[1]), int.Parse(args[2]),
                     float.Parse(args[3]), int.Parse(args[4]), int.Parse(args[5]), int.Parse(args[6]),
                     float.Parse(args[7]), float.Parse(args[8]), float.Parse(args[9]),
-                    true, fake, length >= 12 ? args[11] : "", length >= 13 ? args[12] : "", length >= 14 ? float.Parse(args[13]) : 1f);
+                    true, fake, RockThrow, length >= 12 ? args[12] : "", length >= 13 ? args[13] : "", length >= 14 ? float.Parse(args[14]) : 1f);
                 return true;
             }
             catch (Exception ex)
