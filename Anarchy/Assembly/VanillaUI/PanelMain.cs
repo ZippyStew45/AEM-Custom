@@ -12,6 +12,14 @@ public class PanelMain : MonoBehaviour
     {
     }
 
+    public static Vector2 TextBounds(string text)
+    {
+        return new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 12
+        }.CalcSize(new GUIContent(text));
+    }
+
     private void showTxt()
     {
         if (this.lang == Language.type)

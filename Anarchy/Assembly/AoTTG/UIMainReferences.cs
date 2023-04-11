@@ -38,6 +38,8 @@ public sealed class UIMainReferences : MonoBehaviour
             inputs.name = "InputManagerController";
             DontDestroyOnLoad(inputs);
             new GameObject("AnarchyManager").AddComponent<Anarchy.AnarchyManager>();
+            //GameObject MyGameObj = new GameObject();
+            //MyGameObj.AddComponent<MyUpdater>();
         }
         Anarchy.Network.NetworkManager.TryRejoin();
     }
