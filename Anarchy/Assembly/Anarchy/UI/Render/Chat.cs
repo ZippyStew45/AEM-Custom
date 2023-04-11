@@ -213,7 +213,7 @@ namespace Anarchy.UI
                     {
                         Vector3 ppos = PhotonPlayer.MyHero().transform.position;
                         Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
-                        CMDHandler.TryHandle(inputLine.Replace("ppos", ppos.x + " " + ppos.y + " " + ppos.z).Replace("prot", prot.x + " " + prot.y + " " + prot.z + " " + prot.w));
+                        CMDHandler.TryHandle(AnarchyExtensions.CommandFormat(inputLine));
                     }
                     else
                     {

@@ -3,6 +3,8 @@ using RC;
 using System;
 using Anarchy.UI;
 using UnityEngine;
+using Anarchy;
+using Mod;
 
 public class RCAction
 {
@@ -638,13 +640,11 @@ public class RCAction
                             }
                             Vector3 ppos = PhotonPlayer.MyHero().transform.position;
                             Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
-                            Chat.CMDHandler.TryHandle(command.Replace("ppos", ppos.x + " " + ppos.y + " " + ppos.z).Replace("prot", prot.x + " " + prot.y + " " + prot.z + " " + prot.w));
+                            Chat.CMDHandler.TryHandle(AnarchyExtensions.CommandFormat(command));
                             //Chat.CMDHandler.TryHandle(command);
-                            /*
-                            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
-                            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
-                            CommandList.CMDHandler.TryHandle("/" + command.Replace("ppos", ppos.x + " " + ppos.y + " " + ppos.z).Replace("prot", prot.x + " " + prot.y + " " + prot.z + " " + prot.w));
-                             */
+                            
+                            //CommandList.CMDHandler.TryHandle(AnarchyExtensions.CommandFormat(command));
+                            
                             return;
                         }
                         FengGameManagerMKII.FGM.BasePV.RPC("Chat", PhotonTargets.All, new object[]

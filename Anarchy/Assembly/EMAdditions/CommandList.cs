@@ -7,6 +7,7 @@ using System.IO;
 using ExitGames.Client.Photon;
 using Anarchy.Commands.Chat;
 using System.Threading;
+using Anarchy;
 
 namespace Mod
 {
@@ -143,6 +144,10 @@ namespace Mod
             {
                 line.ToLower();
                 string[] options = line.Split(new string[] { " " }, StringSplitOptions.None);
+                if (line.StartsWith("//"))
+                {
+                    yield return new WaitForSeconds(0);
+                }
                 if (line.StartsWith("wait"))
                 {
                     yield return new WaitForSeconds(Convert.ToSingle(options[1]));
@@ -157,7 +162,7 @@ namespace Mod
                     FengGameManagerMKII.FGM.StopAllCoroutines();
                     yield break;
                 }
-                CMDHandler.TryHandle("/" + line.Replace("ppos", ppos.x + " " + ppos.y + " " + ppos.z).Replace("prot", prot.x + " " + prot.y + " " + prot.z + " " + prot.w));
+                CMDHandler.TryHandle("/" + AnarchyExtensions.CommandFormat(line));
             }
             yield break;
         }

@@ -243,6 +243,21 @@ namespace Anarchy
             return str;
         }
 
+        /// <summary>
+        /// Formatting for commands.
+        /// Example: ppos would be changed to player coord x y and z
+        /// </summary>
+        public static string CommandFormat(this string str)
+        {
+            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
+            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
+
+            str = str.Replace("ppos", $"{ppos.x} {ppos.y} {ppos.z}");
+            str = str.Replace("prot", $"{prot.x} {prot.y} {prot.z} {prot.w}");
+
+            return str;
+        }
+
         //Credits to Hawk. Took from his Shelter mod
         public static string ValidateUnityTags(string text)
         {
