@@ -340,6 +340,7 @@ namespace Anarchy.UI
         { "/givelight ID Toggle(0|1) ", "Set Light On A Player Or Turn It Off" },
         { "/setdaylightcolor R [Optional]G [Optional]B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
         { "/setsky north south east west top bottom ", "Set SkyBox For Everyone" },
+        { "/comehereall ", "TP all PLayers To You" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()

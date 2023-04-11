@@ -68,6 +68,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("moveobject", new MoveObjectCommand());
             allCommands.Add("destroyobjects", new DestroyObjectsCommand());
             allCommands.Add("rd", new RenderDistanceCommand());
+            allCommands.Add("comehereall", new ComeHereAllCommand());
         }
 
         private void NotFound(string name)

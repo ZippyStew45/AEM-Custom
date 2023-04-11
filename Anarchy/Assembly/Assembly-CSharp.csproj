@@ -146,6 +146,7 @@
     <Compile Include="Anarchy\Commands\Chat\ChangeTeamCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\CheckAnarchyUserCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ClearCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\ComeHereAllCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\CommonVDCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\DestroyObjectsCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\EMCustomMapCommand.cs" />
