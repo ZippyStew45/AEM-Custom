@@ -304,6 +304,12 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
+    private void HideHPTitan(bool hidehp, PhotonMessageInfo info)
+    {
+        TITAN.HideHP = hidehp;
+    }
+
+    [RPC]
     private void ReconnectWagon(int horseID, PhotonMessageInfo info)
     {
         var h = PhotonView.Find(horseID);

@@ -19,10 +19,10 @@ namespace AoTTG.Anarchy.Commands.Chat
         {
             if (args[0] == "1")
             {
-                TITAN.HideHP = true;
+                FengGameManagerMKII.FGM.BasePV.RPC("HideHPTitan", PhotonTargets.AllBuffered, true);
                 return true;
             }
-            TITAN.HideHP = false;
+            FengGameManagerMKII.FGM.BasePV.RPC("HideHPTitan", PhotonTargets.AllBuffered, false);
             return false;
         }
     }

@@ -90,6 +90,7 @@ public partial class TITAN
     [RPC]
     public void labelRPC(int health, int healthMax)
     {
+        if (HideHP) return;
         if (health < 0)
         {
             if (healthLabel != null)

@@ -2025,7 +2025,7 @@ public partial class TITAN : TitanBase
 
     private void UpdateLabel()
     {
-        if (healthLabel != null && HideHP != true)
+        if (healthLabel != null)
         {
             healthLabel.transform.LookAt(2f * healthLabel.transform.position - IN_GAME_MAIN_CAMERA.BaseT.position);
         }
