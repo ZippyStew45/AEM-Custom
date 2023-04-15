@@ -638,8 +638,6 @@ public class RCAction
                                 }
                                 ((RCEvent)RC.RCManager.RCEvents["OnChatInput"]).checkEvent();
                             }
-                            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
-                            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
                             Chat.CMDHandler.TryHandle(AnarchyExtensions.CommandFormat(command));
                             //Chat.CMDHandler.TryHandle(command);
                             

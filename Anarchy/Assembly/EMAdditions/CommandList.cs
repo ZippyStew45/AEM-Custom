@@ -138,8 +138,6 @@ namespace Mod
         public System.Collections.IEnumerator RunCmdtest(string FilePath)
         {
             string[] linesRead = File.ReadAllLines(FilePath);
-            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
-            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
             foreach (string line in linesRead)
             {
                 line.ToLower();

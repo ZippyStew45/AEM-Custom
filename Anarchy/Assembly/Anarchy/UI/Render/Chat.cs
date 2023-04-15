@@ -211,8 +211,6 @@ namespace Anarchy.UI
                     }
                     if (inputLine.StartsWith("/"))
                     {
-                        Vector3 ppos = PhotonPlayer.MyHero().transform.position;
-                        Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
                         CMDHandler.TryHandle(AnarchyExtensions.CommandFormat(inputLine));
                     }
                     else
@@ -314,7 +312,7 @@ namespace Anarchy.UI
         { "/checkuser ID ", "Check Anarchy Abuse Features Of Player" },
         { "/scatter ", "Spread The Titans Around The Map" },
         { "/givegas ID Amount ", "Give A Player A Selected Amount Of Gas" },
-        { "/sptit type size health speed count chaseDistance attackWait, X, Y, Z, Faker[0|1] RockThrow[0|1] [Optional ->] bodySkinLink eyeSkinLink animationSpeed ", "Spawn Custom Titan (1 = Enable)" },
+        { "/sptit type size health speed count chaseDistance attackWait X Y Z Faker[0|1] RockThrow[0|1] [Optional ->] bodySkinLink eyeSkinLink animationSpeed ", "Spawn Custom Titan (1 = Enable)" },
         { "/emcustommap localPath prefabName X Y Z X Y Z W ", "Spawn Custom Unity Map" },
         { "/bundle_load bundleName ", "Load Unity Bundle To Cache" },
         { "/object_load bundleName objectName ", "Load Unity Object To Cache" },

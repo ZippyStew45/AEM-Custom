@@ -56,7 +56,7 @@ namespace AoTTG.Anarchy.Commands.Chat
                 FengGameManagerMKII.FGM.SPTitan(int.Parse(args[0]), float.Parse(args[1]), int.Parse(args[2]),
                     float.Parse(args[3]), int.Parse(args[4]), int.Parse(args[5]), int.Parse(args[6]),
                     float.Parse(args[7]), float.Parse(args[8]), float.Parse(args[9]),
-                    true, fake, RockThrow, length >= 12 ? args[12] : "", length >= 13 ? args[13] : "", length >= 14 ? float.Parse(args[14]) : 1f);
+                    true, RockThrow, length >= 13 ? args[12] : "", length >= 14 ? args[13] : "", length >= 15 ? float.Parse(args[14]) : 1f);
                 return true;
             }
             catch (Exception ex)

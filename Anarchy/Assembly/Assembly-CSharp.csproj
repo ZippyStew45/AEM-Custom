@@ -275,6 +275,7 @@
     <Compile Include="EMAdditions\InventorySystem\InventoryComponent.cs" />
     <Compile Include="EMAdditions\InventorySystem\InventoryItem.cs" />
     <Compile Include="EMAdditions\ObjControll.cs" />
+    <Compile Include="EMAdditions\PunkRockTag.cs" />
     <Compile Include="EMAdditions\ReviveGrave.cs" />
     <Compile Include="EMAdditions\WagonAutoFill.cs" />
     <Compile Include="EMAdditions\Wagon.cs" />
