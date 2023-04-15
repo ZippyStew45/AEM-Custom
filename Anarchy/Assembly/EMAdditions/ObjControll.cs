@@ -11,8 +11,8 @@ public class ObjControll : MonoBehaviour
 {
     [Header("PickUp Settings")]
     [SerializeField] Transform HoldArea = Camera.main.transform;
-    private GameObject HeldOBJ;
-    private Rigidbody HeldOBJRB;
+    private static GameObject HeldOBJ;
+    private static Rigidbody HeldOBJRB;
 
 
     [Header("Physics Paramater")]
@@ -88,7 +88,7 @@ public class ObjControll : MonoBehaviour
         }
     }
 
-    void PickUpOBJ(GameObject obj)
+    public static void PickUpOBJ(GameObject obj)
     {
         if (obj.GetComponent<Rigidbody>())
         {

@@ -275,11 +275,11 @@ namespace Anarchy.UI
 
             if (isShowCommandList && Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                commandsScroll = new Vector2(0, myYScroll -= 50);
+                commandsScroll = new Vector2(0, myYScroll -= 10);
             }
             else if (isShowCommandList && Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                commandsScroll = new Vector2(0, myYScroll += 50);
+                commandsScroll = new Vector2(0, myYScroll += 10);
             }
 
             if (this.inputLine.StartsWith("/")) isShowCommandList = true;

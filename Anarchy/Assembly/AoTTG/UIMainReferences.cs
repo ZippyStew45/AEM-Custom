@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Diagnostics;
+using UnityEngine;
 
 public sealed class UIMainReferences : MonoBehaviour
 {
     private static bool isGAMEFirstLaunch = true;
     public const string VersionShow = "AEM Version {1} \nAnarchy({0})";
-    public static string ConnectField = "01042015";
+    public static string ConnectField = "01042015"; 
+    public static string UpdaterPath = Environment.CurrentDirectory + "\\AEMUpdater.exe";
     public static UIMainReferences Main;
     public GameObject panelCredits;
     public GameObject PanelDisconnect;
@@ -38,8 +41,9 @@ public sealed class UIMainReferences : MonoBehaviour
             inputs.name = "InputManagerController";
             DontDestroyOnLoad(inputs);
             new GameObject("AnarchyManager").AddComponent<Anarchy.AnarchyManager>();
-            //GameObject MyGameObj = new GameObject();
-            //MyGameObj.AddComponent<MyUpdater>();
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(UpdaterPath);
+            Process.Start(startInfo);
         }
         Anarchy.Network.NetworkManager.TryRejoin();
     }

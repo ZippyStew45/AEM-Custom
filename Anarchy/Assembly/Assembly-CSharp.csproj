@@ -216,7 +216,6 @@
     <Compile Include="Anarchy\Network\Events\EventDetectRRC.cs" />
     <Compile Include="Anarchy\Network\Events\EventVC.cs" />
     <Compile Include="Anarchy\Network\ModNames.cs" />
-    <Compile Include="Anarchy\Network\MyUpdater.cs" />
     <Compile Include="Anarchy\Network\PropertiesChecker.cs" />
     <Compile Include="Anarchy\Notifications\NotificationEvent.cs" />
     <Compile Include="Anarchy\Notifications\NotificationType.cs" />

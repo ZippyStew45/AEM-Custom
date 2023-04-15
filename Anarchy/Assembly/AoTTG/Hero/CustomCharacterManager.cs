@@ -333,6 +333,7 @@ public class CustomCharacterManager : MonoBehaviour
             "levi",
             "sasha",
             "jean",
+            "rage",
             "marco",
             "armin",
             "petra"

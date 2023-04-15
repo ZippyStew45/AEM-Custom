@@ -85,7 +85,7 @@ namespace AoTTG.Anarchy.Commands.Chat
             SpawnObj.GetComponent<Rigidbody>().useGravity = true;
             SpawnObj.GetComponent<Rigidbody>().mass = 10;
             SpawnObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
+            ObjControll.PickUpOBJ(SpawnObj);
             return true;
         }
     }

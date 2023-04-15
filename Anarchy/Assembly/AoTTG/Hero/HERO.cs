@@ -213,6 +213,7 @@ public partial class HERO : HeroBase
     private TriggerColliderWeapon wRight;
     private SmoothSyncMovement smoothSync;
     public bool CheckInteraction;
+    public static bool israged = false;
 
     public bool IsDead { get; private set; }
 
@@ -418,6 +419,15 @@ public partial class HERO : HeroBase
                 targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
             }
         }
+    }
+    private void RageInit()
+    {
+        skillCDDuration = skillCDLast;
+        skillIDHUD = skillID;
+
+        skillIDHUD = "levi";
+        skillCDLast = 20f;
+        skillCDDuration = 10f;
     }
 
     private void BombInit()
@@ -993,7 +1003,7 @@ public partial class HERO : HeroBase
             return;
         }
 
-        UseGas(totalGas * 0.04f);
+        UseGas(4f);
         facingDirection = GetGlobalFacingDirection(horizontal, vertical);
         dashV = GetGlobaleFacingVector3(facingDirection);
         originVM = currentSpeed;
@@ -1749,7 +1759,10 @@ public partial class HERO : HeroBase
                 var vector8 = GetGlobaleFacingVector3(num7);
                 var d3 = vector7.magnitude <= 0.95f ? vector7.magnitude >= 0.25f ? vector7.magnitude : 0f : 1f;
                 vector8 *= d3;
-                vector8 *= Setup.myCostume.stat.Acl / 10f * 2f;
+                if (israged)
+                    vector8 *= Setup.myCostume.stat.Acl / 10f * 2f * 2f;
+                else
+                    vector8 *= Setup.myCostume.stat.Acl / 10f * 2f;
                 if (num == 0f && num2 == 0f)
                 {
                     if (State == HeroState.Attack)
@@ -2939,6 +2952,7 @@ public partial class HERO : HeroBase
         NetDieSpecial(baseR.velocity * 50f, false, -1, User.Suicide.PickRandomString());
         FengGameManagerMKII.FGM.needChooseSide = true;
         FengGameManagerMKII.FGM.justSuicide = true;
+        HERO.israged = false;
     }
 
     private void ThrowBlades()
@@ -3693,7 +3707,8 @@ public partial class HERO : HeroBase
         audioTransform.GetComponent<AudioSource>().Play();
         baseG.GetComponent<SmoothSyncMovement>().Disabled = true;
         PhotonNetwork.player.Dead = true;
-        PhotonNetwork.player.Deaths++;
+        //PhotonNetwork.player.Deaths++;
+        HERO.israged = false;
         FengGameManagerMKII.FGM.BasePV.RPC("someOneIsDead", PhotonTargets.MasterClient, 0);
         FengGameManagerMKII.FGM.SendKillInfo(false, titanName, false, User.DeathName);
         AnarchyManager.Feed.Kill(titanName, User.DeathName, 0);
@@ -3787,9 +3802,14 @@ public partial class HERO : HeroBase
                 skillCDLast = 10f;
                 break;
 
+            case "rage":
+                RageInit();
+                break;
+
             case "jean":
                 skillCDLast = 0.001f;
                 break;
+
 
             case "eren":
                 {
@@ -3830,13 +3850,17 @@ public partial class HERO : HeroBase
         }
 
         BombInit();
+        if (skillID == "rage")
+        {
+            RageInit();
+        }
         speed = Setup.myCostume.stat.Spd / 10f;
         totalGas = currentGas = Setup.myCostume.stat.Gas;
         totalBladeSta = currentBladeSta = Setup.myCostume.stat.Bla;
         baseR.mass = 0.5f - (Setup.myCostume.stat.Acl - 100) * 0.001f;
         CacheGameObject.Find("skill_cd_bottom").transform.localPosition =
             new Vector3(0f, -(float)Screen.height * 0.5f + 5f, 0f);
-        skillCD = CacheGameObject.Find("skill_cd_" + skillIDHUD);
+            skillCD = CacheGameObject.Find("skill_cd_" + skillIDHUD);
         skillCD.transform.localPosition = CacheGameObject.Find("skill_cd_bottom").transform.localPosition;
         CacheGameObject.Find("GasUI").transform.localPosition =
             CacheGameObject.Find("skill_cd_bottom").transform.localPosition;
@@ -4329,6 +4353,10 @@ public partial class HERO : HeroBase
                             {
                                 case "eren":
                                     ErenTransform();
+                                    return;
+
+                                case "rage":
+                                    FengGameManagerMKII.FGM.StartCoroutine(rage());
                                     return;
 
                                 case "marco":
@@ -5506,5 +5534,26 @@ public partial class HERO : HeroBase
         }
 
         ShowBlades();
+    }
+
+    public IEnumerator rage()
+    {
+        int i = 0;
+        HERO.israged = true;
+        while (israged == true)
+        {
+            yield return new WaitForSeconds(0.25f);
+            i++;
+            GameObject obj2;
+            obj2 = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("redCross1"));
+            obj2.transform.position = base.transform.position;
+            if (40 <= i)
+            {
+                HERO.israged = false;
+                yield break;
+            }
+            //PhotonNetwork.Instantiate("redCross", base.transform.position, base.transform.rotation, 0);
+        }
+        //yield return new WaitForSeconds(15f);
     }
 }

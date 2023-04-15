@@ -220,6 +220,7 @@ public partial class HERO
         {
             PhotonNetwork.Destroy(BasePV);
         }
+        HERO.israged = false;
     }
 
     [RPC]
@@ -566,6 +567,7 @@ public partial class HERO
         {
             PhotonNetwork.Destroy(BasePV);
         }
+        HERO.israged = false;
     }
 
     [RPC]
