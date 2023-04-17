@@ -425,7 +425,7 @@ public partial class HERO : HeroBase
         skillCDDuration = skillCDLast;
         skillIDHUD = skillID;
 
-        skillIDHUD = "levi";
+        skillIDHUD = "marco";
         skillCDLast = 20f;
         skillCDDuration = 10f;
     }

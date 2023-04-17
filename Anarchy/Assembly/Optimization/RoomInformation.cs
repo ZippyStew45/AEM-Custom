@@ -33,32 +33,39 @@ namespace Optimization
         public void UpdateLabels()
         {
             var bld = new StringBuilder();
-            bld.AppendLine(lang.Format("time", (IN_GAME_MAIN_CAMERA.GameType == GameType.Single ? (FengGameManagerMKII.FGM.logic.RoundTime).ToString("F0") : (FengGameManagerMKII.FGM.logic.ServerTime).ToString("F0"))));
-
-            if (IN_GAME_MAIN_CAMERA.GameMode != GameMode.Racing)
+            if (AnarchyManager.Pause.IsActive)
             {
-                bld.AppendLine(lang.Format("score", FengGameManagerMKII.FGM.logic.HumanScore.ToString(), FengGameManagerMKII.FGM.logic.TitanScore.ToString()));
-                string difficulty = (IN_GAME_MAIN_CAMERA.Difficulty >= 0) ? ((IN_GAME_MAIN_CAMERA.Difficulty != 0) ? ((IN_GAME_MAIN_CAMERA.Difficulty != 1) ? lang["abnormal"] : lang["hard"]) : lang["normal"]) : lang["training"];
-                bld.Append(FengGameManagerMKII.Level.Name);
-                bld.Append(": ");
-                bld.AppendLine(difficulty);
-            }
+                bld.AppendLine(lang.Format("time", (IN_GAME_MAIN_CAMERA.GameType == GameType.Single ? (FengGameManagerMKII.FGM.logic.RoundTime).ToString("F0") : (FengGameManagerMKII.FGM.logic.ServerTime).ToString("F0"))));
 
-            bld.AppendLine(lang.Format("cameraChange", InputManager.Settings[InputCode.CameraChange].ToString(), IN_GAME_MAIN_CAMERA.CameraMode.ToString()));
-            if (PhotonNetwork.inRoom)
-            {
-                bld.AppendLine(lang.Format("room", PhotonNetwork.room.UIName.Split('/')[0].ToHTMLFormat()));
-                bld.AppendLine(lang.Format("slots", PhotonNetwork.room.PlayerCount.ToString(), PhotonNetwork.room.MaxPlayers.ToString().ToString()));
+                if (IN_GAME_MAIN_CAMERA.GameMode != GameMode.Racing)
+                {
+                    bld.AppendLine(lang.Format("score", FengGameManagerMKII.FGM.logic.HumanScore.ToString(), FengGameManagerMKII.FGM.logic.TitanScore.ToString()));
+                    string difficulty = (IN_GAME_MAIN_CAMERA.Difficulty >= 0) ? ((IN_GAME_MAIN_CAMERA.Difficulty != 0) ? ((IN_GAME_MAIN_CAMERA.Difficulty != 1) ? lang["abnormal"] : lang["hard"]) : lang["normal"]) : lang["training"];
+                    bld.Append(FengGameManagerMKII.Level.Name);
+                    bld.Append(": ");
+                    bld.AppendLine(difficulty);
+                }
+
+                bld.AppendLine(lang.Format("cameraChange", InputManager.Settings[InputCode.CameraChange].ToString(), IN_GAME_MAIN_CAMERA.CameraMode.ToString()));
+                if (PhotonNetwork.inRoom)
+                {
+                    bld.AppendLine(lang.Format("room", PhotonNetwork.room.UIName.Split('/')[0].ToHTMLFormat()));
+                    bld.AppendLine(lang.Format("slots", PhotonNetwork.room.PlayerCount.ToString(), PhotonNetwork.room.MaxPlayers.ToString().ToString()));
+                }
             }
             bld.Append(lang.Format("fps", FengGameManagerMKII.FPS.FPS.ToString()));
             if (PhotonPlayer.MyHero() != null)
                 bld.Append("\n" + HeroPos.x.ToString("0") + "," + HeroPos.y.ToString("0") + "," + HeroPos.z.ToString("0"));
-            if (PhotonNetwork.player.Properties.ContainsKey(PhotonPlayerProperty.anarchyFlags))
+
+            if (AnarchyManager.Pause.IsActive)
             {
-                int anarchyInt = (int)PhotonNetwork.player.Properties[PhotonPlayerProperty.anarchyFlags];
-                if (anarchyInt > 0)
+                if (PhotonNetwork.player.Properties.ContainsKey(PhotonPlayerProperty.anarchyFlags))
                 {
-                    bld.Append($"\nAnarchy functions were used: {anarchyInt}");
+                    int anarchyInt = (int)PhotonNetwork.player.Properties[PhotonPlayerProperty.anarchyFlags];
+                    if (anarchyInt > 0)
+                    {
+                        bld.Append($"\nAnarchy functions were used: {anarchyInt}");
+                    }
                 }
             }
             Labels.TopRight = "<color=#" + User.MainColor.Value + ">" + bld.ToString() + "</color>";
