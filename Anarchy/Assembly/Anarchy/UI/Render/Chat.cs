@@ -342,6 +342,7 @@ namespace Anarchy.UI
         { "/hidehp [0|1] ", "Hide All Titan's Health(0 = false 1 = true)" },
         { "/difficulty [0|1|2] ", "Change Difficulty Of All AEM Players (0 = normal, 1 = hard, 2 = abnormal)" },
         { "/cmdlist File ", " Pick A File To Run Via Command List" },
+        { "/explosion Position(X Y Z) Size(X Y Z) ", " Spawn An Explosion That Kills Players (Y Size Determines Death Radius)" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()

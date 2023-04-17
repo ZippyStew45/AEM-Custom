@@ -72,6 +72,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("hidehp", new HideTitanHealthCommand());
             allCommands.Add("difficulty", new ChangeDifficultyCommand());
             allCommands.Add("cmdlist", new RunCMDListCommand());
+            allCommands.Add("explosion", new ExplosionCommand());
         }
 
         private void NotFound(string name)

@@ -151,6 +151,7 @@
     <Compile Include="Anarchy\Commands\Chat\CommonVDCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\DestroyObjectsCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\EMCustomMapCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\ExplosionCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\FogCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\GiveGasCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\GravityCommand.cs" />
