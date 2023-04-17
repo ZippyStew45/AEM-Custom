@@ -21,10 +21,8 @@ namespace AoTTG.Anarchy.Commands.Chat
         public override bool Execute(string[] args)
         {
             bool RockThrow = false;
-            bool fake = false;
             if (args[10] == "1")
             {
-                fake = true;
                 int ran = UnityEngine.Random.Range(0, 3);
                 string[] animation = { "run_walk", "run_abnormal", "run_abnormal_1" };
                 switch (ran)
@@ -43,7 +41,10 @@ namespace AoTTG.Anarchy.Commands.Chat
                         break;
                 }
             }
-            else TITAN.runAnimation2 = null;
+            else
+            {
+                TITAN.runAnimation2 = null;
+            }
 
             if (args[11] == "1")
             {
@@ -56,7 +57,7 @@ namespace AoTTG.Anarchy.Commands.Chat
                 FengGameManagerMKII.FGM.SPTitan(int.Parse(args[0]), float.Parse(args[1]), int.Parse(args[2]),
                     float.Parse(args[3]), int.Parse(args[4]), int.Parse(args[5]), int.Parse(args[6]),
                     float.Parse(args[7]), float.Parse(args[8]), float.Parse(args[9]),
-                    true, RockThrow, length >= 13 ? args[12] : "", length >= 14 ? args[13] : "", length >= 15 ? float.Parse(args[14]) : 1f);
+                    true, length >= 12 ? RockThrow : false, length >= 13 ? args[12] : "", length >= 14 ? args[13] : "", length >= 15 ? float.Parse(args[14]) : 1f);
                 return true;
             }
             catch (Exception ex)
