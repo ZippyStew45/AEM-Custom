@@ -135,7 +135,7 @@ namespace Mod
             UnityEngine.GUI.DragWindow();
         }
 
-        public System.Collections.IEnumerator RunCmdtest(string FilePath)
+        public static System.Collections.IEnumerator RunCmdtest(string FilePath)
         {
             string[] linesRead = File.ReadAllLines(FilePath);
             foreach (string line in linesRead)

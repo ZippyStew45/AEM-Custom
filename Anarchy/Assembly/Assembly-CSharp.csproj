@@ -165,6 +165,7 @@
     <Compile Include="Anarchy\Commands\Chat\ObjectSpawnCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\RenderDistanceCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\RulesCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\RunCMDListCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ScatterCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SetDayLevelCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\SetFlashLightCommand.cs" />

@@ -33,8 +33,8 @@ public class ObjControll : MonoBehaviour
     {
         if (!PhotonNetwork.player.Builder) //builder check
             return;
-        if (HeldRange <= 15) HeldRange = 12;
-        if (HeldRange >= 35) HeldRange = 25;
+        if (HeldRange <= 15) HeldRange = 15;
+        if (HeldRange >= 35) HeldRange = 35;
 
         if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_Place))
         {
