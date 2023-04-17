@@ -3024,6 +3024,8 @@ public partial class HERO : HeroBase
         {
             amount = UseGasSpeed;
         }
+        if (israged)
+            amount = amount * 2;
 
         amount *= GasMultiplier;
 
