@@ -141,13 +141,9 @@ internal partial class FengGameManagerMKII
         SpawnObj.name = Object;
         SpawnObj.transform.position = position;
         SpawnObj.transform.rotation = rotation;
-        SpawnObj.transform.localScale = new Vector3(3, 3, 3);
+        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
         SpawnObj.renderer.material.color = ObjControll.PlacedObjColor;
         SpawnObj.layer = LayerMask.NameToLayer("Ground");
-        SpawnObj.AddComponent<Rigidbody>();
-        SpawnObj.GetComponent<Rigidbody>().useGravity = true;
-        SpawnObj.GetComponent<Rigidbody>().mass = 10;
-        SpawnObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     [RPC]

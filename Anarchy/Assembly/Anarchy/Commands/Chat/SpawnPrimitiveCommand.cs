@@ -79,12 +79,13 @@ namespace AoTTG.Anarchy.Commands.Chat
             SpawnObj.name += " [" + FengGameManagerMKII.RandomString(25) + "]";
             SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
             SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
-            SpawnObj.transform.localScale = new Vector3(3, 3, 3);
+            SpawnObj.transform.localScale = new Vector3(10, 10, 10);
             SpawnObj.renderer.material.color = ObjControll.UnPlacedObjColor;
             SpawnObj.AddComponent<Rigidbody>();
             SpawnObj.GetComponent<Rigidbody>().useGravity = true;
             SpawnObj.GetComponent<Rigidbody>().mass = 10;
             SpawnObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            SpawnObj.layer = 1;
             ObjControll.PickUpOBJ(SpawnObj);
             return true;
         }
