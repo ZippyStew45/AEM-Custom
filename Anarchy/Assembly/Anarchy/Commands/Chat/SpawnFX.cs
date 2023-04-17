@@ -32,7 +32,6 @@ namespace AoTTG.Anarchy.Commands.Chat
             quat.w = Convert.ToSingle(args[7]);
 
             PhotonNetwork.Instantiate(args[0], pos, quat, 0);
-            chatMessage = "Game Object Spawned: " + args[0];
             return true;
         }
     }

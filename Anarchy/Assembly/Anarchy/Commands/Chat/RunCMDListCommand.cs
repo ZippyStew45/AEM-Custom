@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Anarchy.Commands.Chat;
+using System.Runtime;
 using Anarchy.IO;
 using Mod;
-using UnityEngine;
 
 namespace AoTTG.Anarchy.Commands.Chat
 {
@@ -20,12 +20,14 @@ namespace AoTTG.Anarchy.Commands.Chat
         public override bool Execute(string[] args)
         {
             string Path = Environment.CurrentDirectory + "\\AoTTG_Data\\CommandLists\\";
-            if (!Directory.Exists($"{Path}{args[0]}.txt"))
+            string message = string.Join(" ", args, 0, args.Length);
+            if (!System.IO.File.Exists($"{Path}{message}.txt"))
             {
-                chatMessage = $"file {args[0]} does not exist!";
+                chatMessage = $"file \"{message}.txt\" does not exist!";
+                return false;
             }
-
-            CommandList.RunCmdtest($"{Path}{args[0]}.txt");
+            ;
+            FengGameManagerMKII.FGM.StartCoroutine(CommandList.RunCmdtest($"{Path}{message}.txt"));
             return true;
         }
     }
