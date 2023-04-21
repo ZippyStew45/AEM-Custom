@@ -253,7 +253,7 @@ namespace Anarchy.UI
 
             if (isShowCommandList)
             {
-                Screen.lockCursor = false;
+                //Screen.lockCursor = false;
                 GUILayout.BeginArea(this.rectCommands);
                 UGUI.FlexibleSpace();
                 GUILayout.Label(string.Concat(new string[] { "<color=#000000>[Available commands]</color>" }), new GUILayoutOption[0]);
