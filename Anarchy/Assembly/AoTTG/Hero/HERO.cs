@@ -3326,10 +3326,6 @@ public partial class HERO : HeroBase
 
     public void Grabbed(GameObject titan, bool leftHand)
     {
-        if (this == PhotonNetwork.player.GameObject.GetComponent<HERO>())
-        {
-            return;
-        }
         if (isMounted)
         {
             Unmounted();

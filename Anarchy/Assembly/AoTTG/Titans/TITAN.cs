@@ -1100,6 +1100,7 @@ public partial class TITAN : TitanBase
         }
     }
 
+
     private string[] GetAttackStrategy()
     {
         string[] array = null;
@@ -1936,28 +1937,28 @@ public partial class TITAN : TitanBase
         runAnimation = "run_walk";
         grabTF = new GameObject { name = "titansTmpGrabTF" };
         oldHeadRotation = Head.rotation;
-        if (IN_GAME_MAIN_CAMERA.GameType != GameType.MultiPlayer || BasePV.IsMine)
+        if (IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer && !BasePV.IsMine)
         {
+            return;
+        }
 
-
-            if (!hasSetLevel)
+        if (!hasSetLevel)
+        {
+            myLevel = Random.Range(0.7f, 3f);
+            if (GameModes.SizeMode.Enabled)
             {
-                myLevel = Random.Range(0.7f, 3f);
-                if (GameModes.SizeMode.Enabled)
-                {
-                    myLevel = Random.Range(GameModes.SizeMode.GetFloat(0), GameModes.SizeMode.GetFloat(1));
-                }
-
-                hasSetLevel = true;
+                myLevel = Random.Range(GameModes.SizeMode.GetFloat(0), GameModes.SizeMode.GetFloat(1));
             }
 
-            spawnPt = baseT.position;
-            SetMyLevel();
-            SetAbnormalType(abnormalType);
-            if (myHero == null)
-            {
-                FindNearestHero();
-            }
+            hasSetLevel = true;
+        }
+
+        spawnPt = baseT.position;
+        SetMyLevel();
+        SetAbnormalType(abnormalType);
+        if (myHero == null)
+        {
+            FindNearestHero();
         }
 
         if (maxHealth == 0 && GameModes.HealthMode.Enabled)
@@ -3201,7 +3202,7 @@ public partial class TITAN : TitanBase
                             }
 
                             if ((abnormalType == AbnormalType.Jumper || abnormalType == AbnormalType.Aberrant) &&
-                                Mathf.Abs(between2) > 40f)
+                               Mathf.Abs(between2) > 40f)
                             {
                                 if (text.Contains("grab") || text.Contains("kick") || text.Contains("slap") ||
                                     text.Contains("bite"))
@@ -3706,6 +3707,7 @@ public partial class TITAN : TitanBase
 
                     break;
 
+
                 case TitanState.Grab:
                     if (baseA["grab_" + attackAnimation].normalizedTime >= attackCheckTimeA &&
                         baseA["grab_" + attackAnimation].normalizedTime <= attackCheckTimeB && grabbedTarget == null)
@@ -3747,7 +3749,6 @@ public partial class TITAN : TitanBase
                     {
                         Idle();
                     }
-
                     break;
 
                 case TitanState.Chase:
