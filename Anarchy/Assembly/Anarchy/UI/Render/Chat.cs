@@ -215,7 +215,7 @@ namespace Anarchy.UI
                     }
                     else
                     {
-                       Send(inputLine);
+                        Send(inputLine);
                     }
                     ResetInputline();
                     return;
@@ -248,8 +248,6 @@ namespace Anarchy.UI
             GUILayout.BeginArea(inputPosition);
             inputLine = UnityEngine.GUILayout.TextField(inputLine, textFieldStyle, textFieldOptions);
             GUILayout.EndArea();
-
-
 
             if (isShowCommandList)
             {

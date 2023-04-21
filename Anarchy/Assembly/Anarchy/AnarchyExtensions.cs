@@ -249,6 +249,8 @@ namespace Anarchy
         /// </summary>
         public static string CommandFormat(this string str)
         {
+            if (PhotonPlayer.MyHero() == null)
+                return str;
             Vector3 ppos = PhotonPlayer.MyHero().transform.position;
             Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
 
