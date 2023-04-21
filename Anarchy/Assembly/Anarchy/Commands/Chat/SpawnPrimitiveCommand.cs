@@ -1,4 +1,5 @@
 ﻿using Anarchy.Commands.Chat;
+using AoTTG.EMAdditions;
 using Optimization.Caching;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace AoTTG.Anarchy.Commands.Chat
         {
 
         }
-
+        
         public override bool Execute(string[] args)
         {
             if (!PhotonNetwork.player.Builder)
@@ -80,7 +81,8 @@ namespace AoTTG.Anarchy.Commands.Chat
             SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
             SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
             SpawnObj.transform.localScale = new Vector3(10, 10, 10);
-            SpawnObj.renderer.material.color = ObjControll.UnPlacedObjColor;
+            SpawnObj.AddComponent<BuilderTag>();
+            SpawnObj.renderer.material.color = Color.gray;
             SpawnObj.AddComponent<Rigidbody>();
             SpawnObj.GetComponent<Rigidbody>().useGravity = true;
             SpawnObj.GetComponent<Rigidbody>().mass = 10;

@@ -2,7 +2,7 @@
 
 namespace AoTTG.EMAdditions
 {
-    internal class PunkRockTag : MonoBehaviour
+    internal class BuilderTag : MonoBehaviour
     {
     }
 }

@@ -6,6 +6,7 @@ using Anarchy.Commands.Chat;
 using Anarchy.UI;
 using System;
 using System.Diagnostics;
+using AoTTG.EMAdditions;
 
 public class ObjControll : MonoBehaviour
 {
@@ -20,14 +21,12 @@ public class ObjControll : MonoBehaviour
     [SerializeField] private float PickUpForce = 150f;
     [SerializeField] private float HeldRange = 18f;
 
-    [Header("Object Colors")]
-    public static Color PlacedObjColor = Color.grey;
-    public static Color UnPlacedObjColor = Color.red;
-
     private void Awake()
     {
 
     }
+
+    //base.gameObject.GetComponent<PunkRockTag>() != null
 
     private void Update()
     {
@@ -44,9 +43,11 @@ public class ObjControll : MonoBehaviour
 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, PickUpRange))
                 {
-                    if (hit.transform.gameObject.renderer.material.color != UnPlacedObjColor)
+                    //if (hit.transform.gameObject.renderer.material.color != UnPlacedObjColor)
+                    if (hit.transform.gameObject.GetComponent<BuilderTag>() == null)
                         return;
-                    PickUpOBJ(hit.transform.gameObject);
+                    RespawnOBJ(hit);
+                    DeleteOBJ(hit);
                 }
             }
             else
@@ -60,8 +61,9 @@ public class ObjControll : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, PickUpRange))
             {
-                if (hit.transform.gameObject.renderer.material.color == UnPlacedObjColor || hit.transform.gameObject.renderer.material.color == PlacedObjColor)
-                  DeleteOBJ(hit);
+                if (hit.transform.gameObject.GetComponent<BuilderTag>() == null)
+                    return;
+                DeleteOBJ(hit);
             }
         }
         if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_OBJ_away))
@@ -119,5 +121,70 @@ public class ObjControll : MonoBehaviour
     {
         //Destroy(hit.transform.gameObject);
         FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.AllBuffered, hit.transform.gameObject.name);
+    }
+
+    void RespawnOBJ(RaycastHit hit)
+    {
+        Photon.MonoBehaviour hero = null;
+        if (IN_GAME_MAIN_CAMERA.GameType != GameType.Stop)
+        {
+
+            if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
+            {
+                if (FengGameManagerMKII.Heroes.Count > 0)
+                {
+                    hero = FengGameManagerMKII.Heroes[0];
+                }
+            }
+            else if (PhotonNetwork.player.IsTitan)
+            {
+                hero = PhotonNetwork.player.GetTitan();
+            }
+            else
+            {
+                hero = PhotonNetwork.player.GetHero();
+            }
+        }
+        PrimitiveType Primitive;
+        switch (hit.transform.gameObject.name.ToLower())
+        {
+            case string s when s.StartsWith("cube"):
+                Primitive = PrimitiveType.Cube;
+                break;
+            case string s when s.StartsWith("sphere"):
+                Primitive = PrimitiveType.Sphere;
+                break;
+            case string s when s.StartsWith("capsule"):
+                Primitive = PrimitiveType.Capsule;
+                break;
+            case string s when s.StartsWith("cylinder"):
+                Primitive = PrimitiveType.Cylinder;
+                break;
+            case string s when s.StartsWith("quad"):
+                Primitive = PrimitiveType.Quad;
+                break;
+            case string s when s.StartsWith("plane"):
+                Primitive = PrimitiveType.Plane;
+                break;
+            default:
+                Primitive = PrimitiveType.Cube;
+                break;
+        }
+
+
+        GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
+        SpawnObj.name += " [" + FengGameManagerMKII.RandomString(25) + "]";
+        SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
+        SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
+        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
+        SpawnObj.AddComponent<BuilderTag>();
+        SpawnObj.renderer.material.color = Color.gray;
+        SpawnObj.AddComponent<Rigidbody>();
+        SpawnObj.GetComponent<Rigidbody>().useGravity = true;
+        SpawnObj.GetComponent<Rigidbody>().mass = 10;
+        SpawnObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        SpawnObj.layer = 1;
+
+        PickUpOBJ(SpawnObj);
     }
 }
