@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using static Anarchy.UI.GUI;
+using static Optimization.Caching.Colors;
 
 namespace Anarchy.UI
 {
@@ -14,7 +17,10 @@ namespace Anarchy.UI
         private Rect scrollArea;
         private Rect scrollAreaView;
         private SmartRect rect;
+        private SmartRect left;
+        private SmartRect right;
         private SmartRect scrollRect;
+        private GUIStyle style;
         private string showString = string.Empty;
         private readonly List<string> messages = new List<string>();
 
@@ -25,7 +31,7 @@ namespace Anarchy.UI
 
         public void AddMessage(string message)
         {
-            messages.Add(message.RemoveAll());
+            messages.Add(message);
             if (IsActive)
             {
                 showString += "\n" + message;
@@ -39,6 +45,8 @@ namespace Anarchy.UI
 
         protected override void DrawMainPart()
         {
+            left.Reset();
+            right.Reset();
             rect.Reset();
             rect.MoveY();
             scrollRect.Reset();
@@ -54,6 +62,16 @@ namespace Anarchy.UI
                 //    GUILayout.Label(msg.ToString(), options);
                 //}
                 EndScrollView();
+            }
+            if (Button(right, "Back", true))
+            {
+                Disable();
+            }
+            if (Button(left, "Save", true))
+            {
+                File.AppendAllText(Environment.CurrentDirectory + "\\AoTTG_Data\\Logs\\ChatHistory.txt", $"\n-----------------Chat Saved! {DateTime.Now}-----------------\n");
+                File.AppendAllText(Environment.CurrentDirectory + "\\AoTTG_Data\\Logs\\ChatHistory.txt", showString.RemoveAll());
+                AddMessage($"Chat Saved To: {Environment.CurrentDirectory}\\AoTTG_Data\\Logs\\ChatHistory.txt");
             }
         }
 
@@ -90,6 +108,11 @@ namespace Anarchy.UI
             scrollRect = new SmartRect(0f, 0f, rect.width, rect.height, 0f, Style.VerticalMargin);
             scrollArea = new Rect(rect.x, rect.y, rect.width, WindowPosition.height - (4 * (Style.Height + Style.VerticalMargin)) - (Style.WindowTopOffset + Style.WindowBottomOffset) - 10f);
             scrollAreaView = new Rect(0f, 0f, rect.width, int.MaxValue);
+
+
+            SmartRect[] rects = Helper.GetSmartRects(WindowPosition, 2);
+            left = rects[0];
+            right = rects[1];
 
             var bld = new StringBuilder();
             foreach(string str in messages)

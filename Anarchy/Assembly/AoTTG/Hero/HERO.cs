@@ -249,7 +249,9 @@ public partial class HERO : HeroBase
 
     public void CreateGrave()
     {
-        var obj = Instantiate(RCManager.EMAssets.Load("GhostHero"), baseG.transform.position, Quaternion.Euler(9.68f, 0f, 0f)) as GameObject;
+        //var obj = Instantiate(RCManager.EMAssets.Load("GhostHero"), baseG.transform.position, Quaternion.Euler(9.68f, 0f, 0f)) as GameObject;
+
+        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         obj.AddComponent<ReviveGrave>().Player = BasePV.owner;
     }
     public void AddGas(float gas)

@@ -570,7 +570,8 @@ public class RCAction
                     this.parameters[1].returnPlayer(null).ID,
                     this.parameters[2].returnInt(null)
                             };
-                            titan2.BasePV.RPC("titanGetHit", titan2.BasePV.owner, parameters);
+                            //titan2.BasePV.RPC("titanGetHit", titan2.BasePV.owner, parameters);
+                            titan2.BasePV.RPC("netDie", PhotonTargets.OthersBuffered);
                             return;
                         }
                     case 1:

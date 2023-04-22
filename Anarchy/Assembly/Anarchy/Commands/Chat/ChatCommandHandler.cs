@@ -22,6 +22,7 @@ namespace Anarchy.Commands.Chat
         {
             allCommands.Clear();
             allCommands.Add("restart", new RestartCommand());
+            allCommands.Add("r", new RestartCommand());
             allCommands.Add("pm", new PMCommand());
             allCommands.Add("kick", new KickCommand(false, false));
             allCommands.Add("ban", new KickCommand(true, false));
