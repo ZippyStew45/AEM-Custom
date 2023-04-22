@@ -273,6 +273,7 @@
     <Compile Include="Aottg\Hero\HeroRPC.cs" />
     <Compile Include="Aottg\Titans\TitanRPC.cs" />
     <Compile Include="Anarchy\UI\Panels\CreditsPanel.cs" />
+    <Compile Include="EMAdditions\FakerTitan.cs" />
     <Compile Include="EMAdditions\Interactable.cs" />
     <Compile Include="EMAdditions\InventorySystem\Inventory.cs" />
     <Compile Include="EMAdditions\InventorySystem\InventoryComponent.cs" />

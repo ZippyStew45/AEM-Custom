@@ -7,6 +7,7 @@ using Anarchy.Skins;
 using Anarchy.Skins.Maps;
 using Anarchy.UI;
 using Antis;
+using AoTTG.EMAdditions;
 using GameLogic;
 using Optimization;
 using Optimization.Caching;
@@ -303,6 +304,62 @@ internal partial class FengGameManagerMKII : MonoBehaviour
 
     private static TITAN SpawnTitanRaw(Vector3 position, Quaternion rotation)
     {
+        if (GameModes.CustomTitanSpawnRate.Enabled)
+        {
+            var Customrates = new float[5];
+            for (var i = 0; i < Customrates.Length; i++)
+            {
+                Customrates[i] = GameModes.CustomTitanSpawnRate.GetFloat(i);
+            }
+            string[] options = { "Normal", "Fake", "Rock", "Stalker", "Speed" };
+            double[] weights = { Customrates[0], Customrates[1], Customrates[2], Customrates[3], Customrates[4] }; // Replace with your percentages
+
+            System.Random rand = new System.Random();
+            double totalWeight = weights.Sum();
+            double randomValue = rand.NextDouble() * totalWeight;
+            int selectedIndex = -1;
+
+            for (int i = 0; i < options.Length; i++)
+            {
+                randomValue -= weights[i];
+                if (randomValue <= 0.0)
+                {
+                    selectedIndex = i;
+                    break;
+                }
+            }
+
+            string selectedOption = options[selectedIndex];
+
+            TITAN Titan;
+            if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
+                Titan = ((GameObject)Instantiate(CacheResources.Load("TITAN_VER3.1"), position, rotation)).GetComponent<TITAN>();
+            else
+                Titan = Pool.NetworkEnable("TITAN_VER3.1", position, rotation).GetComponent<TITAN>();
+
+            switch (selectedOption)
+            {
+                case "Normal":
+                    return Titan;
+
+                case "Fake":
+                    Titan.gameObject.AddComponent<FakerTitan>();
+                    return Titan;
+
+                case "Rock":
+                    Titan.gameObject.AddComponent<PunkRockTag>();
+                    return Titan;
+
+                case "Stalker":
+                    Titan.gameObject.AddComponent<StalkerTitan>();
+                    return Titan;
+
+                case "Speed":
+                    Titan.gameObject.AddComponent<SpeedTitan>();
+                    return Titan;
+            }
+        }
+
         if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
         {
             return ((GameObject)Instantiate(CacheResources.Load("TITAN_VER3.1"), position, rotation))
@@ -1054,16 +1111,6 @@ internal partial class FengGameManagerMKII : MonoBehaviour
         {
             num = GameModes.CustomAmount.GetInt(0);
         }
-
-        if (GameModes.CustomTitanSpawnRate.Enabled)
-        {
-            var Customrates = new float[4];
-            for (var i = 0; i < Customrates.Length; i++)
-            {
-                Customrates[i] = GameModes.CustomTitanSpawnRate.GetFloat(i);
-            }
-        }
-
         num = Mathf.Min(50, num);
         if (GameModes.SpawnRate.Enabled)
         {

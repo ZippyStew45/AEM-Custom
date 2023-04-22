@@ -289,6 +289,30 @@ public partial class TITAN
             runAnimation = "run_abnormal_1";
             GetComponent<TITAN_SETUP>().setHair();
         }
+        if (base.gameObject.GetComponent<FakerTitan>() != null)
+        {
+            int ran = UnityEngine.Random.Range(0, 3);
+            string[] animation = { "run_walk", "run_abnormal", "run_abnormal_1" };
+            switch (ran)
+            {
+                case 0:
+                    runAnimation2 = animation[0];
+                    runAnimation = animation[0];
+                    break;
+                case 1:
+                    runAnimation2 = animation[1];
+                    runAnimation = animation[1];
+                    break;
+                case 2:
+                    runAnimation2 = animation[2];
+                    runAnimation = animation[2];
+                    break;
+                default:
+                    runAnimation2 = animation[0];
+                    runAnimation = animation[0];
+                    break;
+            }
+        }
         name = titanNames[(int)abnormalType];
         ShowName = User.TitanNames[(int)abnormalType].PickRandomString();
         if (abnormalType == AbnormalType.Aberrant || abnormalType == AbnormalType.Jumper ||

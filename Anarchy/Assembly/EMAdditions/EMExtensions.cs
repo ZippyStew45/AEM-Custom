@@ -321,7 +321,7 @@ internal partial class FengGameManagerMKII
         h.GetComponent<Horse>().Wagon = true;
     }
 
-    public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool RockThrow = false, bool speedtitan = false, bool stalker = false, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
+    public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker = false, bool RockThrow = false, bool speedtitan = false, bool stalker = false, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
     {
         var position = new Vector3(posX, posY, posZ);
         var rotation = new Quaternion(0f, 0f, 0f, 0f);
@@ -339,6 +339,7 @@ internal partial class FengGameManagerMKII
             if (RockThrow) t.gameObject.AddComponent<PunkRockTag>();
             if (speedtitan) t.gameObject.AddComponent<SpeedTitan>();
             if (stalker) t.gameObject.AddComponent<StalkerTitan>();
+            if (faker) t.gameObject.AddComponent<FakerTitan>();
             t.BasePV.RPC("AniSpeed", PhotonTargets.AllBuffered, animationSpeed);
             t.BasePV.RPC("loadskinRPC", PhotonTargets.AllBuffered, bodySkinLink, eyeSkinLink);
             t.SetAbnormalType((AbnormalType)type);
