@@ -215,7 +215,8 @@ internal partial class FengGameManagerMKII
         {
             Light bulbComp = obj.AddComponent<Light>();
             bulbComp.renderMode = LightRenderMode.ForcePixel;
-            bulbComp.range = 70f;
+            bulbComp.range = 500f;
+            bulbComp.intensity = 1f;
             bulbComp.color = col;
         }
         obj.GetComponent<ParticleSystem>().startColor = col;
