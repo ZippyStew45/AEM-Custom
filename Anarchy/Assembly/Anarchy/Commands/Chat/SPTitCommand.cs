@@ -21,6 +21,8 @@ namespace AoTTG.Anarchy.Commands.Chat
         public override bool Execute(string[] args)
         {
             bool RockThrow = false;
+            bool speedie = false;
+            bool stalker = false;
             if (args[10] == "1")
             {
                 int ran = UnityEngine.Random.Range(0, 3);
@@ -50,6 +52,14 @@ namespace AoTTG.Anarchy.Commands.Chat
             {
                 RockThrow = true;
             }
+            if (args[12] == "1")
+            {
+                speedie = true;
+            }
+            if (args[13] == "1")
+            {
+                stalker = true;
+            }
 
             try
             {
@@ -57,7 +67,7 @@ namespace AoTTG.Anarchy.Commands.Chat
                 FengGameManagerMKII.FGM.SPTitan(int.Parse(args[0]), float.Parse(args[1]), int.Parse(args[2]),
                     float.Parse(args[3]), int.Parse(args[4]), int.Parse(args[5]), int.Parse(args[6]),
                     float.Parse(args[7]), float.Parse(args[8]), float.Parse(args[9]),
-                    true, length >= 12 ? RockThrow : false, length >= 13 ? args[12] : "", length >= 14 ? args[13] : "", length >= 15 ? float.Parse(args[14]) : 1f);
+                    true, length >= 12 ? RockThrow : false, length >= 13 ? speedie : false, length >= 14 ? stalker : false, length >= 15 ? args[14] : "", length >= 16 ? args[15] : "", length >= 17 ? float.Parse(args[16]) : 1f);
                 return true;
             }
             catch (Exception ex)

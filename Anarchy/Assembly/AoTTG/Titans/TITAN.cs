@@ -3089,6 +3089,7 @@ public partial class TITAN : TitanBase
                             if (Random.Range(0f, 1f) < 0.02f)
                             {
                                 Wander();
+                                StalkerLockOn();
                                 return;
                             }
 
@@ -4111,6 +4112,20 @@ public partial class TITAN : TitanBase
             }
 
             ColliderEnabled = true;
+        }
+    }
+
+    public void StalkerLockOn()
+    {
+        foreach (var tit in FengGameManagerMKII.Titans)
+        {
+            if (tit.GetComponent<StalkerTitan>() != null)
+            {
+                if (tit != null && !tit.hasDie && Vector3.Distance(tit.baseGT.position, baseT.position) < 10000)
+                {
+                    tit.BeTauntedBy(PhotonPlayer.Find(Random.Range(1, PhotonNetwork.playerList.Length)).GameObject, float.MaxValue);
+                }
+            }
         }
     }
 }

@@ -27,6 +27,10 @@ namespace Anarchy
             new GameModeSetting("spawnMode,nRate,aRate,jRate,cRate,pRate",
                 new float[] { 20f, 20f, 20f, 20f, 20f }).AddApplyCallback(CheckCustomSpawn);
 
+        public static readonly GameModeSetting CustomTitanSpawnRate =
+            new GameModeSetting("specialspawnMode,fRate,rRate,stRate,spRate",
+                new float[] { 0f, 0f, 0f, 0f }).AddApplyCallback(CheckCustomTitanSpawn);
+
         public static readonly GameModeSetting SizeMode =
             new GameModeSetting("sizeMode,sizeLower,sizeUpper", new[] { 0.7f, 3f });
 
@@ -180,6 +184,27 @@ namespace Anarchy
                 if (summ > 100f)
                 {
                     for (int i = 0; i < 5; i++)
+                    {
+                        floats[i] = 20f;
+                    }
+                }
+            }
+        }
+
+        private static void CheckCustomTitanSpawn(GameModeSetting set, bool state, int selection, float[] floats,
+            int[] integers)
+        {
+            if (state)
+            {
+                float summ = 0f;
+                for (int i = 0; i < 4; i++)
+                {
+                    summ += floats[i];
+                }
+
+                if (summ > 100f)
+                {
+                    for (int i = 0; i < 4; i++)
                     {
                         floats[i] = 20f;
                     }

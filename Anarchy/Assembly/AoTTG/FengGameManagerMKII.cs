@@ -1055,6 +1055,15 @@ internal partial class FengGameManagerMKII : MonoBehaviour
             num = GameModes.CustomAmount.GetInt(0);
         }
 
+        if (GameModes.CustomTitanSpawnRate.Enabled)
+        {
+            var Customrates = new float[4];
+            for (var i = 0; i < Customrates.Length; i++)
+            {
+                Customrates[i] = GameModes.CustomTitanSpawnRate.GetFloat(i);
+            }
+        }
+
         num = Mathf.Min(50, num);
         if (GameModes.SpawnRate.Enabled)
         {

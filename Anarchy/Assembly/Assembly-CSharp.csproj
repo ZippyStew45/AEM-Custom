@@ -280,6 +280,8 @@
     <Compile Include="EMAdditions\ObjControll.cs" />
     <Compile Include="EMAdditions\PunkRockTag.cs" />
     <Compile Include="EMAdditions\ReviveGrave.cs" />
+    <Compile Include="EMAdditions\SpeedTitan.cs" />
+    <Compile Include="EMAdditions\StalkerTitan.cs" />
     <Compile Include="EMAdditions\WagonAutoFill.cs" />
     <Compile Include="EMAdditions\Wagon.cs" />
     <Compile Include="EMAdditions\WheelRotate.cs" />

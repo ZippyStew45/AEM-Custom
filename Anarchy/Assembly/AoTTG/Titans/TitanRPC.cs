@@ -7,6 +7,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Anarchy.UI;
 using UnityEngine;
+using AoTTG.EMAdditions;
+using Anarchy.Replays;
 
 // ReSharper disable UnusedMember.Local
 [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -252,7 +254,10 @@ public partial class TITAN
     {
         foreach (AnimationState a in baseA)
         {
-            a.speed = aniSpeed;
+            if (base.gameObject.GetComponent<SpeedTitan>() != null)
+                a.speed = aniSpeed * 1.75f;
+            else
+                a.speed = aniSpeed;
         }
         if (type == 0)
         {
@@ -282,7 +287,7 @@ public partial class TITAN
         {
             abnormalType = AbnormalType.Punk;
             runAnimation = "run_abnormal_1";
-            GetComponent<TITAN_SETUP>().setPunkHair();
+            GetComponent<TITAN_SETUP>().setHair();
         }
         name = titanNames[(int)abnormalType];
         ShowName = User.TitanNames[(int)abnormalType].PickRandomString();
@@ -332,6 +337,7 @@ public partial class TITAN
             AABB.GetComponent<CapsuleCollider>().radius = 5f;
             AABB.GetComponent<CapsuleCollider>().center = new Vector3(0f, 5.05f, 0f);
             if (CustomSpeed != 0) this.speed = CustomSpeed;
+            if (base.gameObject.GetComponent<SpeedTitan>() != null) CustomSpeed = CustomSpeed * 1.75f;
             if (CustomAttackWait != 0) this.attackWait = CustomAttackWait;
         }
 

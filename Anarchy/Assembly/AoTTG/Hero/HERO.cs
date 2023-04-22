@@ -20,6 +20,7 @@ using UnityEngine;
 using Xft;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
+using AoTTG.EMAdditions;
 
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]

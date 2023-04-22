@@ -161,6 +161,7 @@ namespace Anarchy.UI
             GameModes.PunkOverride.Draw(right, locale);
             right.MoveY();
             GameModes.NoRocks.Draw(right, locale);
+            GameModes.CustomTitanSpawnRate.Draw(right, locale);
         }
 
         public override void Update()
