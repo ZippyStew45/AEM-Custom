@@ -70,6 +70,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("destroyobjects", new DestroyObjectsCommand());
             allCommands.Add("rd", new RenderDistanceCommand());
             allCommands.Add("comehereall", new ComeHereAllCommand());
+            allCommands.Add("comehere", new ComeHereCommand());
             allCommands.Add("hidehp", new HideTitanHealthCommand());
             allCommands.Add("difficulty", new ChangeDifficultyCommand());
             allCommands.Add("cmdlist", new RunCMDListCommand());

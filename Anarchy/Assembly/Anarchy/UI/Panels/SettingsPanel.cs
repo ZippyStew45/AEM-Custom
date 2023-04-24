@@ -554,7 +554,7 @@ namespace Anarchy.UI
             //left
             left.Reset();
             LabelCenter(left, locale["graphics"], true);
-            DropdownMenuScrollable(left, VideoSettings.ResolutionIndex, VideoSettings.Resolutions, 4, true);
+            DropdownMenu(left, VideoSettings.ResolutionIndex, VideoSettings.Resolutions, true);
             ToggleButton(left, VideoSettings.Fullscreen, "Fullscreen", true);
             TextField(left, VideoSettings.DrawDistance, locale["drawDistance"], Style.BigLabelOffset, true);
             ToggleButton(left, VideoSettings.Mipmap, locale["mipmap"], true);

@@ -18,7 +18,6 @@ namespace AoTTG.Anarchy.Commands.Chat
         public override bool Execute(string[] args)
         {
             Vector3 Mypos = PhotonPlayer.MyHero().transform.position;
-
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
             {
                 go.GetComponent<HERO>().BasePV.RPC("moveToRPC", PhotonTargets.Others, new object[] { Mypos.x, Mypos.y, Mypos.z });

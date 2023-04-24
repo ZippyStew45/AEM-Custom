@@ -62,7 +62,7 @@ internal partial class FengGameManagerMKII : MonoBehaviour
     public int singleMax;
     public int singleTotal;
     public int time = 600;
-    private List<TITAN> titans;
+    public List<TITAN> titans;
 
     public static FEMALE_TITAN Annie => FGM.annie;
     public static COLOSSAL_TITAN Colossal => FGM.colossal;
