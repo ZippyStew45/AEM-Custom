@@ -158,6 +158,7 @@
     <Compile Include="Anarchy\Commands\Chat\GravityCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\HideTitanHealthCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ImpactDeathCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\KillAllTitansCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\KillCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\LeaveCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\LightCommand.cs" />

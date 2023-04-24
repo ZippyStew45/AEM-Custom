@@ -71,6 +71,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("rd", new RenderDistanceCommand());
             allCommands.Add("comehereall", new ComeHereAllCommand());
             allCommands.Add("comehere", new ComeHereCommand());
+            allCommands.Add("killtitans", new KillAllTitansCommand());
             allCommands.Add("hidehp", new HideTitanHealthCommand());
             allCommands.Add("difficulty", new ChangeDifficultyCommand());
             allCommands.Add("cmdlist", new RunCMDListCommand());

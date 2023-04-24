@@ -338,6 +338,7 @@ namespace Anarchy.UI
         { "/setsky north south east west top bottom ", "Set SkyBox For Everyone" },
         { "/comehereall ", "TP all PLayers To You" },
         { "/comehere ID ", "TP Certain PLayers To You, If You Use Your ID It TPs All Titans On You" },
+        { "/killtitans ", "Kills All Titans In The Room" },
         { "/hidehp [0|1] ", "Hide All Titan's Health(0 = false 1 = true)" },
         { "/difficulty [0|1|2] ", "Change Difficulty Of All AEM Players (0 = normal, 1 = hard, 2 = abnormal)" },
         { "/cmdlist File ", " Pick A File To Run Via Command List" },
