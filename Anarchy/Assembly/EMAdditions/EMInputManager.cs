@@ -23,6 +23,8 @@ public static class EMInputManager
         Builder_delete,
         Builder_OBJ_away,
         Builder_OBJ_close,
+        Supply_Drop_Gas,
+        Supply_Drop_Blade,
         Count
     }
 
@@ -40,7 +42,9 @@ public static class EMInputManager
         KeyCode.Mouse0,
         KeyCode.Mouse1,
         KeyCode.UpArrow,
-        KeyCode.DownArrow
+        KeyCode.DownArrow,
+        KeyCode.J,
+        KeyCode.K
     };
 
     public static KeySetting[] Keys = new KeySetting[(int)EMInputs.Count];

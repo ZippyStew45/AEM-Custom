@@ -476,6 +476,13 @@ namespace Anarchy.UI
                     {
                         RebindButton(rects[1], EMInputManager.Keys[i]);
                     }
+                    rects[1].MoveY();
+                    Label(rects[1], "[00FF00]Supply Binds".ToHTMLFormat());
+                    rects[1].MoveY();
+                    for (int i = 13; i < 15; i++)
+                    {
+                        RebindButton(rects[1], EMInputManager.Keys[i]);
+                    }
                     break;
 
                 case RebindsHuman:

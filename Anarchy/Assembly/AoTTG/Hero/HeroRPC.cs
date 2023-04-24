@@ -29,6 +29,12 @@ public partial class HERO
         Chat.Add($"{info.Sender.UIName.ToHTMLFormat()}, Gave you {gas} gas");
     }
     [RPC]
+    private void giveBladeRPC(int Blade, PhotonMessageInfo info)
+    {
+        AddBlade(Blade);
+        Chat.Add($"{info.Sender.UIName.ToHTMLFormat()}, Gave you {Blade} Blade(s)");
+    }
+    [RPC]
     private void backToHumanRPC()
     {
         titanForm = false;
@@ -118,6 +124,22 @@ public partial class HERO
     private void netDie2(int viewID = -1, string titanName = "", PhotonMessageInfo info = null)
     {
         if (PhotonNetwork.player.Medic) CreateGrave();
+
+        if (state != HeroState.Grab)
+        {
+            Vector3 vec3 = PhotonPlayer.MyHero().transform.position;
+            Quaternion quat = PhotonPlayer.MyHero().transform.rotation;
+            if (currentGas > 10)
+            {
+                string GasName = $"GasDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                FengGameManagerMKII.FGM.BasePV.RPC("DropGasRPC", PhotonTargets.All, GasName, vec3, quat);
+            }
+            if (currentBladeNum <= 1)
+            {
+                string BladeName = $"BladeDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                FengGameManagerMKII.FGM.BasePV.RPC("DropbladeRPC", PhotonTargets.All, BladeName, vec3, quat);
+            }
+        }
 
         if (BasePV.IsMine)
         {
@@ -480,6 +502,23 @@ public partial class HERO
     public void netDie(Vector3 v, bool isBite, int viewID = -1, string titanName = "", bool killByTitan = true, PhotonMessageInfo info = null)
     {
         if (PhotonNetwork.player.Medic) CreateGrave();
+
+        if (state != HeroState.Grab)
+        {
+            Vector3 vec3 = PhotonPlayer.MyHero().transform.position;
+            Quaternion quat = PhotonPlayer.MyHero().transform.rotation;
+            if (currentGas > 10)
+            {
+                string GasName = $"GasDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                FengGameManagerMKII.FGM.BasePV.RPC("DropGasRPC", PhotonTargets.All, GasName, vec3, quat);
+            }
+            if (currentBladeNum <= 1)
+            {
+                string BladeName = $"BladeDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                FengGameManagerMKII.FGM.BasePV.RPC("DropbladeRPC", PhotonTargets.All, BladeName, vec3, quat);
+            }
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             OnDeathEvent(viewID, killByTitan);

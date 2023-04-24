@@ -56,7 +56,10 @@ namespace Optimization
             bld.Append(lang.Format("fps", FengGameManagerMKII.FPS.FPS.ToString()));
             if (PhotonPlayer.MyHero() != null)
                 bld.Append("\n" + HeroPos.x.ToString("0") + "," + HeroPos.y.ToString("0") + "," + HeroPos.z.ToString("0"));
-
+            if (PhotonNetwork.player.Supply)
+            {
+                bld.Append($"\nGas Supply {HERO.GasStroage}/15\nBlade Supply {HERO.BladeStroage}/15");
+            }
             if (AnarchyManager.Pause.IsActive)
             {
                 if (PhotonNetwork.player.Properties.ContainsKey(PhotonPlayerProperty.anarchyFlags))

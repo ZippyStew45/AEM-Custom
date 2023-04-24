@@ -215,6 +215,8 @@ public partial class HERO : HeroBase
     private SmoothSyncMovement smoothSync;
     public bool CheckInteraction;
     public static bool israged = false;
+    public static int BladeStroage = 15;
+    public static int GasStroage = 15;
 
     public bool IsDead { get; private set; }
 
@@ -269,6 +271,21 @@ public partial class HERO : HeroBase
         else currentGas = 0;
         ShowGas();
     }
+    public void AddBlade(int Blade)
+    {
+        if (currentBladeNum + Blade <= TotalBladeNum)
+        {
+            this.currentBladeNum += Blade;
+        }
+        else this.currentBladeNum = TotalBladeNum;
+        ShowBlades();
+    }
+    public void ConsumeBlade(int Blade)
+    {
+        if (Blade <= currentBladeNum) currentBladeNum -= Blade;
+        else currentBladeNum = 0;
+        ShowBlades();
+    }
     private static void ApplyForceToBody(GameObject go, Vector3 v)
     {
         go.rigidbody.AddForce(v);
@@ -310,20 +327,6 @@ public partial class HERO : HeroBase
                 GetComponent<CapsuleCollider>().isTrigger = false;
             }
         }
-
-        if (PhotonNetwork.player.Supply)
-        {
-            FengGameManagerMKII.FGM.HeroGrav = FengGameManagerMKII.FGM.HeroGrav*2;
-
-            ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable()
-            {
-                {PhotonPlayerProperty.statGAS, 1000}
-            };
-            var stats = IN_GAME_MAIN_CAMERA.MainHERO.Setup.myCostume.stat;
-            stats.Gas = 1000;
-            PhotonNetwork.player.SetCustomProperties(hash);
-        }
-        this.gravity = FengGameManagerMKII.FGM.HeroGrav;
         SetSounds();
     }
 
@@ -4335,6 +4338,35 @@ public partial class HERO : HeroBase
                     Salute();
                     return;
                 }
+                if (PhotonNetwork.player.Supply)
+                {
+                    if (baseA.IsPlaying(standAnimation) && EMInputManager.IsInputDown(EMInputManager.EMInputs.Supply_Drop_Gas))
+                    {
+                        if (GasStroage > 0)
+                        {
+                            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
+                            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
+                            GasStroage--;
+                            string GasName = $"GasDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                            FengGameManagerMKII.FGM.BasePV.RPC("DropGasRPC", PhotonTargets.All, GasName, ppos + (PhotonPlayer.MyHero().gameObject.transform.forward * 6f) + (Vector3.up * 3f), prot);
+                            CrossFade("supply", 0.8f);
+                        }
+                        return;
+                    }
+                    if (baseA.IsPlaying(standAnimation) && EMInputManager.IsInputDown(EMInputManager.EMInputs.Supply_Drop_Blade))
+                    {
+                        if (BladeStroage > 0)
+                        {
+                            Vector3 ppos = PhotonPlayer.MyHero().transform.position;
+                            Quaternion prot = PhotonPlayer.MyHero().transform.rotation;
+                            BladeStroage--;
+                            string BladeName = $"BladeDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
+                            FengGameManagerMKII.FGM.BasePV.RPC("DropbladeRPC", PhotonTargets.All, BladeName, ppos + (PhotonPlayer.MyHero().gameObject.transform.forward * 6f) + (Vector3.up * 3f), prot);
+                            CrossFade("supply", 0.8f);
+                        }
+                        return;
+                    }
+                }
 
                 if (!isMounted &&
                     (InputManager.IsInputDown[InputCode.Attack0] || InputManager.IsInputDown[InputCode.Attack1]) &&
@@ -5211,6 +5243,8 @@ public partial class HERO : HeroBase
                     currentBladeSta = totalBladeSta;
                     currentBladeNum = TotalBladeNum;
                     currentGas = totalGas;
+                    GasStroage = 15;
+                    BladeStroage = 15;
                     ShowGas();
                     if (!Gunner)
                     {

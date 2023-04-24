@@ -150,8 +150,29 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void DeletePrimitiveRPC(string obj, PhotonMessageInfo info)
     {
-        //Destroy(obj);
         Destroy(GameObject.Find(obj));
+    }
+
+
+    [RPC]
+    private void DropGasRPC(string objname, Vector3 vec3, Quaternion quaternion, PhotonMessageInfo info)
+    {
+        var obj = UnityEngine.Object.Instantiate(RCManager.ZippyAssets.Load("GasCanister"), vec3, quaternion) as GameObject;
+        obj.AddComponent<Rigidbody>();
+        obj.name = objname;
+        obj.layer = LayerMask.NameToLayer("Ground");
+        obj.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        obj.AddComponent<GasCollider>();
+    }
+
+    [RPC]
+    private void DropbladeRPC(string objname, Vector3 vec3, Quaternion quaternion, PhotonMessageInfo info)
+    {
+        var obj = UnityEngine.Object.Instantiate(RCManager.ZippyAssets.Load("Blade"), vec3, quaternion) as GameObject;
+        obj.AddComponent<Rigidbody>();
+        obj.name = objname;
+        obj.layer = LayerMask.NameToLayer("Ground");
+        obj.AddComponent<GasCollider>();
     }
 
     [RPC]

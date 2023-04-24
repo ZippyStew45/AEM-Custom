@@ -265,6 +265,7 @@
     <Compile Include="Anarchy\VoiceChat\VCManager.cs" />
     <Compile Include="Aottg\GameLogic\BombForestLogic.cs" />
     <Compile Include="Aottg\GameLogic\CustomRacingLogic.cs" />
+    <Compile Include="EMAdditions\BladeCollider.cs" />
     <Compile Include="EMAdditions\BuilderTag.cs" />
     <Compile Include="EMAdditions\CommandList.cs" />
     <Compile Include="EMAdditions\EMExtensions.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Aottg\Titans\TitanRPC.cs" />
     <Compile Include="Anarchy\UI\Panels\CreditsPanel.cs" />
     <Compile Include="EMAdditions\FakerTitan.cs" />
+    <Compile Include="EMAdditions\GasCollider.cs" />
     <Compile Include="EMAdditions\Interactable.cs" />
     <Compile Include="EMAdditions\InventorySystem\Inventory.cs" />
     <Compile Include="EMAdditions\InventorySystem\InventoryComponent.cs" />
