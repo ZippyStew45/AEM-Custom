@@ -1993,6 +1993,8 @@ public partial class TITAN : TitanBase
         IsHooked = false;
         IsLook = false;
         spawned = true;
+
+        StalkerLockOn();
     }
 
     private void Turn(float d)
@@ -3089,7 +3091,6 @@ public partial class TITAN : TitanBase
                             if (Random.Range(0f, 1f) < 0.02f)
                             {
                                 Wander();
-                                StalkerLockOn();
                                 return;
                             }
 
@@ -4123,7 +4124,17 @@ public partial class TITAN : TitanBase
             {
                 if (tit != null && !tit.hasDie && Vector3.Distance(tit.baseGT.position, baseT.position) < 10000)
                 {
-                    tit.BeTauntedBy(PhotonPlayer.Find(Random.Range(1, PhotonNetwork.playerList.Length)).GameObject, float.MaxValue);
+                    int ammount = PhotonNetwork.playerList.Length;
+                    int trys = 0;
+                    retry:
+                    GameObject hero = PhotonPlayer.Find(Random.Range(1, PhotonNetwork.playerList.Length)).GameObject;
+                    if (hero != null) 
+                    {
+                        trys++;
+                        if (trys >= ammount) return;
+                        goto retry; 
+                    }
+                    tit.BeTauntedBy(hero, float.MaxValue);
                 }
             }
         }
