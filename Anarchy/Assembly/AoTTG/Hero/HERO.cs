@@ -1036,12 +1036,6 @@ public partial class HERO : HeroBase
 
     private void Dodge(bool offTheWall = false)
     {
-        if (myHorse != null && !isMounted && Vector3.Distance(myHorse.transform.position, baseT.position) < 15f)
-        {
-            getOnHorse();
-            return;
-        }
-
         State = HeroState.GroundDodge;
         if (!offTheWall)
         {
@@ -4249,6 +4243,16 @@ public partial class HERO : HeroBase
                 Dodge();
                 return;
             }
+
+            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseMount) && !baseA.IsPlaying("jump") &&!baseA.IsPlaying("horse_geton"))
+            {
+                if (myHorse != null && !isMounted && Vector3.Distance(myHorse.transform.position, baseT.position) < 15f)
+                {
+                    getOnHorse();
+                    return;
+                }
+            }
+
         }
 
         switch (state)
@@ -4310,7 +4314,7 @@ public partial class HERO : HeroBase
                     Suicide();
                 }
 
-                if (myHorse != null && isMounted && InputManager.IsInputDown[InputCode.Dodge])
+                if (myHorse != null && isMounted && InputManager.IsInputHorseHolding((int)InputHorse.HorseMount))
                 {
                     GetOffHorse();
                 }
