@@ -150,6 +150,8 @@ namespace Anarchy.UI
             GameModes.SpawnRate.Draw(left, locale);
             left.MoveY();
             GameModes.SizeMode.Draw(left, locale);
+            left.MoveY();
+            ToggleButton(left, TITAN.HideHP, val => { TITAN.HideHP = val; }, "Hide Titan HP", false);
 
             right.Reset();
             GameModes.HealthMode.Draw(right, locale);

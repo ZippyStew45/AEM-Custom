@@ -1983,7 +1983,7 @@ public partial class TITAN : TitanBase
 
         lagMax = 150f + myLevel * 3f;
         healthTime = Time.time;
-        if (currentHealth > 0 && IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer)
+        if (currentHealth > 0 && IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer && HideHP == false)
         {
             BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, currentHealth, maxHealth);
         }

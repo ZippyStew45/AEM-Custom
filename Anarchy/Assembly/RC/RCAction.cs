@@ -591,7 +591,8 @@ public class RCAction
                             {
                                 titan3.maxHealth = titan3.currentHealth;
                             }
-                            titan3.BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, new object[]
+                            if (TITAN.HideHP == false)
+                                titan3.BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, new object[]
                             {
                     titan3.currentHealth,
                     titan3.maxHealth
