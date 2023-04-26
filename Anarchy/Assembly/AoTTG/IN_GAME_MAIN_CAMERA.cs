@@ -1,6 +1,7 @@
 ﻿using Anarchy;
 using Anarchy.Configuration;
 using Optimization.Caching;
+using System;
 using UnityEngine;
 
 public class IN_GAME_MAIN_CAMERA : MonoBehaviour
@@ -125,6 +126,8 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
 
     internal static TITAN MainTITAN { get; private set; }
 
+    private bool appInFocus = true;
+
     public static GameObject MainObject
     {
         get => mainObject;
@@ -139,6 +142,8 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
     public static Rigidbody MainR { get; private set; }
 
     public static Transform MainT { get; private set; }
+
+    GameObject SpawnObj;
 
     private void Awake()
     {
@@ -156,25 +161,49 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
         VideoSettings.Apply();
         base.gameObject.AddComponent<ObjControll>();
     }
+    
+    private void SpawnFix()
+    {
+        SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        SpawnObj.name = "OGcamFix";
+        SpawnObj.layer = 1;
+        SpawnObj.transform.localScale = new Vector3(30,30,1);
+
+
+
+
+        Vector3 forward = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 position = transform.position;
+        if (SpawnObj == null) SpawnFix();
+        Vector3 followPosition = position + forward * 200f;
+        SpawnObj.transform.rotation = base.transform.rotation;
+        SpawnObj.transform.position = followPosition;
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        appInFocus = focus;
+    }
 
     private void CameraMovement()
     {
         this.distanceOffsetMulti = (cameraDistance * (200f - BaseCamera.fieldOfView)) / 150f;
         BaseT.position = (Head ?? MainT).position + (Vectors.up * (this.heightMulti - ((0.6f - cameraDistance) * 2f)));
-        if (!InputManager.MenuOn)
+        if (!InputManager.MenuOn && appInFocus)
         {
             switch (CameraMode)
             {
                 case CameraType.ORIGINAL:
+
                     if (Input.mousePosition.x < (Screen.width * 0.4f))
                     {
-                        BaseT.RotateAround(BaseT.position, Vectors.up, (-((((Screen.width * 0.4f) - Input.mousePosition.x) / (Screen.width)) * 0.4f) * this.getSensitivityMultiWithDeltaTime()) * 150f);
+                        BaseT.RotateAround(BaseT.position, Vectors.up, (-((((Screen.width * 0.4f) - Input.mousePosition.x) / (Screen.width)) * 0.4f) * this.getSensitivityMultiWithDeltaTime()) * 150);
                     }
                     else if (Input.mousePosition.x > (Screen.width * 0.6f))
                     {
-                        BaseT.RotateAround(BaseT.position, Vectors.up, ((((Input.mousePosition.x - (Screen.width * 0.6f)) / (Screen.width)) * 0.4f) * this.getSensitivityMultiWithDeltaTime()) * 150f);
+                        BaseT.RotateAround(BaseT.position, Vectors.up, ((((Input.mousePosition.x - (Screen.width * 0.6f)) / (Screen.width)) * 0.4f) * this.getSensitivityMultiWithDeltaTime()) * 150);
                     }
-                    float x = ((140f * ((Screen.height * 0.6f) - Input.mousePosition.y)) / ((float)Screen.height)) * 0.5f;
+                    float x = ((140f * ((Screen.height * 0.6f) - Input.mousePosition.y)) / (Screen.height)) * 1f;
                     BaseT.rotation = Quaternion.Euler(x, BaseT.rotation.eulerAngles.y, BaseT.rotation.eulerAngles.z);
                     break;
 
@@ -408,12 +437,6 @@ public class IN_GAME_MAIN_CAMERA : MonoBehaviour
             RenderSettings.ambientLight = FengColor.dawnAmbientLight;
             CacheGameObject.Find("mainLight").GetComponent<Light>().color = FengColor.dawnAmbientLight;
             BaseG.GetComponent<Skybox>().material = this.skyBoxDAWN;
-        }
-        if (DayLight == DayLight.NightBlack)
-        {
-            RenderSettings.ambientLight = FengColor.NightBlack;
-            CacheGameObject.Find("mainLight").GetComponent<Light>().color = FengColor.NightBlack;
-            BaseG.GetComponent<Skybox>().material = this.skyBoxNIGHT;
         }
         if (DayLight == DayLight.Custom)
         {

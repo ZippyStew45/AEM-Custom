@@ -2104,8 +2104,7 @@ public partial class HERO : HeroBase
     {
         return Physics.Raycast(baseGT.position + baseGT.up * 3f, baseGT.forward, 1.2f, Layers.EnemyGround.value);
     }
-
-    private void LaunchLeftRope(RaycastHit hit, bool single, int mode = 0)
+    private void LaunchLeftRope2(Vector3 point, float distance, bool single, int mode = 0)
     {
         if (currentGas == 0f)
         {
@@ -2126,8 +2125,8 @@ public partial class HERO : HeroBase
         var launcherRef = !Gunner ? "hookRefL1" : "hookRefL2";
         bulletLeft.transform.position = go.transform.position;
         var component = bulletLeft;
-        var d = !single ? hit.distance <= 50f ? hit.distance * 0.05f : hit.distance * 0.3f : 0f;
-        var a = hit.point - baseT.Right() * d - bulletLeft.transform.position;
+        var d = !single ? distance <= 50f ? distance * 0.05f : distance * 0.3f : 0f;
+        var a = point - baseT.Right() * d - bulletLeft.transform.position;
         a.Normalize();
         if (mode == 1)
         {
@@ -2140,8 +2139,7 @@ public partial class HERO : HeroBase
 
         launchPointLeft = Vectors.zero;
     }
-
-    private void LaunchRightRope(RaycastHit hit, bool single, int mode = 0)
+    private void LaunchRightRope2(Vector3 point, float distance, bool single, int mode = 0)
     {
         if (currentGas == 0f)
         {
@@ -2162,8 +2160,8 @@ public partial class HERO : HeroBase
         var launcherRef = !Gunner ? "hookRefR1" : "hookRefR2";
         bulletRight.transform.position = go.transform.position;
         var component = bulletRight;
-        var d = !single ? hit.distance <= 50f ? hit.distance * 0.05f : hit.distance * 0.3f : 0f;
-        var a = hit.point + baseT.Right() * d - bulletRight.transform.position;
+        var d = !single ? distance <= 50f ? distance * 0.05f : distance * 0.3f : 0f;
+        var a = point + baseT.Right() * d - bulletRight.transform.position;
         a.Normalize();
         if (mode == 1)
         {
@@ -2527,97 +2525,97 @@ public partial class HERO : HeroBase
 
         var position = Input.mousePosition;
         var ray = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(position);
+        var hitPos = ray.origin + (ray.direction * 10000);
         if (Physics.Raycast(ray, out var raycastHit, 1E+07f, Layers.EnemyGround.value))
+            hitPos = raycastHit.point;
+        crossT1.localPosition = position;
+        crossT1.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+        crossT2.localPosition = crossT1.localPosition;
+        var magnitude = (hitPos - baseT.position).magnitude;
+        string text = string.Empty;
+        if (FengGameManagerMKII.FGM.logic.Mode == GameMode.Racing && Settings.RacingTimerOnCrosshair.Value)
         {
-            crossT1.localPosition = position;
-            crossT1.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
-            crossT2.localPosition = crossT1.localPosition;
-            var magnitude = (raycastHit.point - baseT.position).magnitude;
-            string text = string.Empty;
-            if (FengGameManagerMKII.FGM.logic.Mode == GameMode.Racing && Settings.RacingTimerOnCrosshair.Value)
+            var raceLogic = FengGameManagerMKII.FGM.logic as GameLogic.RacingLogic;
+            if (raceLogic.RaceStart == false)
             {
-                var raceLogic = FengGameManagerMKII.FGM.logic as GameLogic.RacingLogic;
-                if(raceLogic.RaceStart == false)
-                {
-                    text += "Start in " + (raceLogic.StartTime - raceLogic.Round.Time).ToString("F1") + "\n";
-                }
+                text += "Start in " + (raceLogic.StartTime - raceLogic.Round.Time).ToString("F1") + "\n";
             }
-            if (GameModes.BombMode.Enabled && Settings.BombTimerOnCrosshair.Value)
+        }
+        if (GameModes.BombMode.Enabled && Settings.BombTimerOnCrosshair.Value)
+        {
+            text += "Bomb: " + (skillCDDuration <= 0f ? "Ready" : skillCDDuration.ToString("F1")) + "\n";
+        }
+        text += magnitude <= 1000f ? ((int)magnitude).ToString() : "???";
+        if (Settings.Speedometer.Value)
+        {
+            if (Settings.SpeedometerType.Value == 0)
             {
-                text += "Bomb: " + (skillCDDuration <= 0f ? "Ready" : skillCDDuration.ToString("F1")) + "\n";
-            }
-            text += magnitude <= 1000f ? ((int)magnitude).ToString() : "???";
-            if (Settings.Speedometer.Value)
-            {
-                if (Settings.SpeedometerType.Value == 0)
-                {
-                    text += "\n" + baseR.velocity.magnitude.ToString("F0") + " u/s";
-                }
-                else
-                {
-                    text += "\n" + (baseR.velocity.magnitude / 100f).ToString("F1") + " k";
-                }
-            }
-            labelDistance.text = text;
-            if (magnitude > 120f)
-            {
-                crossT1.localPosition += Vectors.up * 10000f;
-                labelT.localPosition = crossT2.localPosition;
+                text += "\n" + baseR.velocity.magnitude.ToString("F0") + " u/s";
             }
             else
             {
-                crossT2.localPosition += Vectors.up * 10000f;
-                labelT.localPosition = crossT1.localPosition;
+                text += "\n" + (baseR.velocity.magnitude / 100f).ToString("F1") + " k";
+            }
+        }
+        labelDistance.text = text;
+        if (magnitude > 120f)
+        {
+            crossT1.localPosition += Vectors.up * 10000f;
+            labelT.localPosition = crossT2.localPosition;
+        }
+        else
+        {
+            crossT2.localPosition += Vectors.up * 10000f;
+            labelT.localPosition = crossT1.localPosition;
+        }
+
+        labelT.localPosition -= new Vector3(0f, 15f, 0f);
+        var vector = new Vector3(0f, 0.4f, 0f);
+        vector -= baseT.Right() * 0.3f;
+        var vector2 = new Vector3(0f, 0.4f, 0f);
+        vector2 += baseT.Right() * 0.3f;
+        var d = raycastHit.distance <= 50f ? raycastHit.distance * 0.05f : raycastHit.distance * 0.3f;
+        var vector3 = raycastHit.point - baseT.Right() * d - (baseT.position + vector);
+        var vector4 = raycastHit.point + baseT.Right() * d - (baseT.position + vector2);
+        vector3.Normalize();
+        vector4.Normalize();
+        vector3 *= 1000000f;
+        vector4 *= 1000000f;
+
+        if (Settings.DisableHookArrrows.Value)
+        {
+            var localPosition = Vectors.up * 10000f;
+            crossR2T.localPosition = localPosition;
+            crossR1T.localPosition = localPosition;
+            crossL2T.localPosition = localPosition;
+            crossL1T.localPosition = localPosition;
+        }
+        else
+        {
+            if (Physics.Linecast(baseT.position + vector, baseT.position + vector + vector3, out raycastHit,
+               Layers.EnemyGround.value))
+            {
+                crossL1T.localPosition = IN_GAME_MAIN_CAMERA.BaseCamera.WorldToScreenPoint(raycastHit.point);
+                crossL1T.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+                crossL1T.localRotation = Quaternion.Euler(0f, 0f,
+                    Mathf.Atan2(crossL1T.localPosition.y - (position.y - Screen.height * 0.5f),
+                        crossL1T.localPosition.x - (position.x - Screen.width * 0.5f)) * 57.29578f + 180f);
+                crossL2T.localPosition = crossL1T.localPosition;
+                crossL2T.localRotation = crossL1T.localRotation;
+                (raycastHit.distance > 120f ? crossL1T : crossL2T).localPosition += Vectors.up * 10000f;
             }
 
-            labelT.localPosition -= new Vector3(0f, 15f, 0f);
-            var vector = new Vector3(0f, 0.4f, 0f);
-            vector -= baseT.Right() * 0.3f;
-            var vector2 = new Vector3(0f, 0.4f, 0f);
-            vector2 += baseT.Right() * 0.3f;
-            var d = raycastHit.distance <= 50f ? raycastHit.distance * 0.05f : raycastHit.distance * 0.3f;
-            var vector3 = raycastHit.point - baseT.Right() * d - (baseT.position + vector);
-            var vector4 = raycastHit.point + baseT.Right() * d - (baseT.position + vector2);
-            vector3.Normalize();
-            vector4.Normalize();
-            vector3 *= 1000000f;
-            vector4 *= 1000000f;
-
-            if (Settings.DisableHookArrrows.Value)
+            if (Physics.Linecast(baseT.position + vector2, baseT.position + vector2 + vector4, out raycastHit,
+                Layers.EnemyGround.value))
             {
-                var localPosition = Vectors.up * 10000f;
-                crossR2T.localPosition = localPosition;
-                crossR1T.localPosition = localPosition;
-                crossL2T.localPosition = localPosition;
-                crossL1T.localPosition = localPosition;
-            }
-            else
-            {
-                if (Physics.Linecast(baseT.position + vector, baseT.position + vector + vector3, out raycastHit,
-                   Layers.EnemyGround.value))
-                {
-                    crossL1T.localPosition = IN_GAME_MAIN_CAMERA.BaseCamera.WorldToScreenPoint(raycastHit.point);
-                    crossL1T.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
-                    crossL1T.localRotation = Quaternion.Euler(0f, 0f,
-                        Mathf.Atan2(crossL1T.localPosition.y - (position.y - Screen.height * 0.5f),
-                            crossL1T.localPosition.x - (position.x - Screen.width * 0.5f)) * 57.29578f + 180f);
-                    crossL2T.localPosition = crossL1T.localPosition;
-                    crossL2T.localRotation = crossL1T.localRotation;
-                    (raycastHit.distance > 120f ? crossL1T : crossL2T).localPosition += Vectors.up * 10000f;
-                }
-
-                if (Physics.Linecast(baseT.position + vector2, baseT.position + vector2 + vector4, out raycastHit,
-                    Layers.EnemyGround.value))
-                {
-                    crossR1T.localPosition = IN_GAME_MAIN_CAMERA.BaseCamera.WorldToScreenPoint(raycastHit.point);
-                    crossR1T.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
-                    crossR1T.localRotation = Quaternion.Euler(0f, 0f,
-                        Mathf.Atan2(crossR1T.localPosition.y - (position.y - Screen.height * 0.5f),
-                            crossR1T.localPosition.x - (position.x - Screen.width * 0.5f)) * 57.29578f);
-                    crossR2T.localPosition = crossR1T.localPosition;
-                    crossR2T.localRotation = crossR1T.localRotation;
-                    (raycastHit.distance > 120f ? crossR1T : crossR2T).localPosition += Vectors.up * 10000f;
-                }
+                crossR1T.localPosition = IN_GAME_MAIN_CAMERA.BaseCamera.WorldToScreenPoint(raycastHit.point);
+                crossR1T.localPosition -= new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+                crossR1T.localRotation = Quaternion.Euler(0f, 0f,
+                    Mathf.Atan2(crossR1T.localPosition.y - (position.y - Screen.height * 0.5f),
+                        crossR1T.localPosition.x - (position.x - Screen.width * 0.5f)) * 57.29578f);
+                crossR2T.localPosition = crossR1T.localPosition;
+                crossR2T.localRotation = crossR1T.localRotation;
+                (raycastHit.distance > 120f ? crossR1T : crossR2T).localPosition += Vectors.up * 10000f;
             }
         }
     }
@@ -4465,24 +4463,28 @@ public partial class HERO : HeroBase
                                     baseR.velocity += Vectors.up * 5f;
                                     var ray = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(Input.mousePosition);
                                     RaycastHit hit;
+                                    Vector3 hitPos2 = ray.origin + (ray.direction * 1000);
+                                    float distance2 = 10000f;
                                     if (Physics.Raycast(ray, out hit, 1E+07f, Layers.EnemyGround.value))
                                     {
-                                        if (bulletRight)
-                                        {
-                                            bulletRight.Disable();
-                                            ReleaseIfIHookSb();
-                                        }
-
-                                        if (bulletLeft)
-                                        {
-                                            bulletLeft.Disable();
-                                            ReleaseIfIHookSb();
-                                        }
-
-                                        dashDirection = hit.point - baseT.position;
-                                        LaunchRightRope(hit, true, 1);
-                                        rope.Play();
+                                        hitPos2 = hit.point;
+                                        distance2 = hit.distance;
                                     }
+                                    if (bulletRight)
+                                    {
+                                        bulletRight.Disable();
+                                        ReleaseIfIHookSb();
+                                    }
+
+                                    if (bulletLeft)
+                                    {
+                                        bulletLeft.Disable();
+                                        ReleaseIfIHookSb();
+                                    }
+
+                                    dashDirection = hit.point - baseT.position;
+                                    LaunchRightRope2(hitPos2, distance2, true, 1);
+                                    rope.Play();
 
                                     facingDirection = Mathf.Atan2(dashDirection.x, dashDirection.z) * 57.29578f;
                                     targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
@@ -4495,25 +4497,30 @@ public partial class HERO : HeroBase
                                     baseR.velocity += Vectors.up * 5f;
                                     var ray2 = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(Input.mousePosition);
                                     RaycastHit hit2;
+                                    Vector3 hitPos = ray2.origin + (ray2.direction * 1000);
+                                    float distance = 10000f;
                                     if (Physics.Raycast(ray2, out hit2, 1E+07f, Layers.EnemyGround.value))
                                     {
-                                        if (bulletRight)
-                                        {
-                                            bulletRight.Disable();
-                                            ReleaseIfIHookSb();
-                                        }
-
-                                        if (bulletLeft)
-                                        {
-                                            bulletLeft.Disable();
-                                            ReleaseIfIHookSb();
-                                        }
-
-                                        dashDirection = hit2.point - baseT.position;
-                                        LaunchLeftRope(hit2, true);
-                                        LaunchRightRope(hit2, true);
-                                        rope.Play();
+                                        hitPos = hit2.point;
+                                        distance = hit2.distance;
                                     }
+                                    if (bulletRight)
+                                    {
+                                        bulletRight.Disable();
+                                        ReleaseIfIHookSb();
+                                    }
+
+                                    if (bulletLeft)
+                                    {
+                                        bulletLeft.Disable();
+                                        ReleaseIfIHookSb();
+                                    }
+
+                                    dashDirection = hit2.point - baseT.position;
+
+                                    LaunchLeftRope2(hitPos, distance, true);
+                                    LaunchRightRope2(hitPos, distance, true);
+                                    rope.Play();
 
                                     facingDirection = Mathf.Atan2(dashDirection.x, dashDirection.z) * 57.29578f;
                                     targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
@@ -5319,11 +5326,15 @@ public partial class HERO : HeroBase
                 {
                     var ray4 = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit3;
+                    Vector3 hitPos = ray4.origin + (ray4.direction * 1000);
+                    float distance = 10000f;
                     if (Physics.Raycast(ray4, out hit3, 10000f, Layers.EnemyGround.value))
                     {
-                        LaunchLeftRope(hit3, true);
-                        rope.Play();
+                        hitPos = hit3.point;
+                        distance = hit3.distance;
                     }
+                    LaunchLeftRope2(hitPos, distance, true);
+                    rope.Play();
                 }
             }
             else
@@ -5341,11 +5352,15 @@ public partial class HERO : HeroBase
                 {
                     var ray5 = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit4;
+                    Vector3 hitPos = ray5.origin + (ray5.direction * 1000);
+                    float distance = 10000f;
                     if (Physics.Raycast(ray5, out hit4, 10000f, Layers.EnemyGround.value))
                     {
-                        LaunchRightRope(hit4, true);
-                        rope.Play();
+                        hitPos = hit4.point;
+                        distance = hit4.distance;
                     }
+                    LaunchRightRope2(hitPos, distance, true);
+                    rope.Play();
                 }
             }
             else
@@ -5361,12 +5376,16 @@ public partial class HERO : HeroBase
                 {
                     var ray6 = IN_GAME_MAIN_CAMERA.BaseCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit5;
+                    Vector3 hitPos = ray6.origin + (ray6.direction * 1000);
+                    float distance = 10000f;
                     if (Physics.Raycast(ray6, out hit5, 1000000f, Layers.EnemyGround.value))
                     {
-                        LaunchLeftRope(hit5, false);
-                        LaunchRightRope(hit5, false);
-                        rope.Play();
+                        hitPos = hit5.point;
+                        distance = hit5.distance;
                     }
+                    LaunchLeftRope2(hitPos, distance, false);
+                    LaunchRightRope2(hitPos, distance, false);
+                    rope.Play();
                 }
             }
         }

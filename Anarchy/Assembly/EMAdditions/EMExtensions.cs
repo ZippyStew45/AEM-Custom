@@ -171,8 +171,9 @@ internal partial class FengGameManagerMKII
         var obj = UnityEngine.Object.Instantiate(RCManager.ZippyAssets.Load("Blade"), vec3, quaternion) as GameObject;
         obj.AddComponent<Rigidbody>();
         obj.name = objname;
+        obj.AddComponent<BoxCollider>();
         obj.layer = LayerMask.NameToLayer("Ground");
-        obj.AddComponent<GasCollider>();
+        obj.AddComponent<BladeCollider>();
     }
 
     [RPC]
