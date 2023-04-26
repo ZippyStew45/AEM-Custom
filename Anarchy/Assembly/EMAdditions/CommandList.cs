@@ -40,7 +40,7 @@ namespace Mod
                 else if (IsCrashlistVisible == false && PhotonNetwork.inRoom)
                 {
                     Screen.showCursor = false;
-                    if (IN_GAME_MAIN_CAMERA.CameraMode != CameraType.ORIGINAL || IN_GAME_MAIN_CAMERA.CameraMode != CameraType.WOW)
+                    if (IN_GAME_MAIN_CAMERA.CameraMode != CameraType.ORIGINAL && IN_GAME_MAIN_CAMERA.CameraMode != CameraType.WOW)
                         Screen.lockCursor = true;
                 }
                 else if (IsCrashlistVisible == false && !PhotonNetwork.inRoom)
