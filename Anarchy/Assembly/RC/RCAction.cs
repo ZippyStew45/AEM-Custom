@@ -5,6 +5,7 @@ using Anarchy.UI;
 using UnityEngine;
 using Anarchy;
 using Mod;
+using Anarchy.Configuration;
 
 public class RCAction
 {
@@ -591,7 +592,7 @@ public class RCAction
                             {
                                 titan3.maxHealth = titan3.currentHealth;
                             }
-                            if (TITAN.HideHP == false)
+                            if (Settings.HideTitanHP == false)
                                 titan3.BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, new object[]
                             {
                     titan3.currentHealth,

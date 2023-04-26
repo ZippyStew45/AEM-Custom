@@ -128,7 +128,6 @@ public partial class TITAN : TitanBase
     private string turnAnimation;
     private float turnDeg;
     private GameObject whoHasTauntMe;
-    public static bool HideHP = false;
     public static TITAN instance;
 
     public string ShowName { get; private set; }
@@ -1983,7 +1982,7 @@ public partial class TITAN : TitanBase
 
         lagMax = 150f + myLevel * 3f;
         healthTime = Time.time;
-        if (currentHealth > 0 && IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer && HideHP == false)
+        if (currentHealth > 0 && IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer && Settings.HideTitanHP == false)
         {
             BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, currentHealth, maxHealth);
         }

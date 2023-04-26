@@ -258,9 +258,10 @@ namespace Anarchy.UI
                 string text1 = string.Empty;
 
                 this.commandsScroll = GUILayout.BeginScrollView(this.commandsScroll);
+                string[] commandlist = this.inputLine.Split(' ');
                 foreach (var element in CommandList) //dictionary
                 {
-                    if (element.Key.ToLower().Contains(this.inputLine))
+                    if (element.Key.ToLower().Contains(commandlist[0]))
                     {
                         GUILayout.Label(element.Key + element.Value, new GUILayoutOption[0]);
                     }
@@ -339,7 +340,6 @@ namespace Anarchy.UI
         { "/comehereall ", "TP all PLayers To You" },
         { "/comehere ID ", "TP Certain PLayers To You, If You Use Your ID It TPs All Titans On You" },
         { "/killtitans ", "Kills All Titans In The Room" },
-        { "/hidehp [0|1] ", "Hide All Titan's Health(0 = false 1 = true)" },
         { "/difficulty [0|1|2] ", "Change Difficulty Of All AEM Players (0 = normal, 1 = hard, 2 = abnormal)" },
         { "/cmdlist File ", " Pick A File To Run Via Command List" },
         { "/explosion Position(X Y Z) Size(X Y Z) ", " Spawn An Explosion That Kills Players (Y Size Determines Death Radius)" },

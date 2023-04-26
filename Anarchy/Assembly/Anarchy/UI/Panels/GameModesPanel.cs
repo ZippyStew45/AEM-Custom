@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Anarchy.Configuration;
+using UnityEngine;
 using static Anarchy.UI.GUI;
 
 namespace Anarchy.UI
@@ -151,7 +152,7 @@ namespace Anarchy.UI
             left.MoveY();
             GameModes.SizeMode.Draw(left, locale);
             left.MoveY();
-            ToggleButton(left, TITAN.HideHP, val => { TITAN.HideHP = val; }, "Hide Titan HP", false);
+            ToggleButton(left, Settings.HideTitanHP, "Hide Titan HP", false);
 
             right.Reset();
             GameModes.HealthMode.Draw(right, locale);

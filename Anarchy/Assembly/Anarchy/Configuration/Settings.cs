@@ -41,6 +41,7 @@ namespace Anarchy.Configuration
         public static BoolSetting SnapshotsInGame = new BoolSetting("SnapshotsInGame", false);
         public static BoolSetting Speedometer = new BoolSetting("Speedometer", false);
         public static BoolSetting Minimap = new BoolSetting("Minimap", false);
+        public static BoolSetting HideTitanHP = new BoolSetting("HideTitanHP", false);
 
         public static IntSetting CameraMode = new IntSetting("CameraMode", 0);
         public static IntSetting SnapshotsDamage = new IntSetting("SnapshotsDamage", 0);

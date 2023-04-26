@@ -92,7 +92,7 @@ public partial class TITAN
     [RPC]
     public void labelRPC(int health, int healthMax)
     {
-        if (HideHP) return;
+        if (Settings.HideTitanHP) return;
         if (health < 0)
         {
             if (healthLabel != null)
@@ -593,7 +593,7 @@ public partial class TITAN
                 FengGameManagerMKII.FGM.BasePV.RPC("netShowDamage", photonView.owner, hitSpeed);
                 if (maxHealth > 0)
                 {
-                    if (HideHP == false)
+                    if (Settings.HideTitanHP == false)
                         BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, currentHealth, maxHealth);
                 }
 
@@ -603,7 +603,7 @@ public partial class TITAN
             currentHealth -= hitSpeed;
             if (maxHealth > 0)
             {
-                if (HideHP == false)
+                if (Settings.HideTitanHP == false)
                     BasePV.RPC("labelRPC", PhotonTargets.AllBuffered, currentHealth, maxHealth);
             }
 
