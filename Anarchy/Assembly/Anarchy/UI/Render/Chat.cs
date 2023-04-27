@@ -332,7 +332,7 @@ namespace Anarchy.UI
         { "/impact True|False Speed ", "Enable/Disable Player Collision Damage" },
         { "/fx Object X Y Z X Y Z W ", "Spawn Effect" },
         { "/rd Amount ", "Set Your Local Render Distance" },
-        { "/obj Object ", "Spawn Primitive object (You Need Builder Role To Use This)" },
+        { "/obj Object ", "Spawn Primitive object, default objects are: cube, Sphere, Capsule, Cylinder, Quad, Plane (You Need Builder Role To Use This)" },
         { "/cannon ", "Spawn a Cannon (You Need Gunner Role To Use This)" },
         { "/givelight ID Toggle(0|1) ", "Set Light On A Player Or Turn It Off" },
         { "/setdaylightcolor R [Optional]G [Optional]B ", "Set Day Light Level (ex: 0 is MidNight, 1 is blinding)" },
@@ -344,6 +344,7 @@ namespace Anarchy.UI
         { "/cmdlist File ", " Pick A File To Run Via Command List" },
         { "/explosion Position(X Y Z) Size(X Y Z) ", " Spawn An Explosion That Kills Players (Y Size Determines Death Radius)" },
         { "/r ", "Restart The Current Lobby" },
+        { "/sup ", "Spawn Supply Station (Requires Wagon Role)" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()

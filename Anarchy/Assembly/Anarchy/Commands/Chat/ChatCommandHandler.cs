@@ -75,6 +75,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("difficulty", new ChangeDifficultyCommand());
             allCommands.Add("cmdlist", new RunCMDListCommand());
             allCommands.Add("explosion", new ExplosionCommand());
+            allCommands.Add("sup", new SpawnSupplyStationCommand());
         }
 
         private void NotFound(string name)
