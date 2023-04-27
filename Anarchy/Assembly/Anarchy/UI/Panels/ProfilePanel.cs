@@ -156,10 +156,7 @@ namespace Anarchy.UI
         {
             right.Reset();
             LabelCenter(right, "Expedition Settings", true);
-            TextField(right, User.FlareColour4, "Flare 4", Style.LabelOffset, true);
-            TextField(right, User.FlareColour5, "Flare 5", Style.LabelOffset, true);
-            TextField(right, User.FlareColour6, "Flare 6", Style.LabelOffset, true);
-            TextField(right, User.FlareColour7, "Flare 7", Style.LabelOffset, true);
+            TextField(right, User.FlareColour8, "Flare 8", Style.LabelOffset, true);
 
             right.MoveToEndY(WindowPosition, Style.Height * 2f + Style.VerticalMargin);
             right.BeginHorizontal(2);

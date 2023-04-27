@@ -50,10 +50,7 @@ namespace Anarchy
 
         public static readonly UserSetting McSwitch = new UserSetting("mcSwitch");
         public static readonly UserSetting RestartMessage = new UserSetting("restartMsg");
-        public static readonly UserSetting FlareColour4 = new UserSetting("flare4");
-        public static readonly UserSetting FlareColour5 = new UserSetting("flare5");
-        public static readonly UserSetting FlareColour6 = new UserSetting("flare6");
-        public static readonly UserSetting FlareColour7 = new UserSetting("flare7");
+        public static readonly UserSetting FlareColour8 = new UserSetting("flare8");
 
         public static string[] AllProfiles { get; private set; }
 
