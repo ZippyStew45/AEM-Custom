@@ -24,6 +24,7 @@ public static class EMInputManager
         Builder_delete,
         Builder_OBJ_away,
         Builder_OBJ_close,
+        Builder_Spawn_Last_OBJ,
         Supply_Drop_Gas,
         Supply_Drop_Blade,
         Count
@@ -45,6 +46,7 @@ public static class EMInputManager
         KeyCode.Mouse1,
         KeyCode.UpArrow,
         KeyCode.DownArrow,
+        KeyCode.L,
         KeyCode.J,
         KeyCode.K
     };

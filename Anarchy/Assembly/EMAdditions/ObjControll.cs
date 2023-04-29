@@ -7,6 +7,7 @@ using Anarchy.UI;
 using System;
 using System.Diagnostics;
 using AoTTG.EMAdditions;
+using RC;
 
 public class ObjControll : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ObjControll : MonoBehaviour
     [SerializeField] Transform HoldArea = Camera.main.transform;
     private static GameObject HeldOBJ;
     private static Rigidbody HeldOBJRB;
-
+    public static string SavedOBJ;
 
     [Header("Physics Paramater")]
     [SerializeField] private float PickUpRange = 25f;
@@ -46,7 +47,7 @@ public class ObjControll : MonoBehaviour
                     //if (hit.transform.gameObject.renderer.material.color != UnPlacedObjColor)
                     if (hit.transform.gameObject.GetComponent<BuilderTag>() == null)
                         return;
-                    RespawnOBJ(hit);
+                    RespawnOBJ(hit.transform.gameObject.name);
                     DeleteOBJ(hit);
                 }
             }
@@ -74,10 +75,16 @@ public class ObjControll : MonoBehaviour
         {
             HeldRange -= 1f;
         }
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Builder_Spawn_Last_OBJ))
+        {
+            if (HeldOBJ == null)
+            {
+                RespawnOBJ(SavedOBJ);
+            }
+        }
         if (HeldOBJ != null)
         {
             MoveOBJ();
-            //Chat.Add(HeldOBJ.name);
         }
     }
 
@@ -123,8 +130,9 @@ public class ObjControll : MonoBehaviour
         FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.AllBuffered, hit.transform.gameObject.name);
     }
 
-    void RespawnOBJ(RaycastHit hit)
+    public static void RespawnOBJ(string Item)
     {
+        if (Item == null) return;
         Photon.MonoBehaviour hero = null;
         if (IN_GAME_MAIN_CAMERA.GameType != GameType.Stop)
         {
@@ -146,33 +154,40 @@ public class ObjControll : MonoBehaviour
             }
         }
         PrimitiveType Primitive;
-        switch (hit.transform.gameObject.name.ToLower())
+        GameObject SpawnObj = new GameObject();
+        string[] ItemSplit = Item.Split(' ');
+        switch (ItemSplit[0])
         {
             case string s when s.StartsWith("cube"):
                 Primitive = PrimitiveType.Cube;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             case string s when s.StartsWith("sphere"):
                 Primitive = PrimitiveType.Sphere;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             case string s when s.StartsWith("capsule"):
                 Primitive = PrimitiveType.Capsule;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             case string s when s.StartsWith("cylinder"):
                 Primitive = PrimitiveType.Cylinder;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             case string s when s.StartsWith("quad"):
                 Primitive = PrimitiveType.Quad;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             case string s when s.StartsWith("plane"):
                 Primitive = PrimitiveType.Plane;
+                SpawnObj = GameObject.CreatePrimitive(Primitive);
                 break;
             default:
-                Primitive = PrimitiveType.Cube;
+                SpawnObj = Instantiate(RCManager.ZippyAssets.Load("Blade"), hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f), hero.gameObject.transform.rotation) as GameObject;
                 break;
         }
 
 
-        GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
         SpawnObj.name += " [" + FengGameManagerMKII.RandomString(25) + "]";
         SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
         SpawnObj.transform.rotation = hero.gameObject.transform.rotation;

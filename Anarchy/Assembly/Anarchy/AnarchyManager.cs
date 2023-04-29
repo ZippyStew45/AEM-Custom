@@ -36,7 +36,7 @@ namespace Anarchy
         /// <summary>
         /// Your AEM version
         /// </summary>
-        public static readonly string CustomVersion = "0.1";
+        public static readonly string CustomVersion = "0.2";
         /// <summary>
         /// If you want to use full Anarchy synchronization feautures
         /// </summary>
