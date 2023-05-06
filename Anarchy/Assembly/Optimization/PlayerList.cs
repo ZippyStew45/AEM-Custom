@@ -1,5 +1,6 @@
 ﻿using Anarchy;
 using System.Text;
+using System.Linq;
 
 namespace Optimization
 {
@@ -83,6 +84,9 @@ namespace Optimization
                 return;
             }
             var bld = new StringBuilder();
+            PhotonPlayer[] playerList;
+            playerList = (from player in PhotonNetwork.playerList orderby player.ID select player).ToArray();
+
             if (GameModes.TeamMode.Enabled && !GameModes.InfectionMode.Enabled)
             {
                 var individual = new StringBuilder();
@@ -94,7 +98,7 @@ namespace Optimization
                 for (int i = 0; i < PhotonNetwork.playerList.Length; i++)
                 {
                     StringBuilder local = null;
-                    PhotonPlayer player = PhotonNetwork.playerList[i];
+                    PhotonPlayer player = playerList[i];
                     int[] teamArray = null;
                     switch (PhotonNetwork.playerList[i].RCteam)
                     {
@@ -121,7 +125,7 @@ namespace Optimization
                         teamArray[2] += player.MaximumDamage;
                         teamArray[3] += player.TotalDamage;
                     }
-                    local.AppendLine(PlayerToString(PhotonNetwork.playerList[i]));
+                    local.AppendLine(PlayerToString(playerList[i]));
                 }
                 bld.AppendLine($"\n<color=cyan>Team cyan</color> {GetStatString(cyanStats)}\n{cyan.ToString()}");
                 bld.AppendLine($"<color=magenta>Team magenta</color> {GetStatString(magentaStats)}\n{magenta.ToString()}");
@@ -131,12 +135,12 @@ namespace Optimization
             {
                 for (int i = 0; i < PhotonNetwork.playerList.Length; i++)
                 {
-                    if (i >= 25)
+                    if (i >= 35)
                     {
-                        bld.Append("And " + (PhotonNetwork.playerList.Length - 25) + " players...");
+                        bld.Append("And " + (PhotonNetwork.playerList.Length - 35) + " players...");
                         break;
                     }
-                    bld.AppendLine(PlayerToString(PhotonNetwork.playerList[i]));
+                    bld.AppendLine(PlayerToString(playerList[i]));
                 }
             }
             Labels.TopLeft = bld.ToString().ToHTMLFormat();

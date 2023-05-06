@@ -259,6 +259,7 @@ namespace Anarchy
 
             return str;
         }
+
         public static string CustomLogicFormat(this string str)
         {
             str = str.Replace("[d]", ".");
