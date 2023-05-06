@@ -472,14 +472,14 @@ namespace Anarchy.UI
                     rects[1].MoveY();
                     Label(rects[1], "[00FF00]Builder Binds".ToHTMLFormat());
                     rects[1].MoveY();
-                    for (int i = 10; i < 14; i++)
+                    for (int i = 10; i < 15; i++)
                     {
                         RebindButton(rects[1], EMInputManager.Keys[i]);
                     }
                     rects[1].MoveY();
                     Label(rects[1], "[00FF00]Supply Binds".ToHTMLFormat());
                     rects[1].MoveY();
-                    for (int i = 14; i < 16; i++)
+                    for (int i = 15; i < 17; i++)
                     {
                         RebindButton(rects[1], EMInputManager.Keys[i]);
                     }

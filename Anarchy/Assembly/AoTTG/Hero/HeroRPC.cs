@@ -134,7 +134,7 @@ public partial class HERO
                 string GasName = $"GasDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
                 FengGameManagerMKII.FGM.BasePV.RPC("DropGasRPC", PhotonTargets.All, GasName, vec3, quat);
             }
-            if (currentBladeNum <= 1)
+            if (currentBladeNum >= 1)
             {
                 string BladeName = $"BladeDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
                 FengGameManagerMKII.FGM.BasePV.RPC("DropbladeRPC", PhotonTargets.All, BladeName, vec3, quat);
@@ -512,7 +512,7 @@ public partial class HERO
                 string GasName = $"GasDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
                 FengGameManagerMKII.FGM.BasePV.RPC("DropGasRPC", PhotonTargets.All, GasName, vec3, quat);
             }
-            if (currentBladeNum <= 1)
+            if (currentBladeNum >= 1)
             {
                 string BladeName = $"BladeDrop ({PhotonNetwork.player.ID})[{FengGameManagerMKII.RandomString(25)}]";
                 FengGameManagerMKII.FGM.BasePV.RPC("DropbladeRPC", PhotonTargets.All, BladeName, vec3, quat);
@@ -672,7 +672,7 @@ public partial class HERO
     [RPC]
     public void SpawnCannonRPC(string settings, PhotonMessageInfo info)
     {
-        var flag = info.Sender.IsMasterClient && IsLocal && myCannon == null;
+        var flag = myCannon == null;
         if (flag)
         {
             var flag2 = myHorse != null && isMounted;

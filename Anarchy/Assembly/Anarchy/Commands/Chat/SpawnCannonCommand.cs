@@ -14,7 +14,7 @@ namespace AoTTG.Anarchy.Commands.Chat
 {
     internal class SpawnCannonCommand : ChatCommand
     {
-        public SpawnCannonCommand() : base("cannon", true, true, true)
+        public SpawnCannonCommand() : base("cannon", false, true, true)
         {
 
         }
@@ -42,27 +42,8 @@ namespace AoTTG.Anarchy.Commands.Chat
                     ",",
                     prot.w
             });
-            Photon.MonoBehaviour hero = null;
-            if (IN_GAME_MAIN_CAMERA.GameType != GameType.Stop)
-            {
-
-                if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
-                {
-                    if (FengGameManagerMKII.Heroes.Count > 0)
-                    {
-                        hero = FengGameManagerMKII.Heroes[0];
-                    }
-                }
-                else if (PhotonNetwork.player.IsTitan)
-                {
-                    hero = PhotonNetwork.player.GetTitan();
-                }
-                else
-                {
-                    hero = PhotonNetwork.player.GetHero();
-                }
-            }
-            hero.gameObject.GetComponent<HERO>().BasePV.RPC("SpawnCannonRPC", PhotonTargets.MasterClient, settings);
+            HERO.herin.SpawnCannon(settings);
+            //PhotonPlayer.MyHero().gameObject.GetComponent<HERO>().BasePV.RPC("SpawnCannonRPC", PhotonTargets.MasterClient, settings);
             return true;
         }
     }

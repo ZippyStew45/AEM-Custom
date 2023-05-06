@@ -218,6 +218,7 @@ public partial class HERO : HeroBase
     public static bool israged = false;
     public static int BladeStroage = 15;
     public static int GasStroage = 15;
+    public static HERO herin;
 
     public bool IsDead { get; private set; }
 
@@ -247,6 +248,75 @@ public partial class HERO : HeroBase
             }
 
             state = value;
+        }
+    }
+
+
+    public void SpawnCannon(string settings)
+    {
+        var flag = myCannon == null;
+        if (flag)
+        {
+            var flag2 = myHorse != null && isMounted;
+            if (flag2)
+            {
+                GetOffHorse();
+            }
+
+            idle();
+            var flag3 = bulletLeft != null;
+            if (flag3)
+            {
+                bulletLeft.RemoveMe();
+            }
+
+            var flag4 = bulletRight != null;
+            if (flag4)
+            {
+                bulletRight.RemoveMe();
+            }
+
+            var flag5 = smoke3Dmg.enableEmission && IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer && IsLocal;
+            if (flag5)
+            {
+                object[] parameters =
+                {
+                    false
+                };
+                BasePV.RPC("net3DMGSMOKE", PhotonTargets.Others, parameters);
+            }
+
+            smoke3Dmg.enableEmission = false;
+            rigidbody.velocity = Vector3.zero;
+            var array = settings.Split(',');
+            var flag6 = array.Length > 15;
+            if (flag6)
+            {
+                myCannon = Pool.NetworkEnable("RCAsset/" + array[1],
+                    new Vector3(Convert.ToSingle(array[12]), Convert.ToSingle(array[13]), Convert.ToSingle(array[14])),
+                    new Quaternion(Convert.ToSingle(array[15]), Convert.ToSingle(array[16]),
+                        Convert.ToSingle(array[17]), Convert.ToSingle(array[18])));
+            }
+            else
+            {
+                myCannon = Pool.NetworkEnable("RCAsset/" + array[1],
+                    new Vector3(Convert.ToSingle(array[2]), Convert.ToSingle(array[3]), Convert.ToSingle(array[4])),
+                    new Quaternion(Convert.ToSingle(array[5]), Convert.ToSingle(array[6]), Convert.ToSingle(array[7]),
+                        Convert.ToSingle(array[8])));
+            }
+
+            myCannonBase = myCannon.transform;
+            myCannonPlayer = myCannon.transform.Find("PlayerPoint");
+            isCannon = true;
+            myCannon.GetComponent<Cannon>().myHero = this;
+            myCannonRegion = null;
+            IN_GAME_MAIN_CAMERA.MainCamera.SetMainObject(myCannon.transform.Find("Barrel").Find("FiringPoint")
+                .gameObject);
+            IN_GAME_MAIN_CAMERA.BaseCamera.fieldOfView = 55f;
+            //BasePV.RPC("SetMyCannon", PhotonTargets.OthersBuffered, myCannon.GetPhotonView().viewID);
+            skillCDLastCannon = skillCDLast;
+            skillCDLast = 3.5f;
+            skillCDDuration = 3.5f;
         }
     }
 
@@ -328,6 +398,7 @@ public partial class HERO : HeroBase
                 GetComponent<CapsuleCollider>().isTrigger = false;
             }
         }
+        herin = this;
         SetSounds();
     }
 

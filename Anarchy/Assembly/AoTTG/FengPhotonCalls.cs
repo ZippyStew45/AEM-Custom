@@ -355,7 +355,7 @@ internal partial class FengGameManagerMKII
     private void Update()
     {
         FPS.FPSUpdate();
-        if (IN_GAME_MAIN_CAMERA.GameType != GameType.Single)
+        if (IN_GAME_MAIN_CAMERA.GameType != GameType.Single && !PhotonNetwork.offlineMode)
         {
             Labels.NetworkStatus = PhotonNetwork.connectionStateDetailed +
                                    (PhotonNetwork.connected ? " ping: " + PhotonNetwork.GetPing() : "");
