@@ -155,6 +155,15 @@ internal partial class FengGameManagerMKII
 
 
     [RPC]
+    private void ShakeScreenRPC(float amount, float duration, float decay, PhotonMessageInfo info)
+    {
+        if (!info.Sender.IsMasterClient) return;
+        if (decay == 0f) decay = 0.95f;
+        IN_GAME_MAIN_CAMERA.MainCamera.startShake( amount, duration, decay);
+    }
+
+
+    [RPC]
     private void DropGasRPC(string objname, Vector3 vec3, Quaternion quaternion, PhotonMessageInfo info)
     {
         var obj = UnityEngine.Object.Instantiate(RCManager.ZippyAssets.Load("GasCanister"), vec3, quaternion) as GameObject;

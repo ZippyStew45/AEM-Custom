@@ -322,7 +322,7 @@ namespace Anarchy.UI
         { "/fog end Distance ", "Set Distance For Fog To End" },
         { "/fog density Value ", "Set Fog Density" },
         { "/fog color HEX ", "Set Fog Color" },
-        { "/fog enabled Vaule ", "Turn On Fog" },
+        { "/fog enabled Value ", "Turn On Fog" },
         { "/fog mode ExponentialSquared|Exponential|Linear ", "Set Fog Mode" },
         { "/commonvd Amount ", "Set The Titans Detection Radius" },
         { "/seths ID Amount ", "Set A Player's Horse Speed" },
@@ -345,6 +345,7 @@ namespace Anarchy.UI
         { "/explosion Position(X Y Z) Size(X Y Z) ", " Spawn An Explosion That Kills Players (Y Size Determines Death Radius)" },
         { "/r ", "Restart The Current Lobby" },
         { "/sup ", "Spawn Supply Station (Requires Wagon Role)" },
+        { "/shakescreen Intensity Duration Decay ", "Shake Player's Screens for dramatic effect" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()
