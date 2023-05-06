@@ -655,14 +655,27 @@ namespace Anarchy.UI
             LabelCenter(rect, locale["connectionProtocol"], true);
             rect.MoveY();
             int prot = NetworkSettings.ConnectionProtocol;
-            SelectionGrid(rect, NetworkSettings.ConnectionProtocol, protocols, protocols.Length, true);
-            if (prot != NetworkSettings.ConnectionProtocol.Value)
+            if (NetworkSettings.CustomSettings.Value)
             {
-                PhotonNetwork.SwitchToProtocol(NetworkSettings.ConnectProtocol);
+                SelectionGrid(rect, NetworkSettings.ConnectionProtocol, protocols, protocols.Length, true);
+                if (prot != NetworkSettings.ConnectionProtocol.Value)
+                {
+                    PhotonNetwork.SwitchToProtocol(NetworkSettings.ConnectProtocol);
+                }
+                Label(rect, locale["connectionProtocolDescUDP"], true);
+                Label(rect, locale["connectionProtocolDescTCP"], true);
+                Label(rect, locale["connectionProtocolDescWS"], true);
             }
-            Label(rect, locale["connectionProtocolDescUDP"], true);
-            Label(rect, locale["connectionProtocolDescTCP"], true);
-            Label(rect, locale["connectionProtocolDescWS"], true);
+            else
+            {
+                SelectionGrid(rect, NetworkSettings.ConnectionProtocol, new string[] {"UDP","TCP" }, 2, true);
+                if (prot != NetworkSettings.ConnectionProtocol.Value)
+                {
+                    PhotonNetwork.SwitchToProtocol(NetworkSettings.ConnectProtocol);
+                }
+                Label(rect, locale["connectionProtocolDescUDP"], true);
+                Label(rect, locale["connectionProtocolDescTCP"], true);
+            }
             rect.ResetX();
             rect.MoveY();
             rect.MoveY();
@@ -728,6 +741,7 @@ namespace Anarchy.UI
             }
             else
             {
+                if (NetworkSettings.ConnectionProtocol == 2 || NetworkSettings.ConnectionProtocol == 3) PhotonNetwork.SwitchToProtocol(0);
                 if (selection == 0)
                 {
                     //usa
