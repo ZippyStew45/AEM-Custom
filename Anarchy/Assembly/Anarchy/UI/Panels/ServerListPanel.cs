@@ -446,6 +446,7 @@ namespace Anarchy.UI
             {
                 if (!AnarchyExtensions.CheckForInternetConnection())
                 {
+                    Anarchy.Notifications.NotifMessage.message.New("No Internet Connection...", 5f);
                     return;
                 }
                 disconnectByJoin = true;

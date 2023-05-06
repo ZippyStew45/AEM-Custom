@@ -1,5 +1,6 @@
 ﻿using Anarchy.Configuration;
 using Anarchy.Inputs;
+using Anarchy.Notifications;
 using Anarchy.UI;
 using AoTTG.EMAdditions;
 using ExitGames.Client.Photon;
@@ -493,6 +494,7 @@ namespace Anarchy
             Instantiate(AnarchyAssets.Load("UIManager"));
             Instantiate(AnarchyAssets.Load("LoadScreen"));
             base.gameObject.AddComponent<CommandList>();
+            base.gameObject.AddComponent<NotifMessage>();
             Destroy(back);
         }
 
