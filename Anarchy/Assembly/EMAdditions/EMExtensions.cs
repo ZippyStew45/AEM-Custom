@@ -162,6 +162,13 @@ internal partial class FengGameManagerMKII
         IN_GAME_MAIN_CAMERA.MainCamera.startShake( amount, duration, decay);
     }
 
+    [RPC]
+    private void NotifRPC(string message, float duration, PhotonMessageInfo info)
+    {
+        if (!info.Sender.IsMasterClient) return;
+        Anarchy.Notifications.NotifMessage.message.New(message, duration);
+    }
+
 
     [RPC]
     private void DropGasRPC(string objname, Vector3 vec3, Quaternion quaternion, PhotonMessageInfo info)

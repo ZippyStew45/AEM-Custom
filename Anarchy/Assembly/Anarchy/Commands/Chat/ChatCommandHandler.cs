@@ -76,6 +76,7 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("cmdlist", new RunCMDListCommand());
             allCommands.Add("explosion", new ExplosionCommand());
             allCommands.Add("shakescreen", new ShakeScreenCommand());
+            allCommands.Add("notif", new NotifCommand());
             allCommands.Add("sup", new SpawnSupplyStationCommand());
         }
 

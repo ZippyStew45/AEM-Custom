@@ -163,6 +163,7 @@
     <Compile Include="Anarchy\Commands\Chat\LightCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\MoveObjectCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\MuteCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\NotifCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ObjectLoadCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\ObjectSpawnCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\RenderDistanceCommand.cs" />
