@@ -321,6 +321,7 @@ public class Cannon : Photon.MonoBehaviour
                     }
                 }
             }
+            shootflare();
             bool flag14 = InputManager.IsInputCannonDown((int)InputCannon.CannonFire);
             if (flag14)
             {
@@ -345,6 +346,50 @@ public class Cannon : Photon.MonoBehaviour
                     PhotonNetwork.Destroy(base.gameObject);
                 }
             }
+        }
+    }
+
+    private void shootflare()
+    {
+
+        if (InputManager.IsInputDown[InputCode.Flare1])
+        {
+            HERO.herin.ShootFlare(1);
+        }
+
+        if (InputManager.IsInputDown[InputCode.Flare2])
+        {
+            HERO.herin.ShootFlare(2);
+        }
+
+        if (InputManager.IsInputDown[InputCode.Flare3])
+        {
+            HERO.herin.ShootFlare(3);
+        }
+
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Flare4))
+        {
+            HERO.herin.ShootFlare(4);
+        }
+
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Flare5))
+        {
+            HERO.herin.ShootFlare(5);
+        }
+
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Flare6))
+        {
+            HERO.herin.ShootFlare(6);
+        }
+
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Flare7))
+        {
+            HERO.herin.ShootFlare(7);
+        }
+
+        if (EMInputManager.IsInputDown(EMInputManager.EMInputs.Flare8))
+        {
+            HERO.herin.ShootFlare(8);
         }
     }
 }
