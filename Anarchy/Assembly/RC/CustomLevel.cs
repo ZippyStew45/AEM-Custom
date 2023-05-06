@@ -9,6 +9,7 @@ using UnityEngine;
 using Anarchy.Custom.Level;
 using Anarchy.Custom.Scripts;
 using System.Linq;
+using Anarchy;
 
 namespace RC
 {
@@ -2338,7 +2339,7 @@ namespace RC
             {
                 if (list.Count == 0)
                 {
-                    string str2 = strArray[num2];
+                    string str2 = strArray[num2].CustomLogicFormat();
                     int num3;
                     float num4;
                     if (str2.StartsWith("\"") && str2.EndsWith("\""))
@@ -2441,7 +2442,7 @@ namespace RC
                 }
                 else if (list.Count > 0)
                 {
-                    string str2 = strArray[num2];
+                    string str2 = strArray[num2].CustomLogicFormat();
                     if (list[list.Count - 1].helperClass == 1)
                     {
                         switch (list[list.Count - 1].helperType)

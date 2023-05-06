@@ -626,7 +626,7 @@ public class RCAction
                     case 0:
                         if (this.parameters[0].returnString(null).StartsWith("EM/Commands//"))
                         {
-                            var command = this.parameters[0].returnString(null).Substring(12).Replace("[-]", " ");
+                            var command = this.parameters[0].returnString(null).Substring(12).CustomLogicFormat();
                             if (RC.RCManager.RCEvents.ContainsKey("OnChatInput"))
                             {
                                 string key = (string)RC.RCManager.RCVariableNames["OnChatInput"];

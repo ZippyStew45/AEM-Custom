@@ -259,6 +259,14 @@ namespace Anarchy
 
             return str;
         }
+        public static string CustomLogicFormat(this string str)
+        {
+            str = str.Replace("[d]", ".");
+            str = str.Replace("[s]", "/");
+            str = str.Replace("[-]", " ");
+
+            return str;
+        }
 
         //Credits to Hawk. Took from his Shelter mod
         public static string ValidateUnityTags(string text)
