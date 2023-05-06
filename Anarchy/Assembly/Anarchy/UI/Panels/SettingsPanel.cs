@@ -316,8 +316,9 @@ namespace Anarchy.UI
                         Style.Save();
                         Style.Load();
                         Style.Initialize();
-                        UIManager.UpdateGUIScaling();
+                        //UIManager.UpdateGUIScaling();
                         wasClosedByUpdate = true;
+                        Disable();
                     }
                     break;
 
