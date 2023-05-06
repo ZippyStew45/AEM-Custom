@@ -444,6 +444,10 @@ namespace Anarchy.UI
             left.width = left.DefaultWidth / 2f - Style.HorizontalMargin;
             if (Button(left, locale["btnCreation"], false))
             {
+                if (!AnarchyExtensions.CheckForInternetConnection())
+                {
+                    return;
+                }
                 disconnectByJoin = true;
                 serverTime = serverTime.Trim();
                 int serverTimeInt;
