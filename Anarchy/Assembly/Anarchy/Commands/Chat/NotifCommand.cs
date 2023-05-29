@@ -12,7 +12,7 @@ namespace AoTTG.Anarchy.Commands.Chat
     {
         private int pmID = -1;
 
-        public NotifCommand() : base("notif", false, true, false)
+        public NotifCommand() : base("notif", true, true, false)
         {
         }
 

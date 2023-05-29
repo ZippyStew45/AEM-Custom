@@ -11,6 +11,7 @@ namespace Optimization.Caching
         public const int PlayersN = 8;
         public const int UI = 5;
         public const int none = 1;
+        public const int IgnoreTitanN = 30;
 
         public static readonly LayerMask AABB;
         public static readonly LayerMask EnemyAABB;
@@ -25,6 +26,7 @@ namespace Optimization.Caching
         public static readonly LayerMask Players;
         public static readonly LayerMask PlayersEnemyAABGround;
         public static readonly LayerMask playerinteracttitanignore;
+        public static readonly LayerMask IgnoreTitan;
 
         static Layers()
         {
