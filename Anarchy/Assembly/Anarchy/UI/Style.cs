@@ -295,8 +295,8 @@ namespace Anarchy.UI
                 {
                     settings.Load();
                     settings.AutoSave = true;
-                    ScreenWidthDefault = Screen.resolutions[VideoSettings.ResolutionIndex].width;
-                    ScreenHeightDefault = Screen.resolutions[VideoSettings.ResolutionIndex].height;
+                    ScreenWidthDefault = Screen.width;
+                    ScreenHeightDefault = Screen.height;
                     if (PlayerPrefs.GetInt("AnarchyModLaunched") == 0)
                     {
                         PlayerPrefs.SetInt("AnarchyModLaunched", 1);

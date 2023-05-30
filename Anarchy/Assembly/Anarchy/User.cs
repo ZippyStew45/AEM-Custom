@@ -51,6 +51,8 @@ namespace Anarchy
         public static readonly UserSetting McSwitch = new UserSetting("mcSwitch");
         public static readonly UserSetting RestartMessage = new UserSetting("restartMsg");
         public static readonly UserSetting FlareColour8 = new UserSetting("flare8");
+        public static readonly UserSetting HookRight = new UserSetting("hookright");
+        public static readonly UserSetting HookLeft = new UserSetting("hookleft");
 
         public static string[] AllProfiles { get; private set; }
 
@@ -187,6 +189,10 @@ namespace Anarchy
         public static void Load()
         {
             UserSetting.LoadSettings();
+            if (User.HookRight.Value.Length < 1)
+                User.HookRight.Value = "000000";
+            if (User.HookLeft.Value.Length < 1)
+                User.HookLeft.Value = "000000";
         }
 
         public static void LoadProfile(string name)

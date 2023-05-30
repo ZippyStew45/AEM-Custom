@@ -1,4 +1,6 @@
-﻿namespace Anarchy.Commands.Chat
+﻿using UnityEngine;
+
+namespace Anarchy.Commands.Chat
 {
     internal class RestartCommand : ChatCommand
     {

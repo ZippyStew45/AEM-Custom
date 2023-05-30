@@ -42,6 +42,7 @@ namespace Anarchy.UI
             {
                 file.Load();
                 file.AutoSave = false;
+                
                 Resolution res;
                 if (VideoSettings.ResolutionIndex >= Screen.resolutions.Length)
                 {
@@ -50,6 +51,7 @@ namespace Anarchy.UI
                 }
                 res = Screen.resolutions[VideoSettings.ResolutionIndex];
                 Screen.SetResolution(res.width, res.height, VideoSettings.Fullscreen);
+
                 profile = file.GetString("profile");
                 QualitySettings.SetQualityLevel(file.GetInt("graphics"), true);
                 Localization.Language.SetLanguage(file.GetString("language"));

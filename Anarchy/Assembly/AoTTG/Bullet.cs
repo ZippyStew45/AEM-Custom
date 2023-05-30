@@ -1,6 +1,7 @@
 ﻿using Optimization.Caching;
 using System.Collections.Generic;
 using UnityEngine;
+using Anarchy;
 
 public class Bullet : Photon.MonoBehaviour
 {
@@ -536,12 +537,12 @@ public class Bullet : Photon.MonoBehaviour
             }
             this.lineRenderer.SetPosition(num - 1, baseT.position);
 
-            if(isOnTrap && trapKillTimer > 0f)
+            if (isOnTrap && trapKillTimer > 0f)
             {
                 hookHoldTimer += Time.deltaTime;
-                if(hookHoldTimer > trapKillTimer)
+                if (hookHoldTimer > trapKillTimer)
                 {
-                    if(master != null)
+                    if (master != null)
                     {
                         Anarchy.Abuse.Kill(PhotonNetwork.player, "Trap");
                     }
@@ -607,6 +608,16 @@ public class Bullet : Photon.MonoBehaviour
                     return;
                 }
             }
+        }
+        if (left)
+        {
+            Color hook = User.HookLeft.Value.HexToColor();
+            rope.renderer.material.color = hook;
+        }
+        else
+        {
+            Color hook = User.HookRight.Value.HexToColor();
+            rope.renderer.material.color = hook;
         }
     }
 }
