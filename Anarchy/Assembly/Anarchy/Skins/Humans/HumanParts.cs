@@ -2,7 +2,7 @@
 {
     public enum HumanParts : int
     {
-        Horse = 0,
+        Horse,
         Hair,
         Eyes,
         Glass,

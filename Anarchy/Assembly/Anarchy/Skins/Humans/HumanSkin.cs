@@ -189,7 +189,7 @@ namespace Anarchy.Skins.Humans
                     break;
 
                 case HumanParts.Hoodie:
-                    if (hero.Setup.part_chest_1 != null && hero.Setup.part_chest_1.name.Contains("character_cap_casual"))
+                    if (hero.Setup.part_chest_1 != null /*&& hero.Setup.part_chest_1.name.Contains("character_cap_casual")*/)
                     {
                         tmp.Add(hero.Setup.part_chest_1.renderer);
                     }
