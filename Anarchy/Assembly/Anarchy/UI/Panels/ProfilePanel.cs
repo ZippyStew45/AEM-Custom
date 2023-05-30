@@ -159,7 +159,6 @@ namespace Anarchy.UI
             TextField(right, User.FlareColour8, "Flare 8", Style.LabelOffset, true);
             TextField(right, User.HookRight, "Right Hook", Style.LabelOffset, true);
             TextField(right, User.HookLeft, "Left Hook", Style.LabelOffset, true);
-
             right.MoveToEndY(WindowPosition, Style.Height * 2f + Style.VerticalMargin);
             right.BeginHorizontal(2);
             if (Button(right, locale["btnToMain"], false))

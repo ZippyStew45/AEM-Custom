@@ -619,5 +619,6 @@ public class Bullet : Photon.MonoBehaviour
             Color hook = User.HookRight.Value.HexToColor();
             rope.renderer.material.color = hook;
         }
+
     }
 }

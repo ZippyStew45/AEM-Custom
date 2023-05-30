@@ -189,10 +189,6 @@ namespace Anarchy
         public static void Load()
         {
             UserSetting.LoadSettings();
-            if (User.HookRight.Value.Length < 1)
-                User.HookRight.Value = "000000";
-            if (User.HookLeft.Value.Length < 1)
-                User.HookLeft.Value = "000000";
         }
 
         public static void LoadProfile(string name)
