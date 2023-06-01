@@ -1,11 +1,11 @@
 ﻿using Optimization.Caching;
 using UnityEngine;
 using System.Threading;
+//threaded for optimzation
 
 public class CheckHitGround : MonoBehaviour
 {
     public bool isGrounded;
-    private Collider Other;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,10 +17,10 @@ public class CheckHitGround : MonoBehaviour
                 break;
         }
     }
+
     private void OnTriggerStay(Collider other)
     {
-        Other = other;
-        Thread simulationThreadenter = new Thread(new ThreadStart(OnTriggerStayThread));
+        Thread simulationThreadenter = new Thread(() => OnTriggerStayThread(other));
         simulationThreadenter.Start();
         /*switch (other.gameObject.layer)
         {
@@ -31,16 +31,17 @@ public class CheckHitGround : MonoBehaviour
         }*/
     }
 
-    void OnTriggerStayThread()
+    void OnTriggerStayThread(Collider other)
     {
         // Perform your computationally intensive task here
-        switch (Other.gameObject.layer)
+        switch (other.gameObject.layer)
         {
             case Layers.GroundN:
             case Layers.EnemyAABBN:
                 this.isGrounded = true;
                 break;
         }
+        Thread.CurrentThread.Abort();
     }
 
 }

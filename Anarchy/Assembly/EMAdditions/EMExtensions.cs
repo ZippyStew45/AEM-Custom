@@ -14,6 +14,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Anarchy.UI;
 using System.Runtime.InteropServices;
 using AoTTG.EMAdditions;
+using System.Threading;
 
 internal partial class FengGameManagerMKII
 {
@@ -390,10 +391,18 @@ internal partial class FengGameManagerMKII
     {
         if (info.Sender.IsMasterClient)
         {
-            if (bundleCustomMap != null)bundleCustomMap.Unload(true);
-            IN_GAME_MAIN_CAMERA.MainCamera.GetComponent<TiltShift>().enabled = true;
-            base.StartCoroutine(LoadCustomMap(localPath, prefabName, position, rotation));
+            //threaded for optimzation
+            Thread simulationThreadenter = new Thread(() => Loadmapthread(localPath, prefabName, position, rotation));
+            simulationThreadenter.Start();
         }
+    }
+    //threaded for optimzation
+    private void Loadmapthread(string localPath, string prefabName, Vector3 position, Quaternion rotation)
+    {
+        if (bundleCustomMap != null) bundleCustomMap.Unload(true);
+        IN_GAME_MAIN_CAMERA.MainCamera.GetComponent<TiltShift>().enabled = true;
+        base.StartCoroutine(LoadCustomMap(localPath, prefabName, position, rotation));
+        Thread.CurrentThread.Abort();
     }
 
     [RPC]

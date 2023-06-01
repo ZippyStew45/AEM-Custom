@@ -1,8 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using UnityEngine;
+//threaded for optimzation
 
 public class LevelTriggerGas : MonoBehaviour
 {
+    private void Start()
+    {
+    }
+
     private void OnTriggerStay(Collider other)
+    {
+        Thread simulationThreadenter = new Thread(() => OnTriggerStayThreadLevelTriggerGas(other));
+        simulationThreadenter.Start();
+    }
+
+    void OnTriggerStayThreadLevelTriggerGas(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -21,9 +33,6 @@ public class LevelTriggerGas : MonoBehaviour
                 other.gameObject.GetComponent<HERO>().gasUsageTrack = 0f;
             }
         }
-    }
-
-    private void Start()
-    {
+        Thread.CurrentThread.Abort();
     }
 }
