@@ -293,6 +293,7 @@
     <Compile Include="EMAdditions\TitanKillTrigger.cs" />
     <Compile Include="EMAdditions\WagonAutoFill.cs" />
     <Compile Include="EMAdditions\Wagon.cs" />
+    <Compile Include="EMAdditions\WaterVolume.cs" />
     <Compile Include="EMAdditions\WheelRotate.cs" />
     <Compile Include="Photon\ActorProperties.cs" />
     <Compile Include="Photon\RoomProperty.cs" />

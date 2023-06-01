@@ -28,11 +28,21 @@ public class Bullet : Photon.MonoBehaviour
     public bool leviMode;
     public float leviShootTime;
     public TITAN MyTitan;
+    private Collider[] hitColliders; //Added by Sysyfus for WaterVolume
 
     //Used by anarchy trap
     private float hookHoldTimer;
     private float trapKillTimer;
     private bool isOnTrap;
+
+    #region Added by Sysyfus for WaterVolume
+    private void adjustVelocityWater()
+    {
+        this.velocity *= 0.927842f;
+        this.velocity2 *= 0.927842f;
+        this.velocity += Vector3.down * 0.005f;
+    }
+    #endregion
 
     private void Awake()
     {
@@ -75,6 +85,17 @@ public class Bullet : Photon.MonoBehaviour
 
     private void FixedUpdate()
     {
+        #region Added by Sysyfus for WaterVolume
+        hitColliders = Physics.OverlapSphere(baseGT.position, 0.05f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<WaterVolume>() != null)
+            {
+                this.adjustVelocityWater();
+            }
+
+        }
+        #endregion
         if ((this.phase == 2 || this.phase == 1) && this.leviMode)
         {
             this.spiralcount++;

@@ -130,6 +130,8 @@ public partial class TITAN : TitanBase
     private GameObject whoHasTauntMe;
     public static TITAN instance;
 
+    private Collider[] hitColliders; //Added by Sysyfus for WaterVolume
+
     public string ShowName { get; private set; }
     private bool continueAiCombo = false;
 
@@ -1097,6 +1099,21 @@ public partial class TITAN : TitanBase
                     speed * 0.5f * Time.deltaTime / myLevel);
             }
         }
+
+        #region Added by Sysyfus for WaterVolume
+        hitColliders = Physics.OverlapSphere(baseGT.position, 0.05f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<WaterVolume>() != null)
+            {
+                Vector3 waterResistance = new Vector3(-this.baseR.velocity.x, -this.baseR.velocity.y, -this.baseR.velocity.z);
+                waterResistance.x *= this.speed * 3.0f;
+                waterResistance.z *= this.speed * 3.0f;
+                waterResistance.y += 100f;
+                baseR.AddForce(waterResistance * this.baseR.mass);
+            }
+        }
+        #endregion
     }
 
 

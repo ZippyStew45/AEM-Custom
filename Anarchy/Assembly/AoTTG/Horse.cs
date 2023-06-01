@@ -24,6 +24,16 @@ public class Horse : Photon.MonoBehaviour
     public GameObject wag;
     public bool FollowOverride;
     private float _idleTime = 0f;
+    #region Added by Sysyfus for WaterVolume
+    private Collider[] hitColliders;
+    public float maxDrownTime = 15f;
+    private float drownTime = 15f;
+    private float xRotation = 0f;
+    #endregion
+    #region Added by Sysyfus for horse tilt for sloped ground
+    private float frontElevation;
+    private float rearElevation;
+    #endregion
 
     public void SetSpeed(float s)
     {
@@ -86,6 +96,82 @@ public class Horse : Photon.MonoBehaviour
             return;
         }
 
+        #region Added by Sysyfus for WaterVolume
+        xRotation = 0f;
+
+        #region Added by Sysyfus for horse tilt for sloped ground
+        rearElevation = 0f;
+        frontElevation = 0f;
+        //Physics.Raycast(baseT.position - baseT.forward + Vector3.up, Vector3.down, out RaycastHit hitRear, 2f, Layers.EnemyGround.value);
+        //Physics.Raycast(baseT.position + baseT.forward + Vector3.up, Vector3.down, out RaycastHit hitFront, 2f, Layers.EnemyGround.value);
+        float tempF = 1f;
+        if (Wagon)
+        {
+            tempF = 16f;
+        }
+        if (Physics.Raycast(baseT.position - (baseT.forward * tempF) + Vector3.up, Vector3.down, out RaycastHit hitRear, tempF * 2f, Layers.EnemyGround.value))
+        {
+            this.rearElevation = hitRear.distance;
+        }
+        if (Physics.Raycast(baseT.position + baseT.forward + Vector3.up, Vector3.down, out RaycastHit hitFront, 2f, Layers.EnemyGround.value))
+        {
+            this.frontElevation = hitFront.distance;
+        }
+        if (rearElevation != 0f && frontElevation != 0f)
+        {
+            //xRotation = Mathf.Rad2Deg * (Mathf.Atan(frontElevation - rearElevation));
+            xRotation = Mathf.Rad2Deg * (Mathf.Atan((hitRear.point.y - hitFront.point.y) / tempF));
+        }
+        else if (rearElevation != 0f && frontElevation == 0f)
+        {
+            xRotation = Mathf.Rad2Deg * (Mathf.Atan((hitRear.point.y - baseT.position.y) / tempF));
+        }
+        else if (rearElevation == 0f && frontElevation != 0f)
+        {
+            xRotation = Mathf.Rad2Deg * (Mathf.Atan((baseT.position.y - hitFront.point.y) / tempF));
+        }
+        xRotation = Mathf.Clamp(xRotation, -45f, 45f);
+        #endregion
+
+        float floatDepth = 2.1f;
+        floatDepth -= 0.5f * baseR.velocity.magnitude / this.speed;
+        if (State == HorseState.Mounted)
+        {
+            floatDepth += 0.1f;
+        }
+        bool isInWater = false;
+        hitColliders = Physics.OverlapSphere(baseT.position + (Vector3.up * floatDepth), 0.05f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<WaterVolume>() != null)
+            {
+                isInWater = true;
+            }
+        }
+
+        if (isInWater)
+        {
+            if (!this.IsGrounded())
+            {
+                xRotation = -20f;
+            }
+            Vector3 waterResistance = new Vector3(-this.baseR.velocity.x, -this.baseR.velocity.y, -this.baseR.velocity.z);
+            waterResistance.x *= 5.0f;
+            waterResistance.z *= 5.0f;
+            waterResistance.y *= 1.5f;
+            waterResistance.y += 55f;
+            if (this.Wagon)
+            {
+                waterResistance.y -= 10f;
+                waterResistance.x *= 2.0f;
+                waterResistance.z *= 2.0f;
+            }
+            baseR.AddForce(waterResistance * this.baseR.mass);
+        }
+
+        base.gameObject.transform.rotation = Quaternion.Lerp(base.gameObject.transform.rotation, Quaternion.Euler(xRotation, baseT.rotation.eulerAngles.y, 0f), Time.deltaTime * 2.5f);
+        #endregion
+
         switch (State)
         {
             case HorseState.Mounted:
@@ -96,7 +182,7 @@ public class Horse : Photon.MonoBehaviour
                         return;
                     }
 
-                    Owner.baseT.position = baseT.position + heroOffsetVector;
+                    Owner.baseT.position = baseT.position + heroOffsetVector.y * baseT.up; //changed by Sysyfus to accomodate horse tilt
                     Owner.baseT.rotation = baseR.rotation;
                     Owner.baseR.velocity = baseR.velocity;
 
@@ -120,7 +206,16 @@ public class Horse : Photon.MonoBehaviour
                         base.gameObject.transform.rotation = Quaternion.Lerp(base.gameObject.transform.rotation, Quaternion.Euler(0f, this.controller.targetDirection, 0f), 100f * Time.deltaTime / (base.rigidbody.velocity.magnitude + 20f));
                         if (this.controller.isWALKDown)
                         {
-                            baseR.AddForce(baseT.Forward() * this.speed * 0.6f, ForceMode.Acceleration);
+                            #region Changed by Sysyfus for WaterVolume
+                            if (this.IsGrounded())
+                            {
+                                baseR.AddForce(baseT.Forward() * this.speed * 0.6f, ForceMode.Acceleration);
+                            }
+                            else
+                            {
+                                baseR.AddForce(new Vector3(baseT.Forward().x, 0f, baseT.Forward().z) * this.speed * 0.6f, ForceMode.Acceleration);
+                            }
+                            #endregion
                             if (baseR.velocity.magnitude >= this.speed * 0.6f)
                             {
                                 baseR.AddForce(-this.speed * 0.6f * baseR.velocity.normalized, ForceMode.Acceleration);
@@ -128,7 +223,16 @@ public class Horse : Photon.MonoBehaviour
                         }
                         else
                         {
-                            baseR.AddForce(baseT.Forward() * this.speed, ForceMode.Acceleration);
+                            #region Changed by Sysyfus for WaterVolume
+                            if (this.IsGrounded())
+                            {
+                                baseR.AddForce(baseT.Forward() * this.speed, ForceMode.Acceleration);
+                            }
+                            else
+                            {
+                                baseR.AddForce(new Vector3(baseT.Forward().x, 0f, baseT.Forward().z) * this.speed, ForceMode.Acceleration);
+                            }
+                            #endregion
                             if (baseR.velocity.magnitude >= this.speed)
                             {
                                 baseR.AddForce(-this.speed * baseR.velocity.normalized, ForceMode.Acceleration);
@@ -153,7 +257,7 @@ public class Horse : Photon.MonoBehaviour
                                 });
                             }
                         }
-                        else
+                        else if (baseR.velocity.magnitude > 0.1f) //line changed by Sysyfus so horse will use idle animations
                         {
                             if (!baseA.IsPlaying("horse_WALK"))
                             {
@@ -172,11 +276,24 @@ public class Horse : Photon.MonoBehaviour
                                 });
                             }
                         }
+                        else //this block added by Sysyfus so horse will use idle animations
+                        {
+                            ToIdleAnimation();
+                        }
                     }
 
                     if ((this.controller.isAttackDown || this.controller.isAttackIIDown) && this.IsGrounded())
                     {
-                        baseR.AddForce(Vectors.up * 25f, ForceMode.VelocityChange);
+                        #region Changed by Sysyfus for WaterVolume
+                        if (!isInWater)
+                        {
+                            baseR.AddForce(Vectors.up * 25f, ForceMode.VelocityChange);
+                        }
+                        else
+                        {
+                            baseR.AddForce(Vectors.up * 8.33f, ForceMode.VelocityChange);
+                        }
+                        #endregion
                     }
                 }
                 break;
@@ -221,7 +338,7 @@ public class Horse : Photon.MonoBehaviour
                     }
 
                     float num = -Mathf.DeltaAngle(FengMath.GetHorizontalAngle(baseT.position, this.setPoint), base.gameObject.transform.rotation.eulerAngles.y - 90f);
-                    base.gameObject.transform.rotation = Quaternion.Lerp(base.gameObject.transform.rotation, Quaternion.Euler(0f, base.gameObject.transform.rotation.eulerAngles.y + num, 0f), 200f * Time.deltaTime / (baseR.velocity.magnitude + 20f));
+                    base.gameObject.transform.rotation = Quaternion.Lerp(base.gameObject.transform.rotation, Quaternion.Euler(xRotation, base.gameObject.transform.rotation.eulerAngles.y + num, 0f), 200f * Time.deltaTime / (baseR.velocity.magnitude + 20f)); //Changed by Sysyfus for WaterVolume
                     if (Vector3.Distance(this.setPoint, baseT.position) < 20f)
                     {
                         baseR.AddForce(baseT.Forward() * this.speed * 0.7f, ForceMode.Acceleration);
@@ -278,6 +395,13 @@ public class Horse : Photon.MonoBehaviour
                 break;
         }
         baseR.AddForce(new Vector3(0f, -50f * baseR.mass, 0f));
+
+        #region Added by Sysyfus cuz kicking up dust while in air is dumb
+        if (this.dustParticle.enableEmission && !this.IsGrounded())
+        {
+            this.dustParticle.enableEmission = false;
+        }
+        #endregion
     }
 
     [RPC]
@@ -401,7 +525,7 @@ public class Horse : Photon.MonoBehaviour
                     false
                 });
             }
-            _idleTime += Time.deltaTime;
+            _idleTime -= Time.deltaTime; //changed by Sysyfus so horse will use idle animations
             //base.rigidbody.AddForce(-base.rigidbody.velocity, ForceMode.VelocityChange);
         }
     }

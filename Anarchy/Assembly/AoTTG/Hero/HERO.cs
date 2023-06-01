@@ -252,6 +252,17 @@ public partial class HERO : HeroBase
     }
 
 
+    #region Added by Sysyfus for WaterVolume
+    public void Dismount()
+    {
+        if (this.isMounted)
+        {
+            this.GetOffHorse();
+        }
+    }
+    #endregion
+
+
     public void SpawnCannon(string settings)
     {
         var flag = myCannon == null;

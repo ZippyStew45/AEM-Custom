@@ -242,6 +242,13 @@ internal partial class FengGameManagerMKII
                 }
                 break;
         }
+        #region Added by Sysyfus for WaterVolume
+        WaterVolume[] waterVolumes = FindObjectsOfType(typeof(WaterVolume)) as WaterVolume[];
+        foreach (WaterVolume thisWaterVolume in waterVolumes)
+        {
+            thisWaterVolume.UpdateNormalFog(option, value, info);
+        }
+        #endregion
     }
 
     [RPC]
@@ -297,7 +304,7 @@ internal partial class FengGameManagerMKII
         var obj1 = RCManager.EMAssets.Load(fileName) as GameObject;
         obj1.transform.localScale = new Vector3(2, 2, 2);
         var obj2 = Instantiate(obj1, vector3 + vector4,
-            Quaternion.Euler(0, h.transform.rotation.eulerAngles.y + 180, 0)) as GameObject;
+            Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y + 180, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
         obj2.transform.SetParent(h.transform, true);
         foreach (var comp in obj2.GetComponentsInChildren<Collider>())
         {
@@ -318,7 +325,7 @@ internal partial class FengGameManagerMKII
             v3 -= (obj2.transform.forward * 5f);
             var obj3 = Resources.Load("aot_supply") as GameObject;
             var obj4 =
-                Instantiate(obj3, v3, Quaternion.Euler(0, obj2.transform.eulerAngles.y + 180, 0)) as GameObject;
+                Instantiate(obj3, v3, Quaternion.Euler(-1f * obj2.transform.eulerAngles.x, obj2.transform.eulerAngles.y + 180, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
             obj4.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             obj4.transform.parent = obj2.transform;
             obj4.AddComponent<WagonAutoFill>();
