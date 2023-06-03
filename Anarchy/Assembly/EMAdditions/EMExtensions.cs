@@ -18,7 +18,6 @@ using System.Threading;
 
 internal partial class FengGameManagerMKII
 {
-    public static string SoundPath = Application.dataPath + @"/Sounds/";
     private Dictionary<string, AssetBundle> bundles = new Dictionary<string, AssetBundle>();
     private Dictionary<string, Dictionary<string, GameObject>> objects = new Dictionary<string, Dictionary<string, GameObject>>();
     private AssetBundle bundleCustomMap;
@@ -32,11 +31,6 @@ internal partial class FengGameManagerMKII
     public int MCACL;
     public float ImpactDeathSpeed;
     public bool ImpactDeathEnabled;
-
-    public static AudioClip GetAudioClip(string name)
-    {
-        return new WWW("file://" + SoundPath + name + ".wav").GetAudioClip(false, false, AudioType.WAV);
-    }
 
     [RPC]
     private void MedicRPC(bool medic, PhotonMessageInfo info)
@@ -112,39 +106,42 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SpawnPrimitiveRPC(string Object, Vector3 position, Quaternion rotation, PhotonMessageInfo info)
     {
-        PrimitiveType Primitive;
-        switch (Object.ToLower())
+        string[] ItemSplit = Object.Split(' ');
+        GameObject SpawnObj = new GameObject();
+        switch (Object)
         {
-            case string s when s.StartsWith("cube"):
-                Primitive = PrimitiveType.Cube;
+            case string s when s.ToLower().StartsWith("cube"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 break;
-            case string s when s.StartsWith("sphere"):
-                Primitive = PrimitiveType.Sphere;
+            case string s when s.ToLower().StartsWith("sphere"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 break;
-            case string s when s.StartsWith("capsule"):
-                Primitive = PrimitiveType.Capsule;
+            case string s when s.ToLower().StartsWith("capsule"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 break;
-            case string s when s.StartsWith("cylinder"):
-                Primitive = PrimitiveType.Cylinder;
+            case string s when s.ToLower().StartsWith("cylinder"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 break;
-            case string s when s.StartsWith("quad"):
-                Primitive = PrimitiveType.Quad;
+            case string s when s.ToLower().StartsWith("quad"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Quad);
                 break;
-            case string s when s.StartsWith("plane"):
-                Primitive = PrimitiveType.Plane;
+            case string s when s.ToLower().StartsWith("plane"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 break;
             default:
-                Primitive = PrimitiveType.Cube;
+                SpawnObj = Instantiate(RCManager.ZippyAssets.Load(ItemSplit[0]), position, rotation) as GameObject;
+                goto skip;
                 break;
         }
+        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
+        SpawnObj.renderer.material.color = Color.gray;
 
-        GameObject SpawnObj = GameObject.CreatePrimitive(Primitive);
+        skip:
+
         SpawnObj.name = Object;
         SpawnObj.transform.position = position;
         SpawnObj.transform.rotation = rotation;
-        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
         SpawnObj.AddComponent<BuilderTag>();
-        SpawnObj.renderer.material.color = Color.gray;
         SpawnObj.layer = LayerMask.NameToLayer("Ground");
     }
 

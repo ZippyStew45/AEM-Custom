@@ -11,6 +11,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using UnityEngine;
+using AoTTG.EMAdditions.Sounds;
 
 namespace Anarchy
 {
@@ -37,7 +38,7 @@ namespace Anarchy
         /// <summary>
         /// Your AEM version
         /// </summary>
-        public static readonly string CustomVersion = "0.2";
+        public static readonly string CustomVersion = "0.3";
         /// <summary>
         /// If you want to use full Anarchy synchronization feautures
         /// </summary>

@@ -10,6 +10,7 @@ using RC;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using UnityEngine;
+using AoTTG.EMAdditions.Sounds;
 using AoTTG.EMAdditions;
 
 // ReSharper disable once CheckNamespace
@@ -41,6 +42,12 @@ internal partial class FengGameManagerMKII
 
         message = AnarchyExtensions.ValidateUnityTags(message).RemoveSize();
         Anarchy.UI.Chat.Add(User.Chat(info.Sender.ID, message));
+
+        foreach (PhotonPlayer me in PhotonNetwork.playerList)
+            if (me.IsLocal && !info.Sender.IsLocal && !content.Contains("wins") && !content.Contains("points") && (content.Contains(me.UIName.RemoveAll()) || content.Contains(me.UIName.RemoveAll().ToUpper()) || content.Contains(me.UIName.RemoveAll().ToLower()) || content.Contains(User.ChatName.Value.RemoveAll()) || content.Contains(User.ChatName.Value.RemoveAll().ToLower()) || content.Contains(User.ChatName.Value.RemoveAll().ToUpper())))
+            {
+                if (AudioManager.List_string_of_loaded_sounds.Contains("AIQuoted") && !AudioManager.AudioSource_Quoted.isPlaying && Settings.Quotedaudio) AudioManager.AudioSource_Quoted.Play();
+            }
     }
 
     [RPC]
@@ -97,6 +104,7 @@ internal partial class FengGameManagerMKII
         content = sender + ": " + content;
         content = AnarchyExtensions.ValidateUnityTags(content).RemoveSize();
         Anarchy.UI.Chat.Add(User.ChatPm(info.Sender.ID, content));
+        if (AudioManager.List_string_of_loaded_sounds.Contains("AIQuoted") && Settings.Quotedaudio) AudioManager.AudioSource_Quoted.Play();
     }
 
     [RPC]
@@ -445,6 +453,7 @@ internal partial class FengGameManagerMKII
 
         AnarchyManager.Log.Disable();
         AnarchyManager.Chat.Disable();
+        base.StartCoroutine(LoadSounds(0.01f));
         DestroyAllExistingCloths();
         PhotonNetwork.LoadLevel(Level.MapName);
     }

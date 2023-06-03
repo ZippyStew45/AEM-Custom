@@ -71,7 +71,7 @@ rebinds:<b>Дополнительные</b>
 
 
 #Anarchy page
-modMenu:Главная,Стиль,Имя и Анимация,Чат и Консоль
+modMenu:Главная,Стиль,звуки,Чат и Консоль
 
 #Anarchy/Style
 hudScale:Размер интерфейса[{0}%]:
@@ -234,25 +234,8 @@ hideOwnName:Скрывать свои имя/гильдию:
 noColorNames:Выключить раскраску имён:
 hideCrosshairArrows:Скрыть стрелки на прицеле:
 infGasPvp:Бесконечный газ в ПВП:
-SingleStats:Панель статов:
+SingleStats:Статистика:
 disableFog:Отключить туман:
 labelScale:Размер лейблов[{0}]:
 racingStartCrosshair:Таймер гонки под прицелом:
 bombCdCrosshair:Кулдаун бомбы под прицелом:
-Titan Stomp:
-Titan Kick:Пинок
-Titan FaceSlap:Шлепок по лицу
-Titan NeckSlap:Шлепок по шее
-Titan LeftSlap:Шлепок слева
-Titan RightSlap:Шлепок справа
-Titan SlapLow:Нижний шлепок
-Titan LeftSlapLow:Нижний шлепок слева
-Titan RightSlapLow:Нижний шлепок справа
-Titan LeftBite:Укус слева
-Titan RightBite:Укус справа
-titanRebindOptions:Продвинутые настройки
-invertSlap:Инверсия направления шлепка:
-invertBite:Инверсия направлания укуса:
-disableDirectionalSlap:Выключить направленные шлепки:
-disableDirectionalBite:Выключить направленные укусы:
-Rejoin:Переподключиться к комнате:

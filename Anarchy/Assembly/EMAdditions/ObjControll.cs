@@ -153,47 +153,44 @@ public class ObjControll : MonoBehaviour
                 hero = PhotonNetwork.player.GetHero();
             }
         }
-        PrimitiveType Primitive;
         GameObject SpawnObj = new GameObject();
         string[] ItemSplit = Item.Split(' ');
         switch (ItemSplit[0])
         {
-            case string s when s.StartsWith("cube"):
-                Primitive = PrimitiveType.Cube;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("cube"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 break;
-            case string s when s.StartsWith("sphere"):
-                Primitive = PrimitiveType.Sphere;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("sphere"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 break;
-            case string s when s.StartsWith("capsule"):
-                Primitive = PrimitiveType.Capsule;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("capsule"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 break;
-            case string s when s.StartsWith("cylinder"):
-                Primitive = PrimitiveType.Cylinder;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("cylinder"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 break;
-            case string s when s.StartsWith("quad"):
-                Primitive = PrimitiveType.Quad;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("quad"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Quad);
                 break;
-            case string s when s.StartsWith("plane"):
-                Primitive = PrimitiveType.Plane;
-                SpawnObj = GameObject.CreatePrimitive(Primitive);
+            case string s when s.ToLower().StartsWith("plane"):
+                SpawnObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 break;
             default:
-                SpawnObj = Instantiate(RCManager.ZippyAssets.Load("Blade"), hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f), hero.gameObject.transform.rotation) as GameObject;
+                SpawnObj = Instantiate(RCManager.ZippyAssets.Load(ItemSplit[0]), hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f), hero.gameObject.transform.rotation) as GameObject;
+                goto skip;
                 break;
         }
 
+        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
+        SpawnObj.renderer.material.color = Color.gray;
 
-        SpawnObj.name += " [" + FengGameManagerMKII.RandomString(25) + "]";
+    skip:
+
+        SpawnObj.name = AnarchyExtensions.RemoveUnwantedBuilderNames(SpawnObj.name);
+        SpawnObj.name += " " + FengGameManagerMKII.RandomString(25);
         SpawnObj.transform.position = hero.gameObject.transform.position + (hero.gameObject.transform.forward * 6f) + (Vector3.up * 3f);
         SpawnObj.transform.rotation = hero.gameObject.transform.rotation;
-        SpawnObj.transform.localScale = new Vector3(10, 10, 10);
         SpawnObj.AddComponent<BuilderTag>();
-        SpawnObj.renderer.material.color = Color.gray;
         SpawnObj.AddComponent<Rigidbody>();
         SpawnObj.GetComponent<Rigidbody>().useGravity = true;
         SpawnObj.GetComponent<Rigidbody>().mass = 10;
@@ -201,5 +198,7 @@ public class ObjControll : MonoBehaviour
         SpawnObj.layer = 1;
 
         PickUpOBJ(SpawnObj);
+
+        Log.AddLine(SpawnObj.name);
     }
 }

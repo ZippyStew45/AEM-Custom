@@ -27,6 +27,9 @@ sizeModeInfoDisabled:<color=#$maincolor$>Custom titan size <color=#$dColor$>disa
 spawnModeInfoEnabled:<color=#$maincolor$>Custom spawn rate <color=#$eColor$>enabled</color>\n[N: <color=#$subcolor$>{0}</color>, A: <color=#$subcolor$>{1}</color>, J: <color=#$subcolor$>{2}</color>, C: <color=#$subcolor$>{3}</color>, P: <color=#$subcolor$>{4}</color>]</color>
 spawnModeInfoDisabled:<color=#$maincolor$>Custom spawn rate <color=#$dColor$>disabled</color></color>
 
+specialspawnModeInfoEnabled:<color=#$maincolor$>Custom titan rate <color=#$eColor$>enabled</color>\n[N: <color=#$subcolor$>{0}</color>,F: <color=#$subcolor$>{1}</color>, R: <color=#$subcolor$>{2}</color>, ST: <color=#$subcolor$>{3}</color>, SP: <color=#$subcolor$>{4}</color>]</color>
+specialspawnModeInfoDisabled:<color=#$maincolor$>Custom titan rate <color=#$dColor$>disabled</color></color>
+
 waveModeOnInfoEnabled:<color=#$maincolor$>Custom wave titan spawn [<color=#$subcolor$>{0}</color>] <color=#$eColor$>enabled</color></color>
 waveModeOnInfoDisabled:<color=#$maincolor$>Custom wave titan spawn <color=#$dColor$>disabled</color></color>
 

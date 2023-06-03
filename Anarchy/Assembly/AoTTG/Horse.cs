@@ -1,5 +1,7 @@
 ﻿//Temporarily horse rework is stopped.
 
+using Anarchy.Configuration;
+using AoTTG.EMAdditions.Sounds;
 using Optimization.Caching;
 using System.Linq;
 using UnityEngine;
@@ -253,8 +255,11 @@ public class Horse : Photon.MonoBehaviour
                                 this.dustParticle.enableEmission = true;
                                 BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                                 {
-                        true
+                                    true
                                 });
+
+                                if (BasePV.IsMine && Settings.HorseGallop && !AudioManager.AudioSource_horse_gallop.isPlaying && base.animation.IsPlaying("horse_Run") && AudioManager.List_string_of_loaded_sounds.Contains("horse_gallop")) 
+                                    AudioManager.AudioSource_horse_gallop.Play();
                             }
                         }
                         else if (baseR.velocity.magnitude > 0.1f) //line changed by Sysyfus so horse will use idle animations

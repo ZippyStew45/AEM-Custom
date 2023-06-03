@@ -453,17 +453,8 @@ public partial class TITAN : TitanBase
             }
             //UnityEngine.Debug.Log(state.name);
         }
-        SetSounds();
     }
-    private void SetSounds()
-    {
-        string path = FengGameManagerMKII.SoundPath;
-        if (File.Exists($@"{path}audio_titanStep.wav"))
-        {
-            this.FootAudio.clip = FengGameManagerMKII.GetAudioClip("audio_titanStep");
-        }
 
-    }
     public void UpdateHeroDistance()
     {
         if ((!IN_GAME_MAIN_CAMERA.isPausing || IN_GAME_MAIN_CAMERA.GameType == GameType.MultiPlayer) && myDifficulty >= 0 && !nonAI)

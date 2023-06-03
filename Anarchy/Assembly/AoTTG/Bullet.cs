@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Anarchy;
+using AoTTG.EMAdditions.Sounds;
+using Anarchy.Configuration;
+using System.Runtime;
 
 public class Bullet : Photon.MonoBehaviour
 {
@@ -126,6 +129,7 @@ public class Bullet : Photon.MonoBehaviour
                         {
                             BasePV.RPC("tieMeToOBJ", PhotonTargets.Others, new object[] { raycastHit.collider.transform.root.gameObject.GetPhotonView().viewID });
                         }
+                        if (AudioManager.List_string_of_loaded_sounds.Contains("rope_hit_enemy") && Settings.RopeHitTitan) AudioManager.AudioSource_hook_hit_enemy.Play();
                         master.LastHook = this;
                         baseT.parent = tf;
                         break;
@@ -152,6 +156,7 @@ public class Bullet : Photon.MonoBehaviour
                                 }
                             }
                         }
+                        if (AudioManager.List_string_of_loaded_sounds.Contains("rope_hit_static_objects") && Settings.RopeHitGround) AudioManager.AudioSource_rope_hit_staticObjects.Play();
                         break;
 
                     case Layers.NetworkObjectN:

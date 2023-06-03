@@ -17,6 +17,13 @@ spawnModeFloat2:Jumper:
 spawnModeFloat3:Crawler:
 spawnModeFloat4:Punk:
 
+specialspawnModeState:Custom titan rate:
+specialspawnModeFloat0:Normal:
+specialspawnModeFloat1:Faker:
+specialspawnModeFloat2:Rock Thower:
+specialspawnModeFloat3:Stalker:
+specialspawnModeFloat4:Speedie:
+
 sizeModeState:Titan size mode:
 sizeModeFloat0:Minimal size:
 sizeModeFloat1:Maximum size:

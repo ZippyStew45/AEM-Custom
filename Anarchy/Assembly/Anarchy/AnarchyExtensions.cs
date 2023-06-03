@@ -269,6 +269,13 @@ namespace Anarchy
             return str;
         }
 
+        public static string RemoveUnwantedBuilderNames(this string str)
+        {
+            str = str.Replace("(Clone)", "");
+
+            return str;
+        }
+
         //Credits to Hawk. Took from his Shelter mod
         public static string ValidateUnityTags(string text)
         {

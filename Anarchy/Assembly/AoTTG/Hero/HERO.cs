@@ -21,6 +21,8 @@ using Xft;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
 using AoTTG.EMAdditions;
+using AoTTG.EMAdditions.Sounds;
+using System.Runtime;
 
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
@@ -400,6 +402,7 @@ public partial class HERO : HeroBase
             crossR2T = crossR2.transform;
             labelDistance = CacheGameObject.Find<UILabel>("LabelDistance");
             labelT = labelDistance.transform;
+            SetSounds();
         }
         else
         {
@@ -410,32 +413,13 @@ public partial class HERO : HeroBase
             }
         }
         herin = this;
-        SetSounds();
     }
 
     private void SetSounds()
     {
-        string path = FengGameManagerMKII.SoundPath;
-        if (File.Exists($@"{path}audio_rope.wav"))
-        {
-            this.rope.clip = FengGameManagerMKII.GetAudioClip("audio_rope");
-        }
-
-        if (File.Exists($@"{path}audio_slash.wav"))
-        {
-            this.slash.clip = FengGameManagerMKII.GetAudioClip("audio_slash");
-        }
-
-        if (File.Exists($@"{path}audio_slashHit.wav"))
-        {
-            this.slashHit.clip = FengGameManagerMKII.GetAudioClip("audio_slashHit");
-        }
-
-        if (File.Exists($@"{path}audio_meatDie.wav"))
-        {
-            this.meatDie.clip = FengGameManagerMKII.GetAudioClip("audio_meatDie");
-        }
-
+        if (AudioManager.List_string_of_loaded_sounds.Contains("rope") && Settings.RopeLaunch) this.rope.clip = AudioManager.dictionary_of_sounds["rope"];
+        if (AudioManager.List_string_of_loaded_sounds.Contains("slash_titan") && Settings.SlashTitan) this.slashHit.clip = AudioManager.dictionary_of_sounds["slash_titan"];
+        if (AudioManager.List_string_of_loaded_sounds.Contains("player_titan_die") && Settings.PlayerTitanDie) this.meatDie.clip = AudioManager.dictionary_of_sounds["player_titan_die"];
     }
 
     private void OnCollisionEnter()
@@ -830,6 +814,9 @@ public partial class HERO : HeroBase
         throwedBlades = false;
         if (Gunner)
         {
+            if (BasePV.IsMine && Settings.AHSSReload && AudioManager.List_string_of_loaded_sounds.Contains("guns_reload")) 
+                AudioManager.AudioSource_guns_reload.Play();
+
             if (!leftGunHasBullet && !rightGunHasBullet)
             {
                 if (grounded)
@@ -881,6 +868,8 @@ public partial class HERO : HeroBase
         }
         else
         {
+            if (this.BasePV.IsMine && Settings.ReloadBlades && !AudioManager.AudioSource_blade_reload.isPlaying && AudioManager.List_string_of_loaded_sounds.Contains("blade_reload")) 
+                AudioManager.AudioSource_blade_reload.Play();
             if (!grounded)
             {
                 reloadAnimation = "changeBlade_air";
@@ -1115,6 +1104,7 @@ public partial class HERO : HeroBase
         {
             Pool.NetworkEnable("FX/boost_smoke", baseT.position, baseT.rotation);
         }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("gas_burst") && Settings.GasBurst) AudioManager.AudioSource_gas_burst.Play();
 
         dashTime = 0.5f;
         CrossFade("dash", 0.1f);
@@ -1576,6 +1566,7 @@ public partial class HERO : HeroBase
 
                         if (num != 0f || num2 != 0f)
                         {
+                            if (this.BasePV.IsMine && Settings.PlayerFootSteps == true && !AudioManager.AudioSource_player_footsteps.isPlaying && this.baseA.IsPlaying("run") && AudioManager.List_string_of_loaded_sounds.Contains("player_footsteps")) AudioManager.AudioSource_player_footsteps.Play();
                             if (!baseA.IsPlaying("run") && !baseA.IsPlaying("jump") && !baseA.IsPlaying("run_sasha") &&
                                 (!baseA.IsPlaying("horse_geton") || baseA["horse_geton"].normalizedTime >= 0.5f))
                             {
@@ -1821,6 +1812,7 @@ public partial class HERO : HeroBase
                      !InputManager.IsInput[InputCode.RightRope] && !InputManager.IsInput[InputCode.BothRope] &&
                      IsFrontGrounded() && !baseA.IsPlaying("wallrun") && !baseA.IsPlaying("dodge"))
             {
+                if (this.BasePV.IsMine && Settings.PlayerFootSteps == true && !AudioManager.AudioSource_player_footsteps.isPlaying && AudioManager.List_string_of_loaded_sounds.Contains("player_footsteps")) AudioManager.AudioSource_player_footsteps.Play();
                 CrossFade("wallrun", 0.1f);
                 wallRunTime = 0f;
             }
@@ -1912,10 +1904,14 @@ public partial class HERO : HeroBase
             if (InputManager.IsInputRebindHolding((int)InputRebinds.ReelIn))
             {
                 reelAxis = -1f;
+                if (AudioManager.List_string_of_loaded_sounds.Contains("reel_in") && Settings.ReelIn && !AudioManager.AudioSource_reel_in.isPlaying)
+                    AudioManager.AudioSource_reel_in.Play();
             }
             else if (InputManager.IsInputRebindHolding((int)InputRebinds.ReelOut))
             {
                 reelAxis = 1f;
+                if (AudioManager.List_string_of_loaded_sounds.Contains("reel_out") && Settings.ReelOut && !AudioManager.AudioSource_reel_out.isPlaying)
+                    AudioManager.AudioSource_reel_out.Play();
             }
             else if(InputManager.DisableMouseReeling.Value == false)
             {
@@ -3068,6 +3064,9 @@ public partial class HERO : HeroBase
         }
 
         ShowBlades();
+
+        if (AudioManager.List_string_of_loaded_sounds.Contains("blade_broken") && !AudioManager.AudioSource_blade_reload.isPlaying && !AudioManager.AudioSource_blade_broken.isPlaying && Settings.BladesBroken) 
+            AudioManager.AudioSource_blade_broken.Play();
     }
 
     private void Unmounted()
@@ -3410,6 +3409,7 @@ public partial class HERO : HeroBase
         {
             State = HeroState.FillGas;
             CrossFade("supply", 0.1f);
+            if (Settings.GetSupply && this.BasePV.IsMine && AudioManager.List_string_of_loaded_sounds.Contains("refill")) AudioManager.AudioSource_refill.Play();
         }
     }
 
@@ -4063,7 +4063,6 @@ public partial class HERO : HeroBase
             flare3CD = flareTotalCD;
             flag = true;
         }
-
         if (flag)
         {
             if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
@@ -4126,6 +4125,9 @@ public partial class HERO : HeroBase
                 }
                 break;
         }
+
+        if (AudioManager.List_string_of_loaded_sounds.Contains("shootflare") && Settings.FlareAudio)
+            AudioManager.AudioSource_shootflare.Play();
     }
 
     public IEnumerator StopImmunity()
@@ -4151,6 +4153,20 @@ public partial class HERO : HeroBase
             //{ 
             //}
             return;
+        }
+
+        if (this.BasePV.IsMine)
+        {
+            if (AudioManager.List_string_of_loaded_sounds.Contains("slide") && Settings.Slide)
+            {
+                if (this.state == HeroState.Slide && !AudioManager.AudioSource_slide.isPlaying) AudioManager.AudioSource_slide.Play();
+                if (this.state != HeroState.Slide && AudioManager.AudioSource_slide.isPlaying) AudioManager.AudioSource_slide.Stop();
+            }
+            if (AudioManager.List_string_of_loaded_sounds.Contains("gas") && Settings.Gas)
+            {
+                if (this.smoke3Dmg.enableEmission && !AudioManager.AudioSource_gas.isPlaying) AudioManager.AudioSource_gas.Play();
+                if (!this.smoke3Dmg.enableEmission && AudioManager.AudioSource_gas.isPlaying) AudioManager.AudioSource_gas.Stop();
+            }
         }
 
         var dt = Time.deltaTime;
@@ -5138,6 +5154,10 @@ public partial class HERO : HeroBase
                         GameObject obj4;
                         attackReleased = true;
                         var flag6 = false;
+
+                        if (BasePV.IsMine && Settings.AHSSShoot && AudioManager.List_string_of_loaded_sounds.Contains("guns_shoot"))
+                            AudioManager.AudioSource_guns_shoot.Play();
+
                         if (attackAnimation == "AHSS_shoot_both" || attackAnimation == "AHSS_shoot_both_air")
                         {
                             flag6 = true;
@@ -5152,10 +5172,16 @@ public partial class HERO : HeroBase
                             if (attackAnimation == "AHSS_shoot_l" || attackAnimation == "AHSS_shoot_l_air")
                             {
                                 leftGunHasBullet = false;
+
+                                if (BasePV.IsMine && Settings.AHSSShoot && AudioManager.List_string_of_loaded_sounds.Contains("guns_shoot"))
+                                    AudioManager.AudioSource_guns_shoot.Play();
                             }
                             else
                             {
                                 rightGunHasBullet = false;
+
+                                if (BasePV.IsMine && Settings.AHSSShoot && AudioManager.List_string_of_loaded_sounds.Contains("guns_shoot"))
+                                    AudioManager.AudioSource_guns_shoot.Play();
                             }
 
                             baseR.AddForce(-baseT.Forward() * 600f, ForceMode.Acceleration);

@@ -323,7 +323,29 @@ namespace Anarchy.UI
                     break;
 
                 case AnarchyNameAnimation:
-                    LabelCenter(rects[0], "<b><color=red>NOT IMPLEMENTED YET</color></b>");
+                    LabelCenter(rects[0], "Player Sounds", true);
+                    ToggleButton(rects[0], Settings.Gas, "Gas", true);
+                    ToggleButton(rects[0], Settings.PlayerFootSteps, "Player FootSteps", true);
+                    ToggleButton(rects[0], Settings.FlareAudio, "Flares", true);
+                    ToggleButton(rects[0], Settings.RopeHitGround, "Hook Hit Object", true);
+                    ToggleButton(rects[0], Settings.RopeHitTitan, "Hook Hit Enemy", true);
+                    ToggleButton(rects[0], Settings.GasBurst, "Gas Burst", true);
+                    ToggleButton(rects[0], Settings.Slide, "Slide", true);
+                    ToggleButton(rects[0], Settings.GetSupply, "Supply", true);
+                    ToggleButton(rects[0], Settings.ReelIn, "Reel In", true);
+                    ToggleButton(rects[0], Settings.ReelOut, "Reel Out", true);
+                    ToggleButton(rects[0], Settings.ReloadBlades, "Reload Blades", true);
+                    ToggleButton(rects[0], Settings.BladesBroken, "Blades Broken", true);
+                    ToggleButton(rects[0], Settings.AHSSReload, "AHSS Reload", true);
+                    ToggleButton(rects[0], Settings.AHSSShoot, "AHSS Shoot", true);
+                    ToggleButton(rects[0], Settings.RopeLaunch, "Hook Launch", true);
+                    ToggleButton(rects[0], Settings.SlashTitan, "Slash Titan", true);
+                    ToggleButton(rects[0], Settings.PlayerTitanDie, "Player/Titan Death", true);
+
+                    LabelCenter(rects[1], "Other", true);
+                    ToggleButton(rects[1], Settings.Quotedaudio, "Chat Name Mentions", true);
+                    ToggleButton(rects[1], Settings.HorseGallop, "Horse Gallop", true);
+
                     break;
 
                 case AnarchyChatAndConsole:

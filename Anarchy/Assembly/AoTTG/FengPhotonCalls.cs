@@ -1,5 +1,6 @@
 ﻿using Anarchy;
 using Anarchy.UI;
+using AoTTG.EMAdditions.Sounds;
 using Optimization;
 using Optimization.Caching;
 using RC;
@@ -346,6 +347,7 @@ internal partial class FengGameManagerMKII
         HeroCostume.Init();
         CharacterMaterials.Init();
         RCManager.ClearAll();
+        base.StartCoroutine(LoadSounds(0.1f));
         heroes = new List<HERO>();
         titans = new List<TITAN>();
         hooks = new List<Bullet>();
@@ -564,6 +566,7 @@ internal partial class FengGameManagerMKII
         {
             info.destroy();
         }
+        base.StartCoroutine(LoadSounds(0.1f));
 
         killInfoList.Clear();
         RCManager.racingSpawnPointSet = false;
@@ -740,5 +743,91 @@ internal partial class FengGameManagerMKII
     public void OnUpdatedFriendList(AOTEventArgs args)
     {
         print("OnUpdatedFriendList");
+    }
+
+    public IEnumerator LoadSounds(float time) //loads clips loaded from uimainref into the audio sources 
+    {
+        yield return (object)new WaitForSeconds(time);
+        if (AudioManager.List_string_of_loaded_sounds.Contains("shootflare"))
+        {
+            AudioManager.AudioSource_shootflare = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_shootflare.clip = AudioManager.dictionary_of_sounds["shootflare"]; //in uimainref
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("rope_hit_static_objects"))
+        {
+            AudioManager.AudioSource_rope_hit_staticObjects = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_rope_hit_staticObjects.clip = AudioManager.dictionary_of_sounds["rope_hit_static_objects"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("gas_burst"))
+        {
+            AudioManager.AudioSource_gas_burst = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_gas_burst.clip = AudioManager.dictionary_of_sounds["gas_burst"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("gas"))
+        {
+            AudioManager.AudioSource_gas = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_gas.clip = AudioManager.dictionary_of_sounds["gas"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("refill"))
+        {
+            AudioManager.AudioSource_refill = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_refill.clip = AudioManager.dictionary_of_sounds["refill"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("reel_in"))
+        {
+            AudioManager.AudioSource_reel_in = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_reel_in.clip = AudioManager.dictionary_of_sounds["reel_in"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("reel_out"))
+        {
+            AudioManager.AudioSource_reel_out = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_reel_out.clip = AudioManager.dictionary_of_sounds["reel_out"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("slide"))
+        {
+            AudioManager.AudioSource_slide = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_slide.clip = AudioManager.dictionary_of_sounds["slide"];
+            AudioManager.AudioSource_slide.loop = true;
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("blade_reload"))
+        {
+            AudioManager.AudioSource_blade_reload = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_blade_reload.clip = AudioManager.dictionary_of_sounds["blade_reload"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("blade_broken"))
+        {
+            AudioManager.AudioSource_blade_broken = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_blade_broken.clip = AudioManager.dictionary_of_sounds["blade_broken"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("guns_reload"))
+        {
+            AudioManager.AudioSource_guns_reload = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_guns_reload.clip = AudioManager.dictionary_of_sounds["guns_reload"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("guns_shoot"))
+        {
+            AudioManager.AudioSource_guns_shoot = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_guns_shoot.clip = AudioManager.dictionary_of_sounds["guns_shoot"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("rope_hit_enemy"))
+        {
+            AudioManager.AudioSource_hook_hit_enemy = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_hook_hit_enemy.clip = AudioManager.dictionary_of_sounds["rope_hit_enemy"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("player_footsteps"))
+        {
+            AudioManager.AudioSource_player_footsteps = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_player_footsteps.clip = AudioManager.dictionary_of_sounds["player_footsteps"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("horse_gallop"))
+        {
+            AudioManager.AudioSource_horse_gallop = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_horse_gallop.clip = AudioManager.dictionary_of_sounds["horse_gallop"];
+        }
+        if (AudioManager.List_string_of_loaded_sounds.Contains("AIQuoted"))
+        {
+            AudioManager.AudioSource_Quoted = Camera.main.gameObject.AddComponent<AudioSource>();
+            AudioManager.AudioSource_Quoted.clip = AudioManager.dictionary_of_sounds["AIQuoted"];
+        }
     }
 }

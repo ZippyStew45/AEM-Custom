@@ -50,6 +50,29 @@ namespace Anarchy.Configuration
         public static FloatSetting CameraDistance = new FloatSetting("CameraDistance", 1f);
         public static FloatSetting MouseSensivity = new FloatSetting("MouseSensivity", 0.5f);
         public static FloatSetting SoundLevel = new FloatSetting("SoundLevel", 1f);
+
+        #region Sounds
+        internal static BoolSetting PlayerFootSteps = new BoolSetting("PlayerFootSteps", true);
+        internal static BoolSetting FlareAudio = new BoolSetting("FlareAudio", true);
+        internal static BoolSetting RopeHitGround = new BoolSetting("RopeHitGround", true);
+        internal static BoolSetting RopeHitTitan = new BoolSetting("RopeHitTitan", true);
+        internal static BoolSetting GasBurst = new BoolSetting("GasBurst", true);
+        internal static BoolSetting Gas = new BoolSetting("Gas", true);
+        internal static BoolSetting Slide = new BoolSetting("Slide", true);
+        internal static BoolSetting GetSupply = new BoolSetting("GetSupply", true);
+        internal static BoolSetting ReelIn = new BoolSetting("Reel In", true);
+        internal static BoolSetting ReelOut = new BoolSetting("Reel Out", true);
+        internal static BoolSetting ReloadBlades = new BoolSetting("ReloadBlades", true);
+        internal static BoolSetting BladesBroken = new BoolSetting("BladesBroken", true);
+        internal static BoolSetting AHSSReload = new BoolSetting("AHSSReload", true);
+        internal static BoolSetting AHSSShoot = new BoolSetting("AHSSShoot", true);
+        internal static BoolSetting HorseGallop = new BoolSetting("HorseGallop", true);
+        internal static BoolSetting RopeLaunch = new BoolSetting("RopeLaunch", true);
+        internal static BoolSetting SlashTitan = new BoolSetting("SlashTitan", true);
+        internal static BoolSetting PlayerTitanDie = new BoolSetting("PlayerTitanDie", true);
+        internal static BoolSetting Quotedaudio = new BoolSetting("Quotedaudio", true);
+        #endregion
+
         public static void AddSetting(ISetting set)
         {
             lock (locker)

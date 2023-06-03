@@ -1,5 +1,5 @@
 ﻿title:Custom
-selection:Custom map,Custom logic
+selection:RC map,Custom logic,Unity Map
 gameTypes:1 Round,Waves,PvP,Racing,Custom
 spawnCap:Titan spawn cup:
 gameMode:Game mode:
@@ -11,4 +11,5 @@ random:Random
 update:Update list
 picker0:Maps picker
 picker1:Logics picker
+picker2:Unity Map picker
 filter:Filter:
