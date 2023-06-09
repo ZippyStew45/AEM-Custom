@@ -2,12 +2,13 @@
 using System.Collections;
 using Anarchy.UI;
 
-public class WheelRotate : MonoBehaviour {
+public class WheelRotate2 : MonoBehaviour
+{
     private Vector3 prevPos;
     private Vector3 newPos;
     private Vector3 objVelocity;
-    public Vector3 fWheelPos = new Vector3(0, -1.05477f, -3.291072f);
-    public Vector3 bWheelPos = new Vector3(0, 1.252668f, -0.2125787f);
+    public Vector3 fWheelPos = new Vector3(0, -1.16f, 0.86f);
+    public Vector3 bWheelPos = new Vector3(0, 1.16f, -0.86f);
     private Quaternion wheelRot = Quaternion.Euler(73.70572f, -180f, -180f);
     private bool rotating;
 
@@ -16,10 +17,11 @@ public class WheelRotate : MonoBehaviour {
     public Transform BLWheelT;
     public Transform BRWheelT;
 
-    private void Start () {
+    private void Start()
+    {
         prevPos = transform.position;
     }
-    private void Update ()
+    private void Update()
     {
         rotating = false;
         newPos = transform.position;

@@ -18,8 +18,8 @@ namespace Anarchy.UI
         private SmartRect left;
         private Rect pagePosition;
         private string[] selections = {"Wagons"};
-        private string[] wagonNames = {"No Canopy"};
-        private string[] wagonFiles = {"WagonNoMesh"};
+        private string[] wagonNames = {"AEM Wagon 1", "Momo's Wagon 2"};
+        private string[] wagonFiles = {"WagonNoMesh", "AEMWagonFBX"};
         private SmartRect rect;
         private SmartRect right;
         private Vector2 scrollVec = Vector2.zero;

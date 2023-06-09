@@ -107,7 +107,7 @@ public partial class TITAN : TitanBase
     public PVPcheckPoint PVPfromCheckPt;
     private float random_run_time;
     private float rockInterval;
-    private string runAnimation;
+    public string runAnimation;
     public static string runAnimation2;
     private float sbtime;
     internal TitanSkin Skin;
@@ -1940,6 +1940,7 @@ public partial class TITAN : TitanBase
     private void Start()
     {
         FengGameManagerMKII.FGM.AddTitan(this);
+        TITAN.instance = this;
         Minimap.TrackGameObjectOnMinimap(gameObject, Color.yellow, false, true);
         runAnimation = "run_walk";
         grabTF = new GameObject { name = "titansTmpGrabTF" };
@@ -2000,8 +2001,6 @@ public partial class TITAN : TitanBase
         IsHooked = false;
         IsLook = false;
         spawned = true;
-
-        StalkerLockOn();
     }
 
     private void Turn(float d)
@@ -4120,30 +4119,6 @@ public partial class TITAN : TitanBase
             }
 
             ColliderEnabled = true;
-        }
-    }
-
-    public void StalkerLockOn()
-    {
-        foreach (var tit in FengGameManagerMKII.Titans)
-        {
-            if (tit.GetComponent<StalkerTitan>() != null)
-            {
-                if (tit != null && !tit.hasDie && Vector3.Distance(tit.baseGT.position, baseT.position) < 10000)
-                {
-                    int ammount = PhotonNetwork.playerList.Length;
-                    int trys = 0;
-                    retry:
-                    GameObject hero = PhotonPlayer.Find(Random.Range(1, PhotonNetwork.playerList.Length)).GameObject;
-                    if (hero != null) 
-                    {
-                        trys++;
-                        if (trys >= ammount) return;
-                        goto retry; 
-                    }
-                    tit.BeTauntedBy(hero, float.MaxValue);
-                }
-            }
         }
     }
 }

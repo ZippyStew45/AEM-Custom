@@ -335,6 +335,46 @@ internal partial class FengGameManagerMKII
     }
 
     [RPC]
+    private void SpawnWagon2(int horseId, bool refill, string fileName, int id, PhotonMessageInfo info)
+    {
+        var h = PhotonView.Find(horseId);
+        var vector3 = (-h.transform.forward) * 6;
+        var vector4 = h.transform.position;
+        vector4.y += 0.88f;
+        var obj1 = RCManager.ZippyAssets.Load(fileName) as GameObject;
+        obj1.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        var obj2 = Instantiate(obj1, vector3 + vector4,
+            Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
+        obj2.transform.SetParent(h.transform, true);
+        foreach (var comp in obj2.GetComponentsInChildren<Collider>())
+        {
+            comp.gameObject.layer = LayerMask.NameToLayer("Ground");
+        }
+        obj2.layer = LayerMask.NameToLayer("Ground");
+        GameObject go = obj2.transform.FindChild("AEMWagon1").gameObject;
+        WheelRotate2 wr = go.AddComponent<WheelRotate2>();
+        wr.FRWheelT = go.transform.FindChild("Wheel1_1/Mesh2");
+        wr.FLWheelT = go.transform.FindChild("Wheel1_1/Mesh2");
+        wr.BRWheelT = go.transform.FindChild("Wheel2_1/Mesh1");
+        wr.BLWheelT = go.transform.FindChild("Wheel2_1/Mesh1");
+        if (refill)
+        {
+            var v3 = obj2.transform.position;
+            v3.y += 0.2f;
+            v3 += (obj2.transform.forward * 1.55f);
+            var obj3 = Resources.Load("aot_supply") as GameObject;
+            var obj4 = Instantiate(obj3, v3, Quaternion.Euler(-1f * obj2.transform.eulerAngles.x, obj2.transform.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
+            obj4.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            obj4.transform.parent = obj2.transform;
+            obj4.AddComponent<WagonAutoFill>();
+        }
+        h.GetComponent<Horse>().wag = obj2;
+        h.GetComponent<Horse>().Wagon = true;
+        obj2.transform.FindChild("AEMWagon1/Mesh3").gameObject.AddComponent<Wagon>();
+        obj2.AddComponent<PhotonView>().viewID = id;
+    }
+
+    [RPC]
     private void DisconnectWagon(int horseId, Vector3 pos, Quaternion rot, PhotonMessageInfo info)
     {
         var h = PhotonView.Find(horseId).GetComponent<Horse>();

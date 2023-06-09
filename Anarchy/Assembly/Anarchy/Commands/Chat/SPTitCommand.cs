@@ -24,22 +24,24 @@ namespace AoTTG.Anarchy.Commands.Chat
             bool speedie = false;
             bool stalker = false;
             bool faker = false;
-
-            if (args[11] == "1")
+            if (args.Length > 10)
             {
-                RockThrow = true;
-            }
-            if (args[12] == "1")
-            {
-                speedie = true;
-            }
-            if (args[13] == "1")
-            {
-                stalker = true;
-            }
-            if (args[10] == "1")
-            {
-                faker = true;
+                if (args[11] == "1")
+                {
+                    RockThrow = true;
+                }
+                if (args[12] == "1")
+                {
+                    speedie = true;
+                }
+                if (args[13] == "1")
+                {
+                    stalker = true;
+                }
+                if (args[10] == "1")
+                {
+                    faker = true;
+                }
             }
 
             try

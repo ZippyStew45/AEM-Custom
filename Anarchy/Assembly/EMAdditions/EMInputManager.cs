@@ -41,7 +41,7 @@ public static class EMInputManager
         KeyCode.Keypad6,
         KeyCode.Keypad7,
         KeyCode.F,
-        KeyCode.F12,
+        KeyCode.Alpha0,
         KeyCode.Mouse0,
         KeyCode.Mouse1,
         KeyCode.UpArrow,

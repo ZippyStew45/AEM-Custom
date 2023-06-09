@@ -5668,7 +5668,15 @@ public partial class HERO : HeroBase
         if (!myHorse.GetComponent<Horse>().Wagon)
         {
             var id = myHorse.GetPhotonView().viewID;
-            FengGameManagerMKII.FGM.BasePV.RPC("SpawnWagon", PhotonTargets.AllBuffered, id, refill, fileName, PhotonNetwork.AllocateViewID(PhotonNetwork.player.ID));
+            switch (fileName)
+            {
+                case "WagonNoMesh":
+                    FengGameManagerMKII.FGM.BasePV.RPC("SpawnWagon", PhotonTargets.AllBuffered, id, refill, fileName, PhotonNetwork.AllocateViewID(PhotonNetwork.player.ID));
+                    break;
+                case "AEMWagon":
+                    FengGameManagerMKII.FGM.BasePV.RPC("SpawnWagon2", PhotonTargets.AllBuffered, id, refill, fileName, PhotonNetwork.AllocateViewID(PhotonNetwork.player.ID));
+                    break;
+            }
         }
     }
 

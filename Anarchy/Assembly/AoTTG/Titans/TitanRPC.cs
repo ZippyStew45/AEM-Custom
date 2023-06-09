@@ -289,48 +289,6 @@ public partial class TITAN
             runAnimation = "run_abnormal_1";
             GetComponent<TITAN_SETUP>().setHair();
         }
-        if (base.gameObject.GetComponent<FakerTitan>() != null && type != 3)
-        {
-            int ran = UnityEngine.Random.Range(0, 3);
-            string[] animation = { "run_walk", "run_abnormal", "run_abnormal_1" };
-            switch (ran)
-            {
-                case 0:
-                    if (type == 0)
-                    {
-                        runAnimation2 = animation[1];
-                        runAnimation = animation[1];
-                        break;
-                    }
-                    runAnimation2 = animation[0];
-                    runAnimation = animation[0];
-                    break;
-                case 1:
-                    if (type == 2 || type == 1)
-                    {
-                        runAnimation2 = animation[0];
-                        runAnimation = animation[0];
-                        break;
-                    }
-                    runAnimation2 = animation[1];
-                    runAnimation = animation[1];
-                    break;
-                case 2:
-                    if (type == 4)
-                    {
-                        runAnimation2 = animation[0];
-                        runAnimation = animation[0];
-                        break;
-                    }
-                    runAnimation2 = animation[2];
-                    runAnimation = animation[2];
-                    break;
-                default:
-                    runAnimation2 = animation[0];
-                    runAnimation = animation[0];
-                    break;
-            }
-        }
         name = titanNames[(int)abnormalType];
         ShowName = User.TitanNames[(int)abnormalType].PickRandomString();
         if (abnormalType == AbnormalType.Aberrant || abnormalType == AbnormalType.Jumper ||
@@ -378,9 +336,6 @@ public partial class TITAN
             AABB.GetComponent<CapsuleCollider>().height = 10f;
             AABB.GetComponent<CapsuleCollider>().radius = 5f;
             AABB.GetComponent<CapsuleCollider>().center = new Vector3(0f, 5.05f, 0f);
-            if (CustomSpeed != 0) this.speed = CustomSpeed;
-            if (base.gameObject.GetComponent<SpeedTitan>() != null) CustomSpeed = CustomSpeed * 1.75f;
-            if (CustomAttackWait != 0) this.attackWait = CustomAttackWait;
         }
 
         if (nonAI)
@@ -397,6 +352,9 @@ public partial class TITAN
             baseA["attack_jumper_0"].speed = 7f * aniSpeed;
             baseA["attack_crawler_jump_0"].speed = 4f * aniSpeed;
         }
+        if (CustomSpeed != 0) this.speed = CustomSpeed;
+        if (base.gameObject.GetComponent<SpeedTitan>() != null) CustomSpeed = CustomSpeed * 1.75f;
+        if (CustomAttackWait != 0) this.attackWait = CustomAttackWait;
 
         baseA["attack_combo_1"].speed = 1f * aniSpeed;
         baseA["attack_combo_2"].speed = 1f * aniSpeed;

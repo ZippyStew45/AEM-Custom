@@ -185,7 +185,8 @@ namespace Anarchy.Skins.Humans
                     break;
 
                 case HumanParts.Gas:
-                    tmp.Add(hero.baseT.Find("3dmg_smoke").gameObject.renderer);
+                    //tmp.Add(hero.baseT.Find("3dmg_smoke").gameObject.renderer); 
+                    tmp.Add(hero.baseT.Find("3dmg_smoke").gameObject.GetComponent<Renderer>());
                     break;
 
                 case HumanParts.Hoodie:
