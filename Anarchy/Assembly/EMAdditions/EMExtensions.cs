@@ -269,18 +269,22 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetFlashLight(int ID, int Toggle, PhotonMessageInfo info)
     {
+        GameObject Player1 = PhotonPlayer.Find(ID).GameObject;
         if (Toggle == 1)
         {
-            GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(CacheResources.Load("flashlight"));
-            Transform Player = PhotonPlayer.Find(ID).GameObject.transform;
-            gameObject.name = "Fashlightcmd[" + ID + "]";
-            gameObject.transform.parent = Player;
-            gameObject.transform.position = Player.position + Vector3.up * 3f;
-            gameObject.transform.rotation = Quaternion.Euler(353f, 0f, 0f);
+            if (Player1.GetComponent<Light>() != null)
+            {
+                Player1.GetComponent<Light>().enabled = true;
+                return;
+            }
+            Light bulbComp = Player1.AddComponent<Light>();
+            bulbComp.renderMode = LightRenderMode.ForcePixel;
+            bulbComp.range = 100f;
+            bulbComp.intensity = 1f;
         }
         else
         {
-            Destroy(GameObject.Find("Fashlightcmd[" + ID + "]"));
+            Player1.GetComponent<Light>().enabled = false;
         }
     }
 
