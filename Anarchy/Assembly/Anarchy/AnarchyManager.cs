@@ -12,6 +12,9 @@ using System.Linq;
 using System.Net;
 using UnityEngine;
 using AoTTG.EMAdditions.Sounds;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace Anarchy
 {
@@ -137,6 +140,29 @@ namespace Anarchy
                 Log.AddLineRaw($"Player [{id}] has been {(banned ? "banned" : "kicked")}. " +
                                   $"{(reason == "" ? "" : $"reason: {reason}")}");
             };
+
+        }
+
+        public string dllDirectory = $"{Environment.CurrentDirectory}/AoTTG_Data/Mod Plugins/"; // Replace with the directory path where your DLLs are located
+
+        void LoadDLLs()
+        {
+            string[] dllFiles = Directory.GetFiles(dllDirectory, "*.dll"); // Get all DLL files in the directory
+
+            foreach (string dllFile in dllFiles)
+            {
+                try
+                {
+                    Assembly assembly = Assembly.LoadFrom(dllFile);
+                    // Use the loaded assembly as needed
+                    // ...
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Failed to load DLL: " + dllFile);
+                    Debug.LogError(e.Message);
+                }
+            }
         }
 
         /// <summary>

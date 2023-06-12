@@ -5673,7 +5673,7 @@ public partial class HERO : HeroBase
                 case "WagonNoMesh":
                     FengGameManagerMKII.FGM.BasePV.RPC("SpawnWagon", PhotonTargets.AllBuffered, id, refill, fileName, PhotonNetwork.AllocateViewID(PhotonNetwork.player.ID));
                     break;
-                case "AEMWagon":
+                case "AEMWagonFBX":
                     FengGameManagerMKII.FGM.BasePV.RPC("SpawnWagon2", PhotonTargets.AllBuffered, id, refill, fileName, PhotonNetwork.AllocateViewID(PhotonNetwork.player.ID));
                     break;
             }
@@ -5690,7 +5690,10 @@ public partial class HERO : HeroBase
     {
         if (Vector3.Distance(baseT.position, myHorse.GetComponent<Horse>().wag.transform.position) <= 25f)
         {
-            FengGameManagerMKII.FGM.BasePV.RPC("ReconnectWagon", PhotonTargets.AllBuffered, myHorse.GetPhotonView().viewID);
+            if (myHorse.GetComponent<Horse>().wag.name.Contains("AEMWagon"))
+                FengGameManagerMKII.FGM.BasePV.RPC("ReconnectWagon2", PhotonTargets.AllBuffered, myHorse.GetPhotonView().viewID);
+            else
+                FengGameManagerMKII.FGM.BasePV.RPC("ReconnectWagon", PhotonTargets.AllBuffered, myHorse.GetPhotonView().viewID);
         }
     }
 

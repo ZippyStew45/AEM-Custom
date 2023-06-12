@@ -15,6 +15,7 @@ using Anarchy.UI;
 using System.Runtime.InteropServices;
 using AoTTG.EMAdditions;
 using System.Threading;
+using AoTTG.EMAdditions.Scripts;
 
 internal partial class FengGameManagerMKII
 {
@@ -61,6 +62,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void ForceStatsRPC(bool force, int gas, int bla, int spd, int acl, PhotonMessageInfo info)
     {
+        if (!info.Sender.IsMasterClient)
+            return;
         MCForceStats = force;
         MCGAS = gas;
         MCBLA = bla;
@@ -86,6 +89,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SetImpactDeathRPC(bool enabled, float speed, PhotonMessageInfo info)
     {
+        if (!info.Sender.IsMasterClient)
+            return;
         ImpactDeathEnabled = enabled;
         ImpactDeathSpeed = speed;
     }
@@ -93,6 +98,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SetGravityRPC(float g, PhotonMessageInfo info)
     {
+        if (!info.Sender.IsMasterClient)
+            return;
         HeroGrav = g;
     }
 
@@ -106,6 +113,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SpawnPrimitiveRPC(string Object, Vector3 position, Quaternion rotation, PhotonMessageInfo info)
     {
+        if (!info.Sender.Builder)
+            return;
         string[] ItemSplit = Object.Split(' ');
         GameObject SpawnObj = new GameObject();
         switch (Object)
@@ -148,6 +157,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void DeletePrimitiveRPC(string obj, PhotonMessageInfo info)
     {
+        if (!info.Sender.Builder)
+            return;
         Destroy(GameObject.Find(obj));
     }
 
@@ -193,6 +204,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void LightRPC(string option, string value, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         switch (option)
         {
             case "intensity":
@@ -206,6 +219,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void FogRPC(string option, string value, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         switch (option)
         {
             case "start":
@@ -269,6 +284,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetFlashLight(int ID, int Toggle, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         GameObject Player1 = PhotonPlayer.Find(ID).GameObject;
         if (Toggle == 1)
         {
@@ -291,6 +308,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetDayLevel(float r, float g, float b, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         FengColor.Custom = new Color(r, g, b);
         IN_GAME_MAIN_CAMERA.MainCamera.setDayLight(DayLight.Custom);
     }
@@ -298,6 +317,8 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SpawnWagon(int horseId, bool refill, string fileName, int id, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         var h = PhotonView.Find(horseId);
         var vector3 = (-h.transform.forward) * 14;
         var vector4 = h.transform.position;
@@ -341,26 +362,28 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void SpawnWagon2(int horseId, bool refill, string fileName, int id, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         var h = PhotonView.Find(horseId);
         var vector3 = (-h.transform.forward) * 6;
         var vector4 = h.transform.position;
-        vector4.y += 0.88f;
-        var obj1 = RCManager.ZippyAssets.Load(fileName) as GameObject;
+        vector4.y += 0.775f;
+        var obj1 = RCManager.ZippyAssets.Load("AEMWagon") as GameObject;
         obj1.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        var obj2 = Instantiate(obj1, vector3 + vector4,
-            Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
+        var obj2 = Instantiate(obj1, vector3 + vector4, Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
         obj2.transform.SetParent(h.transform, true);
+
         foreach (var comp in obj2.GetComponentsInChildren<Collider>())
         {
             comp.gameObject.layer = LayerMask.NameToLayer("Ground");
         }
-        obj2.layer = LayerMask.NameToLayer("Ground");
-        GameObject go = obj2.transform.FindChild("AEMWagon1").gameObject;
+        obj2.gameObject.layer = LayerMask.NameToLayer("Ground");
+        GameObject go = obj2.transform.FindChild("Wheels").gameObject;
         WheelRotate2 wr = go.AddComponent<WheelRotate2>();
-        wr.FRWheelT = go.transform.FindChild("Wheel1_1/Mesh2");
-        wr.FLWheelT = go.transform.FindChild("Wheel1_1/Mesh2");
-        wr.BRWheelT = go.transform.FindChild("Wheel2_1/Mesh1");
-        wr.BLWheelT = go.transform.FindChild("Wheel2_1/Mesh1");
+        wr.FRWheelT = go.transform.FindChild("WheelMeshFront");
+        wr.FLWheelT = go.transform.FindChild("WheelMeshFront");
+        wr.BRWheelT = go.transform.FindChild("WheelMeshBack");
+        wr.BLWheelT = go.transform.FindChild("WheelMeshBack");
         if (refill)
         {
             var v3 = obj2.transform.position;
@@ -374,23 +397,35 @@ internal partial class FengGameManagerMKII
         }
         h.GetComponent<Horse>().wag = obj2;
         h.GetComponent<Horse>().Wagon = true;
-        obj2.transform.FindChild("AEMWagon1/Mesh3").gameObject.AddComponent<Wagon>();
+        obj2.transform.FindChild("Body/BodyMesh").gameObject.AddComponent<Wagon>();
         obj2.AddComponent<PhotonView>().viewID = id;
+
+        h.GetComponent<Horse>().speed = 60f;
     }
 
     [RPC]
     private void DisconnectWagon(int horseId, Vector3 pos, Quaternion rot, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         var h = PhotonView.Find(horseId).GetComponent<Horse>();
         h.wag.transform.position = pos;
         h.wag.transform.rotation = rot;
         h.wag.transform.parent = null;
         h.Wagon = false;
+        if (BasePV.IsMine)
+        {
+            h.GetComponent<Horse>().speed = 45f;
+            var vector4 = h.transform.position;
+            vector4.y -= 0.775f;
+        }
     }
 
     [RPC]
     private void ReconnectWagon(int horseID, PhotonMessageInfo info)
     {
+        if (!info.Sender.Wagoneer)
+            return;
         var h = PhotonView.Find(horseID);
         var wag = h.GetComponent<Horse>().wag;
         var vector3 = (-h.transform.forward) * 14;
@@ -401,6 +436,24 @@ internal partial class FengGameManagerMKII
         wag.transform.rotation = Quaternion.Euler(0, h.transform.rotation.eulerAngles.y + 180, 0);
         wag.transform.parent = h.transform;
         h.GetComponent<Horse>().Wagon = true;
+    }
+
+    [RPC]
+    private void ReconnectWagon2(int horseID, PhotonMessageInfo info)
+    {
+        if (!info.Sender.Wagoneer)
+            return;
+        var h = PhotonView.Find(horseID);
+        var vector3 = (-h.transform.forward) * 6;
+        var vector4 = h.transform.position;
+        vector4.y += 0.775f;
+        var wag = h.GetComponent<Horse>().wag;
+        wag.transform.position = vector3 + vector4;
+        wag.transform.rotation = Quaternion.Euler(0, h.transform.rotation.eulerAngles.y, 0);
+        wag.transform.parent = h.transform;
+        h.GetComponent<Horse>().Wagon = true;
+        if (BasePV.IsMine)
+            h.GetComponent<Horse>().speed = 60f;
     }
 
     public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker = false, bool RockThrow = false, bool speedtitan = false, bool stalker = false, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)

@@ -16,7 +16,7 @@ public class Horse : Photon.MonoBehaviour
     private TITAN_CONTROLLER controller;
     private ParticleSystem dustParticle;
     private Vector3 setPoint;
-    private float speed = 45f;
+    public float speed = 45f;
     private float timeElapsed;
     public GameObject dust;
     public HERO Owner;
