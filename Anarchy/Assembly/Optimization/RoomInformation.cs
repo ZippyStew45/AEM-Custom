@@ -60,6 +60,10 @@ namespace Optimization
             {
                 bld.Append($"\nGas Supply {HERO.GasStroage}/15\nBlade Supply {HERO.BladeStroage}/15");
             }
+            if (TITAN_CONTROLLER.Mounted)
+            {
+                bld.Append("\nAutopilot: " + (TITAN_CONTROLLER.HorseAutoRun ? "ON" : "OFF") );
+            }
             if (AnarchyManager.Pause.IsActive)
             {
                 if (PhotonNetwork.player.Properties.ContainsKey(PhotonPlayerProperty.anarchyFlags))

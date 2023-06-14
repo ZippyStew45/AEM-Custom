@@ -117,7 +117,8 @@ namespace Anarchy
             new KeySetting("Horse Right", KeyCode.D),
             new KeySetting("Horse Walk", KeyCode.LeftShift),
             new KeySetting("Horse Jump", KeyCode.Q),
-            new KeySetting("Horse Mount", KeyCode.LeftControl)
+            new KeySetting("Horse Mount", KeyCode.LeftControl),
+            new KeySetting("Horse Auto Run", KeyCode.Y)
         };
 
         #endregion Horse

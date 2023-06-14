@@ -8,6 +8,7 @@
         HorseRight,
         HorseWalk,
         HorseJump,
-        HorseMount
+        HorseMount,
+        HorseAutoRun
     }
 }

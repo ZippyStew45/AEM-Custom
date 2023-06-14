@@ -268,6 +268,7 @@
     <Compile Include="Anarchy\VoiceChat\VCManager.cs" />
     <Compile Include="Aottg\GameLogic\BombForestLogic.cs" />
     <Compile Include="Aottg\GameLogic\CustomRacingLogic.cs" />
+    <Compile Include="EMAdditions\Scripts\API.cs" />
     <Compile Include="EMAdditions\Scripts\BladeCollider.cs" />
     <Compile Include="EMAdditions\Scripts\BuilderTag.cs" />
     <Compile Include="EMAdditions\CommandList.cs" />

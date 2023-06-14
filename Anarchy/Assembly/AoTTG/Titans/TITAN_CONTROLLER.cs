@@ -1,5 +1,6 @@
 ﻿using Anarchy;
 using Anarchy.Inputs;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class TITAN_CONTROLLER : MonoBehaviour
@@ -36,6 +37,9 @@ public class TITAN_CONTROLLER : MonoBehaviour
     public bool kick;
     public bool stomp;
 
+    public static bool HorseAutoRun = false;
+    public static bool Mounted = false;
+
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -56,10 +60,16 @@ public class TITAN_CONTROLLER : MonoBehaviour
         {
             return;
         }
+        Mounted = isHorse;
         if (isHorse)
         {
+            if (InputManager.IsInputHorse((int)InputHorse.HorseAutoRun))
+            {
+                HorseAutoRun = !HorseAutoRun;
+            }
+
             int Ordonate;
-            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseForward))
+            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseForward) || HorseAutoRun)
             {
                 Ordonate = 1;
             }
