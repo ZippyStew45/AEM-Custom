@@ -204,7 +204,7 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void LightRPC(string option, string value, PhotonMessageInfo info)
     {
-        if (!info.Sender.Wagoneer)
+        if (!info.Sender.IsMasterClient)
             return;
         switch (option)
         {
@@ -219,7 +219,7 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void FogRPC(string option, string value, PhotonMessageInfo info)
     {
-        if (!info.Sender.Wagoneer)
+        if (!info.Sender.IsMasterClient)
             return;
         switch (option)
         {
@@ -284,7 +284,7 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetFlashLight(int ID, int Toggle, PhotonMessageInfo info)
     {
-        if (!info.Sender.Wagoneer)
+        if (!info.Sender.IsMasterClient)
             return;
         GameObject Player1 = PhotonPlayer.Find(ID).GameObject;
         if (Toggle == 1)
@@ -308,7 +308,7 @@ internal partial class FengGameManagerMKII
     [RPC]
     public void SetDayLevel(float r, float g, float b, PhotonMessageInfo info)
     {
-        if (!info.Sender.Wagoneer)
+        if (!info.Sender.IsMasterClient)
             return;
         FengColor.Custom = new Color(r, g, b);
         IN_GAME_MAIN_CAMERA.MainCamera.setDayLight(DayLight.Custom);

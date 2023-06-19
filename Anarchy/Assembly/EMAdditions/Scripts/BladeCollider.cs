@@ -17,15 +17,13 @@ namespace AoTTG.EMAdditions
         {
             if (col.gameObject.name.Contains("AOTTG_HERO"))
             {
-                foreach (HERO hero in FengGameManagerMKII.Heroes)
+                HERO hero = col.gameObject.GetComponent<HERO>();
+                if (hero != null && hero.IsLocal)
                 {
-                    if (hero != null && hero.IsLocal)
-                    {
-                        hero.AddBlade(1);
-                        Pool.Disable(gameObject);
-                        FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.Others, gameObject.name);
-                        if (Settings.GetSupply && AudioManager.List_string_of_loaded_sounds.Contains("refill")) AudioManager.AudioSource_refill.Play();
-                    }
+                    hero.AddBlade(1);
+                    Pool.Disable(gameObject);
+                    FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.Others, gameObject.name);
+                    if (Settings.GetSupply && AudioManager.List_string_of_loaded_sounds.Contains("refill")) AudioManager.AudioSource_refill.Play();
                 }
             }
         }

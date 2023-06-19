@@ -253,10 +253,10 @@ public class Horse : Photon.MonoBehaviour
                             if (!this.dustParticle.enableEmission)
                             {
                                 this.dustParticle.enableEmission = true;
-                                BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                                /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                                 {
                                     true
-                                });
+                                });*/
                             }
 
                             if (BasePV.IsMine && Settings.HorseGallop && !AudioManager.AudioSource_horse_gallop.isPlaying && base.animation.IsPlaying("horse_Run") && AudioManager.List_string_of_loaded_sounds.Contains("horse_gallop"))
@@ -275,10 +275,10 @@ public class Horse : Photon.MonoBehaviour
                             if (this.dustParticle.enableEmission)
                             {
                                 this.dustParticle.enableEmission = false;
-                                BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                                /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                                 {
                                     false
-                                });
+                                });*/
                             }
                         }
                         else //this block added by Sysyfus so horse will use idle animations
@@ -320,10 +320,10 @@ public class Horse : Photon.MonoBehaviour
                         if (!this.dustParticle.enableEmission)
                         {
                             this.dustParticle.enableEmission = true;
-                            BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                            /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                             {
                         true
-                            });
+                            });*/
                         }
                     }
                     else
@@ -335,10 +335,10 @@ public class Horse : Photon.MonoBehaviour
                         if (this.dustParticle.enableEmission)
                         {
                             this.dustParticle.enableEmission = false;
-                            BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                            /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                             {
                                 false
-                            });
+                            });*/
                         }
                     }
 
@@ -473,10 +473,10 @@ public class Horse : Photon.MonoBehaviour
                 if (!this.dustParticle.enableEmission)
                 {
                     this.dustParticle.enableEmission = true;
-                    BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                    /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                     {
                         true
-                    });
+                    });*/
                 }
             }
             else
@@ -488,10 +488,10 @@ public class Horse : Photon.MonoBehaviour
                 if (this.dustParticle.enableEmission)
                 {
                     this.dustParticle.enableEmission = false;
-                    BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                    /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                     {
                         false
-                    });
+                    });*/
                 }
             }
         }
@@ -525,10 +525,10 @@ public class Horse : Photon.MonoBehaviour
             if (this.dustParticle.enableEmission)
             {
                 this.dustParticle.enableEmission = false;
-                BasePV.RPC("setDust", PhotonTargets.Others, new object[]
+                /*BasePV.RPC("setDust", PhotonTargets.Others, new object[]
                 {
                     false
-                });
+                });*/
             }
             _idleTime -= Time.deltaTime; //changed by Sysyfus so horse will use idle animations
             //base.rigidbody.AddForce(-base.rigidbody.velocity, ForceMode.VelocityChange);
