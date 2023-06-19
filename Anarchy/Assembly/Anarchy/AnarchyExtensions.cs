@@ -264,6 +264,7 @@ namespace Anarchy
         {
             str = str.Replace("[d]", ".");
             str = str.Replace("[s]", "/");
+            str = str.Replace("[c]", ",");
             str = str.Replace("[-]", " ");
 
             return str;
