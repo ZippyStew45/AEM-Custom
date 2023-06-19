@@ -370,7 +370,8 @@ internal partial class FengGameManagerMKII
         vector4.y += 0.775f;
         var obj1 = RCManager.ZippyAssets.Load("AEMWagon") as GameObject;
         obj1.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        var obj2 = Instantiate(obj1, vector3 + vector4, Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
+        obj1.AddComponent<Rigidbody>().isKinematic = true;
+        var obj2 = Instantiate(obj1, vector3 + vector4, Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject;
         obj2.transform.SetParent(h.transform, true);
 
         foreach (var comp in obj2.GetComponentsInChildren<Collider>())
@@ -390,7 +391,7 @@ internal partial class FengGameManagerMKII
             v3.y += 0.2f;
             v3 += (obj2.transform.forward * 1.55f);
             var obj3 = Resources.Load("aot_supply") as GameObject;
-            var obj4 = Instantiate(obj3, v3, Quaternion.Euler(-1f * obj2.transform.eulerAngles.x, obj2.transform.eulerAngles.y, 0)) as GameObject; //Changed by Sysyfus to accomodate tilted horse at time of spawn
+            var obj4 = Instantiate(obj3, v3, Quaternion.Euler(-1f * obj2.transform.eulerAngles.x, obj2.transform.eulerAngles.y, 0)) as GameObject;
             obj4.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             obj4.transform.parent = obj2.transform;
             obj4.AddComponent<WagonAutoFill>();
@@ -399,8 +400,6 @@ internal partial class FengGameManagerMKII
         h.GetComponent<Horse>().Wagon = true;
         obj2.transform.FindChild("Body/BodyMesh").gameObject.AddComponent<Wagon>();
         obj2.AddComponent<PhotonView>().viewID = id;
-
-        h.GetComponent<Horse>().speed = 60f;
     }
 
     [RPC]
@@ -415,7 +414,6 @@ internal partial class FengGameManagerMKII
         h.Wagon = false;
         if (BasePV.IsMine)
         {
-            h.GetComponent<Horse>().speed = 45f;
             var vector4 = h.transform.position;
             vector4.y -= 0.775f;
         }
@@ -452,8 +450,6 @@ internal partial class FengGameManagerMKII
         wag.transform.rotation = Quaternion.Euler(0, h.transform.rotation.eulerAngles.y, 0);
         wag.transform.parent = h.transform;
         h.GetComponent<Horse>().Wagon = true;
-        if (BasePV.IsMine)
-            h.GetComponent<Horse>().speed = 60f;
     }
 
     public void SPTitan(int type, float size, int health, float speed, int count, int chaseDistance, int attackWait, float posX, float posY, float posZ, bool lockAxis, bool faker = false, bool RockThrow = false, bool speedtitan = false, bool stalker = false, string bodySkinLink = "", string eyeSkinLink = "", float animationSpeed = 1f)
