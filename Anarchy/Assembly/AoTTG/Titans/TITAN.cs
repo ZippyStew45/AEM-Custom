@@ -108,7 +108,6 @@ public partial class TITAN : TitanBase
     private float random_run_time;
     private float rockInterval;
     public string runAnimation;
-    public static string runAnimation2;
     private float sbtime;
     internal TitanSkin Skin;
     private bool spawned;
@@ -2822,6 +2821,41 @@ public partial class TITAN : TitanBase
                     BasePV.RPC("loadskinRPC", PhotonTargets.OthersBuffered, body, eyes);
                 }
             }
+        }
+
+        if (IN_GAME_MAIN_CAMERA.GameType != GameType.Single && BasePV.IsMine)
+        {
+            BasePV.RPC("netSetAbnormalType", PhotonTargets.AllBuffered, num);
+        }
+        else if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
+        {
+            netSetAbnormalType(num);
+        }
+    }
+
+    public void SetAbnormalTypeCommand(AbnormalType type)
+    {
+        var num = 0;
+        switch (type)
+        {
+            case AbnormalType.Normal:
+                num = 0;
+                break;
+
+            case AbnormalType.Aberrant:
+                num = 1;
+                break;
+
+            case AbnormalType.Jumper:
+                num = 2;
+                break;
+
+            case AbnormalType.Crawler:
+                num = 3;
+                break;
+            case AbnormalType.Punk:
+                num = 4;
+                break;
         }
 
         if (IN_GAME_MAIN_CAMERA.GameType != GameType.Single && BasePV.IsMine)

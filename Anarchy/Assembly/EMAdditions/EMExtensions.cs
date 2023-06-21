@@ -458,7 +458,7 @@ internal partial class FengGameManagerMKII
         var rotation = new Quaternion(0f, 0f, 0f, 0f);
         for (var i = 0; i < count; i++)
         {
-            TITAN t = SpawnTitan(100, position, rotation);
+            TITAN t = SpawnTitanCommand(type, position, rotation);
             t.ResetLevel(size);
             t.hasSetLevel = true;
             t.maxHealth = health;
@@ -473,7 +473,7 @@ internal partial class FengGameManagerMKII
             if (faker) t.gameObject.AddComponent<FakerTitan>();
             t.BasePV.RPC("AniSpeed", PhotonTargets.AllBuffered, animationSpeed);
             t.BasePV.RPC("loadskinRPC", PhotonTargets.AllBuffered, bodySkinLink, eyeSkinLink);
-            t.SetAbnormalType((AbnormalType)type);
+            //t.SetAbnormalTypeCommand((AbnormalType)type);
         }
     }
     [RPC]

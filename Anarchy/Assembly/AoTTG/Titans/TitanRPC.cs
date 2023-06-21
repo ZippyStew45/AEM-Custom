@@ -365,10 +365,6 @@ public partial class TITAN
         baseA["attack_anti_AE_low_l"].speed = 1.1f * aniSpeed;
         baseA["attack_anti_AE_r"].speed = 1.1f * aniSpeed;
         baseA["attack_anti_AE_low_r"].speed = 1.1f * aniSpeed;
-        if (runAnimation2 != null)
-        {
-            runAnimation = runAnimation2;
-        }
         Idle();
     }
 

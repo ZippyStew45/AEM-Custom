@@ -1010,6 +1010,18 @@ internal partial class FengGameManagerMKII : MonoBehaviour
         return tit;
     }
 
+    public TITAN SpawnTitanCommand(int type, Vector3 position, Quaternion rotation)
+    {
+        var tit = SpawnTitanRaw(position, rotation);
+        tit.SetAbnormalTypeCommand((AbnormalType)type);
+
+        GameObject gameObject2;
+        gameObject2 = Pool.NetworkEnable("FX/FXtitanSpawn", tit.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+
+        gameObject2.transform.localScale = tit.transform.localScale;
+        return tit;
+    }
+
     public void SpawnTitanAction(int type, float size, int health, int number)
     {
         var position = new Vector3(Random.Range(-400f, 400f), 0f, Random.Range(-400f, 400f));
