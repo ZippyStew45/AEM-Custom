@@ -10,12 +10,6 @@ public class LevelTriggerGas : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Thread simulationThreadenter = new Thread(() => OnTriggerStayThreadLevelTriggerGas(other));
-        simulationThreadenter.Start();
-    }
-
-    void OnTriggerStayThreadLevelTriggerGas(Collider other)
-    {
         if (other.gameObject.CompareTag("Player"))
         {
             if (IN_GAME_MAIN_CAMERA.GameType == GameType.Single)
@@ -33,6 +27,5 @@ public class LevelTriggerGas : MonoBehaviour
                 other.gameObject.GetComponent<HERO>().gasUsageTrack = 0f;
             }
         }
-        Thread.CurrentThread.Abort();
     }
 }
