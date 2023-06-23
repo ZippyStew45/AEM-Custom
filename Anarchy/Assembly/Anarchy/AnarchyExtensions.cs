@@ -222,6 +222,33 @@ namespace Anarchy
         internal static string RemoveSize(this string str) => Regex.Replace(str, "<size=(\\w*)?>?|<\\/size>?",
             string.Empty, RegexOptions.IgnoreCase);
 
+        /// </summary>
+        /// Set max text size
+        /// Example: <size=1000></color> would change size to acceptable amount
+        /// </summary>
+        public static string FilterSizeTag(this string text)
+        {
+            MatchCollection matchCollection = Regex.Matches(text.ToLower(), "(<size=(.*?>))");
+            List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
+            foreach (Match item in matchCollection)
+            {
+                if (!list.Any((KeyValuePair<int, string> p) => p.Key == item.Index))
+                {
+                    list.Add(new KeyValuePair<int, string>(item.Index, item.Value));
+                }
+            }
+            foreach (KeyValuePair<int, string> item2 in list)
+            {
+                if (item2.Value.StartsWith("<size=") && item2.Value.Length > 9)
+                {
+                    text = text.Remove(item2.Key, item2.Value.Length);
+                    text = text.Substring(0, item2.Key) + "<size=40>" + text.Substring(item2.Key, text.Length - item2.Key);
+                }
+            }
+            if (text.Contains("quad material")) text = "";
+            return text;
+        }
+
         /// <summary>
         /// Convert hex color to an HTML code.
         /// Example: [000000] would be changed to <color=#000000></color>

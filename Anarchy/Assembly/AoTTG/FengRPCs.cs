@@ -40,7 +40,7 @@ internal partial class FengGameManagerMKII
             message = content;
         }
 
-        message = AnarchyExtensions.ValidateUnityTags(message).RemoveSize();
+        message = AnarchyExtensions.ValidateUnityTags(message).FilterSizeTag();
         Anarchy.UI.Chat.Add(User.Chat(info.Sender.ID, message));
 
         foreach (PhotonPlayer me in PhotonNetwork.playerList)
@@ -102,7 +102,7 @@ internal partial class FengGameManagerMKII
         }
 
         content = sender + ": " + content;
-        content = AnarchyExtensions.ValidateUnityTags(content).RemoveSize();
+        content = AnarchyExtensions.ValidateUnityTags(content).FilterSizeTag();
         Anarchy.UI.Chat.Add(User.ChatPm(info.Sender.ID, content));
         if (AudioManager.List_string_of_loaded_sounds.Contains("AIQuoted") && Settings.Quotedaudio) AudioManager.AudioSource_Quoted.Play();
     }
