@@ -77,7 +77,7 @@ namespace Anarchy.UI
         private void OnButtonStartClick()
         {
             IN_GAME_MAIN_CAMERA.Difficulty = difficulitySelection;
-            IN_GAME_MAIN_CAMERA.GameType = GameType.Single;
+            //IN_GAME_MAIN_CAMERA.GameType = GameType.Single;
             IN_GAME_MAIN_CAMERA.singleCharacter = new string[] { "Mikasa", "Levi", "Armin", "Marco", "Jean", "Eren", "TITAN_EREN", "Petra", "Sasha", "Set 1", "Set 2", "Set 3" }[characterSelection.ToValue()].ToUpper();
             IN_GAME_MAIN_CAMERA.CameraMode = (CameraType)Settings.CameraMode.ToValue();
             IN_GAME_MAIN_CAMERA.DayLight = (DayLight)dayLightSelection.ToValue();
@@ -85,8 +85,23 @@ namespace Anarchy.UI
             Screen.showCursor = false;
             CheckBoxCostume.costumeSet = costumeSelection.ToValue() + 1;
             string map = mapList[mapSelection.ToValue()];
-            FengGameManagerMKII.Level = LevelInfo.GetInfo(map);
-            Application.LoadLevel(FengGameManagerMKII.Level.MapName);
+            //FengGameManagerMKII.Level = LevelInfo.GetInfo(map);
+            //Application.LoadLevel(FengGameManagerMKII.Level.MapName);
+
+
+            string[] args = new string[]
+            {
+                    "Single",
+                    map,
+                    new string[] { "normal", "hard", "abnormal" }[difficulitySelection],
+                    "99999",
+                    new string[] { "day", "dawn", "night" }[dayLightSelection],
+                    string.Empty, //password
+                    UnityEngine.Random.Range(1000000, 10000000).ToString()
+            };
+            PhotonNetwork.offlineMode = true;
+            PhotonNetwork.CreateRoom(string.Join("`", args), new RoomOptions() { isVisible = true, isOpen = true, maxPlayers = 1 }, null);
+            PhotonNetwork.offlineMode = true;
         }
 
         protected override void OnPanelDisable()
