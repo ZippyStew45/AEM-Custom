@@ -32,6 +32,8 @@ internal partial class FengGameManagerMKII
     public int MCACL;
     public float ImpactDeathSpeed;
     public bool ImpactDeathEnabled;
+    public static List<GameObject> GasCanisters = new List<GameObject>();
+    public static List<GameObject> BladeObjects = new List<GameObject>();
 
     [RPC]
     private void MedicRPC(bool medic, PhotonMessageInfo info)
@@ -161,6 +163,10 @@ internal partial class FengGameManagerMKII
             return;
         if (GameObject.Find(obj) == null)
             return;
+        if (GameObject.Find(obj).GetComponent<GasCollider>() != null)
+            GasCanisters.Remove(GameObject.Find(obj));
+        if (GameObject.Find(obj).GetComponent<BladeCollider>() != null)
+            BladeObjects.Remove(GameObject.Find(obj));
         Destroy(GameObject.Find(obj));
     }
 
@@ -190,6 +196,13 @@ internal partial class FengGameManagerMKII
         obj.layer = LayerMask.NameToLayer("Ground");
         obj.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
         obj.AddComponent<GasCollider>();
+        GasCanisters.Add(obj);
+        if (GasCanisters.Count > 10)
+        {
+            GameObject oldestObject = GasCanisters[0];
+            GasCanisters.RemoveAt(0);
+            Destroy(oldestObject);
+        }
     }
 
     [RPC]
@@ -201,6 +214,13 @@ internal partial class FengGameManagerMKII
         obj.AddComponent<BoxCollider>();
         obj.layer = LayerMask.NameToLayer("Ground");
         obj.AddComponent<BladeCollider>();
+        BladeObjects.Add(obj);
+        if (BladeObjects.Count > 10)
+        {
+            GameObject oldestObject = BladeObjects[0];
+            BladeObjects.RemoveAt(0);
+            Destroy(oldestObject);
+        }
     }
 
     [RPC]

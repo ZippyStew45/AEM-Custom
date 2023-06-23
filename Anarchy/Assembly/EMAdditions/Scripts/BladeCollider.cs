@@ -26,6 +26,7 @@ namespace AoTTG.EMAdditions
                 {
                     hero.AddBlade(1);
                     Pool.Disable(gameObject);
+                    FengGameManagerMKII.BladeObjects.Remove(gameObject);
                     FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.Others, gameObject.name);
                     if (Settings.GetSupply && AudioManager.List_string_of_loaded_sounds.Contains("refill")) AudioManager.AudioSource_refill.Play();
                 }
@@ -41,6 +42,7 @@ namespace AoTTG.EMAdditions
                 if (HeroDistance < minDistDespawn)
                 {
                     Pool.Disable(gameObject);
+                    FengGameManagerMKII.BladeObjects.Remove(gameObject);
                 }
 
                 GameObject obj2;
@@ -54,6 +56,7 @@ namespace AoTTG.EMAdditions
             if (this.ItemTimer <= 0f)
             {
                 Pool.Disable(gameObject);
+                FengGameManagerMKII.BladeObjects.Remove(gameObject);
                 return;
             }
         }
