@@ -35,11 +35,17 @@ namespace AoTTG.EMAdditions
 
         private void LateUpdate()
         {
+            if (PhotonPlayer.MyHero().gameObject == null)
+            {
+                HeroDistance = 10;
+            }
+            else
             HeroDistance = Vector3.Distance(PhotonPlayer.MyHero().transform.position, gameObject.transform.position);
+
             updateTimer -= UnityEngine.Time.unscaledDeltaTime;
             if (updateTimer <= 0f)
             {
-                if (HeroDistance < minDistDespawn)
+                if (HeroDistance > minDistDespawn)
                 {
                     Pool.Disable(gameObject);
                     FengGameManagerMKII.GasCanisters.Remove(gameObject);
