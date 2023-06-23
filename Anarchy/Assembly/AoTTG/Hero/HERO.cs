@@ -4350,20 +4350,20 @@ public partial class HERO : HeroBase
                 sparks.enableEmission = false;
             }
 
-            if (InputManager.IsInputDown[InputCode.Dodge] && !baseA.IsPlaying("jump") &&
-                !baseA.IsPlaying("horse_geton"))
-            {
-                Dodge();
-                return;
-            }
-
-            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseMount) && !baseA.IsPlaying("jump") &&!baseA.IsPlaying("horse_geton"))
+            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseMount) && !baseA.IsPlaying("jump") && !baseA.IsPlaying("horse_geton"))
             {
                 if (myHorse != null && !isMounted && Vector3.Distance(myHorse.transform.position, baseT.position) < 15f)
                 {
                     getOnHorse();
                     return;
                 }
+            }
+
+            if (InputManager.IsInputDown[InputCode.Dodge] && !baseA.IsPlaying("jump") &&
+                !baseA.IsPlaying("horse_geton"))
+            {
+                Dodge();
+                return;
             }
 
         }
