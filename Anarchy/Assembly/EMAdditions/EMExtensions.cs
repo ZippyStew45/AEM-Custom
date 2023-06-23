@@ -159,6 +159,8 @@ internal partial class FengGameManagerMKII
     {
         if (!info.Sender.Builder)
             return;
+        if (GameObject.Find(obj) == null)
+            return;
         Destroy(GameObject.Find(obj));
     }
 
