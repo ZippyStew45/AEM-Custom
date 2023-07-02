@@ -1950,6 +1950,17 @@ namespace RC
                         });
                         sentTrueActions.Add(action);
                     }
+                    else if (str2.StartsWith("lerp"))
+                    {
+                        RCActionHelper helper = returnHelper(strArray3[0]);
+                        RCActionHelper helper2 = returnHelper(strArray3[0]);
+                        RCAction action = new RCAction(num11, 13, null, new RCActionHelper[]
+                        {
+                            helper,
+                            helper2
+                        });
+                        sentTrueActions.Add(action);
+                    }
                 }
                 else if (stringArray[i].StartsWith("VariablePlayer"))
                 {

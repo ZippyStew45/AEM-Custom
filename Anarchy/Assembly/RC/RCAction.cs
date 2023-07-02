@@ -354,8 +354,19 @@ public class RCAction
 
                             RCManager.floatVariables[str7] = (float)Math.Round(57.296f * Math.Atan((float) RCManager.floatVariables[str7]), 9);
                             return;
-
                         case 13:
+                            num5 = this.parameters[1].returnFloat(null);
+                            float num6 = this.parameters[2].returnFloat(null);
+                            if (!RCManager.floatVariables.ContainsKey(str7))
+                            {
+                                this.callException("No Variable");
+                                return;
+                            }
+
+                            RCManager.floatVariables[str7] = Mathf.Lerp(((float)RCManager.floatVariables[str7]), num5, num6);
+                            return;
+
+                        case 14:
                             num5 = this.parameters[1].returnFloat(null);
                             RCManager.floatVariables[str7] = UnityEngine.Random.Range(num5, this.parameters[2].returnFloat(null));
                             return;
