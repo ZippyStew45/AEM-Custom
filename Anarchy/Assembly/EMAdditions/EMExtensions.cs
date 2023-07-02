@@ -159,8 +159,6 @@ internal partial class FengGameManagerMKII
     [RPC]
     private void DeletePrimitiveRPC(string obj, PhotonMessageInfo info)
     {
-        if (!info.Sender.Builder)
-            return;
         if (GameObject.Find(obj) == null)
             return;
         if (GameObject.Find(obj).GetComponent<GasCollider>() != null)
@@ -395,6 +393,7 @@ internal partial class FengGameManagerMKII
         obj1.AddComponent<Rigidbody>().isKinematic = true;
         var obj2 = Instantiate(obj1, vector3 + vector4, Quaternion.Euler(-1f * h.transform.rotation.eulerAngles.x, h.transform.rotation.eulerAngles.y, 0)) as GameObject;
         obj2.transform.SetParent(h.transform, true);
+        //obj2.AddComponent<ParentScript>();
 
         foreach (var comp in obj2.GetComponentsInChildren<Collider>())
         {
@@ -511,6 +510,7 @@ internal partial class FengGameManagerMKII
     //threaded for optimzation
     private void Loadmapthread(string localPath, string prefabName, Vector3 position, Quaternion rotation)
     {
+        Anarchy.UI.Chat.Add(string.Concat("Instantiating a Unity map Please Wait"));
         if (bundleCustomMap != null) bundleCustomMap.Unload(true);
         IN_GAME_MAIN_CAMERA.MainCamera.GetComponent<TiltShift>().enabled = true;
         base.StartCoroutine(LoadCustomMap(localPath, prefabName, position, rotation));
@@ -639,7 +639,7 @@ internal partial class FengGameManagerMKII
     private IEnumerator DestroyObjects(string[] names)
     {
         List<GameObject> objects = new List<GameObject>();
-        while (objects.Count == 0)
+        if (objects.Count == 0)
         {
             foreach(var obj in FindObjectsOfType<GameObject>())
             {
@@ -648,7 +648,6 @@ internal partial class FengGameManagerMKII
                     objects.Add(obj);
                 }
             }
-
             yield return null;
         }
 
@@ -656,6 +655,7 @@ internal partial class FengGameManagerMKII
         {
             Destroy(obj);
         }
+        yield return null;
     }
 
     private static System.Random randomm = new System.Random();

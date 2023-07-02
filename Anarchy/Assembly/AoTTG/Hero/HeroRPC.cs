@@ -125,7 +125,7 @@ public partial class HERO
     {
         if (PhotonNetwork.player.Medic) CreateGrave();
 
-        if (state != HeroState.Grab && info.Sender.IsLocal)
+        if (state != HeroState.Grab && BasePV.IsMine)
         {
             Vector3 vec3 = PhotonPlayer.MyHero().transform.position;
             Quaternion quat = PhotonPlayer.MyHero().transform.rotation;
@@ -503,7 +503,7 @@ public partial class HERO
     {
         if (PhotonNetwork.player.Medic) CreateGrave();
 
-        if (state != HeroState.Grab && info.Sender.IsLocal)
+        if (state != HeroState.Grab && BasePV.IsMine)
         {
             Vector3 vec3 = PhotonPlayer.MyHero().transform.position;
             Quaternion quat = PhotonPlayer.MyHero().transform.rotation;

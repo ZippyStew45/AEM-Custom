@@ -161,6 +161,7 @@
     <Compile Include="Anarchy\Commands\Chat\KillCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\LeaveCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\LightCommand.cs" />
+    <Compile Include="Anarchy\Commands\Chat\MomoStickcmd.cs" />
     <Compile Include="Anarchy\Commands\Chat\MoveObjectCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\MuteCommand.cs" />
     <Compile Include="Anarchy\Commands\Chat\NotifCommand.cs" />

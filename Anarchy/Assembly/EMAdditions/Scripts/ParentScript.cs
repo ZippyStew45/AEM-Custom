@@ -14,7 +14,6 @@ namespace AoTTG.EMAdditions
             {
                 // Set the platform as the parent of the player
                 collision.transform.SetParent(transform);
-                GameObject H = gameObject.GetComponent<Horse>().gameObject;
             }
         }
 

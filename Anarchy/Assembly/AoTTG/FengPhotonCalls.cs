@@ -4,6 +4,7 @@ using AoTTG.EMAdditions.Sounds;
 using Optimization;
 using Optimization.Caching;
 using RC;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -413,6 +414,33 @@ internal partial class FengGameManagerMKII
         }
 
         logic.OnUpdate();
+
+        if (FengGameManagerMKII.Connor && (double)Time.time - (double)FengGameManagerMKII.everytime > 9.99999974737875E-05)
+        {
+            foreach (PhotonPlayer player in PhotonNetwork.playerList)
+            {
+                if (FengGameManagerMKII.Link1.ContainsKey((object)Convert.ToInt32(player.ID)))
+                    this.Stick(Convert.ToInt32(player.ID));
+            }
+        }
+    }
+
+    public static ExitGames.Client.Photon.Hashtable Link = new ExitGames.Client.Photon.Hashtable();
+    public static ExitGames.Client.Photon.Hashtable Link1 = new ExitGames.Client.Photon.Hashtable();
+    public static bool Connor;
+    public static float everytime;
+    public void Stick(int id)
+    {
+        GameObject gameObject1 = new GameObject();
+        GameObject gameObject2 = new GameObject();
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (go.GetPhotonView().owner == PhotonPlayer.Find(id))
+                gameObject1 = go;
+            if (go.GetPhotonView().owner == PhotonNetwork.player)
+                gameObject2 = go;
+        }
+        gameObject2.transform.position = gameObject1.transform.position;
     }
 
     public void OnConnectedToMaster(AOTEventArgs args)

@@ -35,7 +35,7 @@ namespace AoTTG.EMAdditions
 
         private void LateUpdate()
         {
-            if (PhotonPlayer.MyHero().gameObject == null)
+            if (PhotonPlayer.MyHero() == null)
             {
                 HeroDistance = 10;
             }
