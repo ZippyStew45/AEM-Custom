@@ -25,7 +25,7 @@ namespace AoTTG.EMAdditions
                 if (hero != null && hero.IsLocal && HeroDistance <= minDistCollect)
                 {
                     hero.AddGas(10000f);
-                    Pool.Disable(gameObject);
+                    Destroy(gameObject);
                     FengGameManagerMKII.GasCanisters.Remove(gameObject);
                     FengGameManagerMKII.FGM.BasePV.RPC("DeletePrimitiveRPC", PhotonTargets.Others, gameObject.name);
                     if (Settings.GetSupply && AudioManager.List_string_of_loaded_sounds.Contains("refill")) AudioManager.AudioSource_refill.Play();
@@ -47,7 +47,7 @@ namespace AoTTG.EMAdditions
             {
                 if (HeroDistance > minDistDespawn)
                 {
-                    Pool.Disable(gameObject);
+                    Destroy(gameObject);
                     FengGameManagerMKII.GasCanisters.Remove(gameObject);
                 }
 
@@ -61,7 +61,7 @@ namespace AoTTG.EMAdditions
             this.ItemTimer -= Time.deltaTime;
             if (this.ItemTimer <= 0f)
             {
-                Pool.Disable(gameObject);
+                Destroy(gameObject);
                 FengGameManagerMKII.GasCanisters.Remove(gameObject);
                 return;
             }
