@@ -23,6 +23,8 @@ public class CannonBall : Photon.MonoBehaviour
 
     public float SmoothingDelay = 10f;
 
+    public static bool LethalBalls = true;
+
     private void Awake()
     {
         bool flag = BasePV != null;
@@ -146,7 +148,7 @@ public class CannonBall : Photon.MonoBehaviour
                             if (flag8)
                             {
                                 bool flag9 = gameObject.name == "head";
-                                if (flag9)
+                                if (flag9 && LethalBalls)
                                 {
                                     component2.BasePV.RPC("DieByCannon", component2.BasePV.owner, new object[]
                                     {
@@ -159,7 +161,7 @@ public class CannonBall : Photon.MonoBehaviour
                             else
                             {
                                 bool flag10 = gameObject.name == "head";
-                                if (flag10)
+                                if (flag10 && LethalBalls)
                                 {
                                     component2.BasePV.RPC("DieByCannon", component2.BasePV.owner, new object[]
                                     {

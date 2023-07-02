@@ -347,6 +347,7 @@ namespace Anarchy.UI
         { "/sup ", "Spawn Supply Station (Requires Wagon Role)" },
         { "/notif Duration Message ", "Sends a notification to all AEM players" },
         { "/shakescreen Intensity Duration Decay ", "Shake Player's Screens for dramatic effect" },
+        { "/lethal true/false ID/all ", "Shake Player's Screens for dramatic effect" },
         { "/restart ", "Restart The Current Lobby" } };
 
         protected override void OnDisable()

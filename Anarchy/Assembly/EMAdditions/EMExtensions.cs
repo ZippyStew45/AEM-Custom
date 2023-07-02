@@ -498,6 +498,13 @@ internal partial class FengGameManagerMKII
         }
     }
     [RPC]
+    private void LethalCannonBalls(bool lethal, PhotonMessageInfo info)
+    {
+        if (!info.Sender.IsMasterClient) return;
+
+        CannonBall.LethalBalls = lethal;
+    }
+    [RPC]
     private void EMCustomMapRPC(string localPath, string prefabName, Vector3 position, Quaternion rotation, PhotonMessageInfo info = null)
     {
         if (info.Sender.IsMasterClient)
