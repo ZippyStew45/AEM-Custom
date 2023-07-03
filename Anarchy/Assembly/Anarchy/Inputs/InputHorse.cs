@@ -9,6 +9,7 @@
         HorseWalk,
         HorseJump,
         HorseMount,
-        HorseAutoRun
+        HorseAutoRun,
+        HorseMountPassenger
     }
 }

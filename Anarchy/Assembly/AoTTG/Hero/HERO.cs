@@ -136,6 +136,9 @@ public partial class HERO : HeroBase
     private bool isLaunchRight;
     private bool isLeftHandHooked;
     private bool isMounted;
+    public static bool isMountedPassenger;
+    public static PhotonView passengerhorse;
+    public static List<int> HorseIDs = new List<int>();
     public bool IsPhotonCamera;
     private bool isRightHandHooked;
     public float jumpHeight = 2f;
@@ -1655,6 +1658,10 @@ public partial class HERO : HeroBase
             {
                 sparks.enableEmission = false;
             }
+            if (isMountedPassenger)
+            {
+                CrossFade("horse_idle", 1f);
+            }
 
             if (myHorse != null && (baseA.IsPlaying("horse_geton") || baseA.IsPlaying("air_fall")) &&
                 baseR.velocity.y < 0f &&
@@ -2137,6 +2144,21 @@ public partial class HERO : HeroBase
         PlayAnimation("horse_geton");
         facingDirection = myHorse.transform.rotation.eulerAngles.y;
         targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
+    }
+
+    private void getOnHorsePassenger()
+    {
+        var horse = FindNearestHorse();
+
+        if (HorseIDs.Contains(horse.GetPhotonView().viewID))
+            return;
+
+        PlayAnimation("horse_geton");
+        facingDirection = horse.transform.rotation.eulerAngles.y;
+        targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
+
+        FengGameManagerMKII.FGM.BasePV.RPC("RequestPassenger", PhotonTargets.AllBuffered, horse.GetPhotonView().viewID);
+        isMountedPassenger = true;
     }
 
     private void HeadMovement()
@@ -3073,6 +3095,7 @@ public partial class HERO : HeroBase
     {
         myHorse.GetComponent<Horse>().Unmounted();
         isMounted = false;
+        isMountedPassenger = false;
     }
 
     private void UpdateLeftMagUI()
@@ -3103,9 +3126,16 @@ public partial class HERO : HeroBase
 
     private void UseGas(float amount = 0f)
     {
-        if(GameModes.InfiniteGasPvp.Enabled && Settings.InfiniteGasPvp.Value && GameModes.BombMode.Enabled)
+        if (GameModes.InfiniteGasPvp.Enabled && Settings.InfiniteGasPvp.Value && GameModes.BombMode.Enabled)
         {
             return;
+        }
+
+        if (isMountedPassenger)
+        {
+            int HID = FindNearestHorse().GetPhotonView().viewID;
+            FengGameManagerMKII.FGM.BasePV.RPC("UnmountPartner", PhotonTargets.AllBuffered, HID);
+            GetOffHorse();
         }
 
         if (amount == 0f)
@@ -4358,6 +4388,14 @@ public partial class HERO : HeroBase
                     return;
                 }
             }
+            if (InputManager.IsInputHorseHolding((int)InputHorse.HorseMountPassenger) && !baseA.IsPlaying("jump") && !baseA.IsPlaying("horse_geton"))
+            {
+                if (!isMounted && !isMountedPassenger && Vector3.Distance(FindNearestHorse().transform.position, baseT.position) < 15f)
+                {
+                    getOnHorsePassenger();
+                    return;
+                }
+            }
 
             if (InputManager.IsInputDown[InputCode.Dodge] && !baseA.IsPlaying("jump") &&
                 !baseA.IsPlaying("horse_geton"))
@@ -4435,6 +4473,15 @@ public partial class HERO : HeroBase
                 if (myHorse != null && isMounted && InputManager.IsInputHorseHolding((int)InputHorse.HorseMount))
                 {
                     GetOffHorse();
+                }
+                if (InputManager.IsInputHorseHolding((int)InputHorse.HorseMountPassenger) && !baseA.IsPlaying("jump") && !baseA.IsPlaying("horse_geton"))
+                {
+                    if (!isMounted && isMountedPassenger)
+                    {
+                        int HID = FindNearestHorse().GetPhotonView().viewID;
+                        FengGameManagerMKII.FGM.BasePV.RPC("UnmountPartner", PhotonTargets.AllBuffered, HID);
+                        GetOffHorse();
+                    }
                 }
 
                 if ((baseA.IsPlaying(standAnimation) || !grounded) && InputManager.IsInputDown[InputCode.Reload])
@@ -5448,6 +5495,12 @@ public partial class HERO : HeroBase
         {
             if (InputManager.IsInput[InputCode.LeftRope])
             {
+                if (isMountedPassenger)
+                {
+                    int HID = FindNearestHorse().GetPhotonView().viewID;
+                    FengGameManagerMKII.FGM.BasePV.RPC("UnmountPartner", PhotonTargets.AllBuffered, HID);
+                    GetOffHorse();
+                }
                 if (bulletLeft)
                 {
                     qHold = true;
@@ -5474,6 +5527,12 @@ public partial class HERO : HeroBase
 
             if (InputManager.IsInput[InputCode.RightRope])
             {
+                if (isMountedPassenger)
+                {
+                    int HID = FindNearestHorse().GetPhotonView().viewID;
+                    FengGameManagerMKII.FGM.BasePV.RPC("UnmountPartner", PhotonTargets.AllBuffered, HID);
+                    GetOffHorse();
+                }
                 if (bulletRight)
                 {
                     EHold = true;
@@ -5500,6 +5559,12 @@ public partial class HERO : HeroBase
 
             if (InputManager.IsInput[InputCode.BothRope])
             {
+                if (isMountedPassenger)
+                {
+                    int HID = FindNearestHorse().GetPhotonView().viewID;
+                    FengGameManagerMKII.FGM.BasePV.RPC("UnmountPartner", PhotonTargets.AllBuffered, HID);
+                    GetOffHorse();
+                }
                 qHold = true;
                 EHold = true;
                 if (!bulletLeft && !bulletRight)
@@ -5695,6 +5760,28 @@ public partial class HERO : HeroBase
             else
                 FengGameManagerMKII.FGM.BasePV.RPC("ReconnectWagon", PhotonTargets.AllBuffered, myHorse.GetPhotonView().viewID);
         }
+    }
+
+
+    public static GameObject FindNearestHorse()
+    {
+        Horse[] horses = FindObjectsOfType<Horse>(); // Get all Horse components in the scene
+
+        GameObject nearestHorse = null;
+        float nearestDistance = 100;
+
+        foreach (Horse horse in horses)
+        {
+            float distance = Vector3.Distance(PhotonPlayer.MyHero().transform.position, horse.transform.position);
+
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestHorse = horse.gameObject;
+            }
+        }
+
+        return nearestHorse;
     }
 
     public void UpdateCannon()

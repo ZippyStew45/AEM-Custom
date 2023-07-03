@@ -98,6 +98,7 @@ public class Horse : Photon.MonoBehaviour
             return;
         }
 
+
         #region Added by Sysyfus for WaterVolume
         xRotation = 0f;
 

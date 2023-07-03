@@ -184,6 +184,41 @@ internal partial class FengGameManagerMKII
         Anarchy.Notifications.NotifMessage.message.New(message, duration);
     }
 
+    [RPC]
+    private void RequestPassenger(int HorseID, PhotonMessageInfo info)
+    {
+        var h = PhotonView.Find(HorseID);
+        var obj2 = info.Sender.GameObject.transform;
+        HERO.passengerhorse = h;
+        HERO.HorseIDs.Add(HorseID);
+
+        var vector3 = (-h.transform.forward) * 0.5f;
+        var vector4 = h.transform.position;
+        vector4.y += 1.6f;
+
+        obj2.transform.position = vector3 + vector4;
+        obj2.transform.rotation = Quaternion.Euler(0, h.transform.rotation.eulerAngles.y, 0);
+        obj2.transform.parent = h.transform;
+
+        obj2.SetParent(h.transform, true);
+        //if (info.Sender.IsLocal)
+            //PhotonPlayer.MyHero().gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        obj2.gameObject.AddComponent<ParentScript>();
+    }
+    [RPC]
+    private void UnmountPartner(int HorseID, PhotonMessageInfo info)
+    {
+        HERO.HorseIDs.Remove(HorseID);
+        info.Sender.GameObject.transform.parent = null;
+        //if (info.Sender.IsLocal)
+            //PhotonPlayer.MyHero().gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+        var obj2 = info.Sender.GameObject.transform;
+        ParentScript component = obj2.GetComponent<ParentScript>();
+        if (component != null)
+            Destroy(component);
+    }
+
 
     [RPC]
     private void DropGasRPC(string objname, Vector3 vec3, Quaternion quaternion, PhotonMessageInfo info)

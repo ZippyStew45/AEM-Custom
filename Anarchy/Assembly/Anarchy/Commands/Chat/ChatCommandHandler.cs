@@ -78,7 +78,6 @@ namespace Anarchy.Commands.Chat
             allCommands.Add("shakescreen", new ShakeScreenCommand());
             allCommands.Add("notif", new NotifCommand());
             allCommands.Add("sup", new SpawnSupplyStationCommand());
-            allCommands.Add("stick", new MomoStickcmd());
             allCommands.Add("lethal", new LethalCannonCommand());
         }
 
